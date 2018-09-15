@@ -26,5 +26,5 @@ struct furnature
  {
    int sizeX;
    int sizeY;
-   int title:
+   int title;
  }
