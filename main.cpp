@@ -1,5 +1,5 @@
-#include "TXLib.h"
-#include "MENU.cpp"
+#include "Lib\\TXLib.h"
+#include "Lib\\MENU.cpp"
 
 int main()
     {
