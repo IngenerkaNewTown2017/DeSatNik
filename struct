@@ -12,7 +12,8 @@ struct button
 
 
 
-struct furnature{
+struct furnature
+{
     int x;
     int y;
     int x1;
@@ -20,3 +21,10 @@ struct furnature{
     HDC picture;
 }
 
+
+ struct model
+ {
+   int sizeX;
+   int sizeY;
+   int title:
+ }
