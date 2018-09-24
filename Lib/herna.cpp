@@ -6,8 +6,8 @@ while(!nachalo)
 draw_main_menu();
 }
 
-if( txMouseX<40 && //ÍÎÂÀß ÏËÀÍÈĞÎÂÊÀ
-    txMouseX>560 &&
+if( txMouseX>40 && //ÍÎÂÀß ÏËÀÍÈĞÎÂÊÀ
+    txMouseX<560 &&
     txMouseY<850 &&
     txMouseY>810 &&){
      nachalo=true;
