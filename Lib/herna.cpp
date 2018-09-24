@@ -6,43 +6,45 @@ while(!nachalo)
 draw_main_menu();
 }
 
-if( txMouseX>40 && //ÕŒ¬¿ﬂ œÀ¿Õ»–Œ¬ ¿
+if( txMouseX>40 && //√ç√é√Ç√Ä√ü √è√ã√Ä√ç√à√ê√é√Ç√ä√Ä
     txMouseX<560 &&
     txMouseY<850 &&
-    txMouseY>810 &&){
+    txMouseY>810 && txMouseButtons() & 1)
+    {
      nachalo=true;
     }
 
-   /* if( txMouseX<40 && //—Óı‡ÌËÚ¸
+   /* if( txMouseX<40 && //√É¬ë√É¬Æ√É¬µ√É¬∞√É¬†√É¬≠√É¬®√É¬≤√É¬º
     txMouseX>560 &&
     txMouseY< 880&&
-    txMouseY>920 &&){
+    txMouseY>920 &&  txMouseButtons() & 1)
+    {
      saving();
     }*/
 
-    if( txMouseX<40 && //«‡„ÛÁËÚ¸
+    if( txMouseX<40 && //√É¬á√É¬†√É¬£√É¬∞√É¬≥√É¬ß√É¬®√É¬≤√É¬º
     txMouseX>560 &&
     txMouseY< 940&&
-    txMouseY>980 &&){
+    txMouseY>980 && txMouseButtons() & 1)
+    {
      loading();
     }
 
 
-    if( txMouseX<40 &&  //Õ‡ÒÚÓÈÍË
+    if( txMouseX<40 &&  //√É¬ç√É¬†√É¬±√É¬≤√É¬∞√É¬Æ√É¬©√É¬™√É¬®
     txMouseX>560 &&
     txMouseY< 1040&&
-    txMouseY>1000 &&){
+    txMouseY>1000 && txMouseButtons() & 1)
+    {
      settings();
     }
 
 
-    if( txMouseX<40 &&    //¬˚ıÓ‰
+    if( txMouseX<40 &&    //√É¬Ç√É¬ª√É¬µ√É¬Æ√É¬§
     txMouseX>560 &&
     txMouseY< 1070&&
-    txMouseY>1010 &&){
+    txMouseY>1010 && txMouseButtons() & 1)
+    {
      return 0;
     }
-
-
-
 }
