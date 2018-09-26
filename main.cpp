@@ -7,7 +7,7 @@ int main()
     int screenH = GetSystemMetrics (SM_CXSCREEN);
     txCreateWindow (screenW, screenH);
 
-    HDC fon_menu = txLoadImage ("Pics\\fon_menu.bmp");
+    HDC fon_menu = txLoadImage ("Pics\\fon_menu2.bmp");
 
     while (!GetAsyncKeyState(VK_ESCAPE))
     {
