@@ -7,7 +7,7 @@ void drawMenu (int screenW, int screenH, HDC fon_menu);
 bool checkFocus(int MinX, int MaxX, int MinY, int MaxY)
 {
     if (
-        txMouseX() >= MinX && //  мышь находится на кнопке
+        txMouseX() >= MinX && //  Г¬Г»ГёГј Г­Г ГµГ®Г¤ГЁГІГ±Гї Г­Г  ГЄГ­Г®ГЇГЄГҐ
         txMouseX() <= MaxX &&
         txMouseY() <= MaxY &&
         txMouseY() >= MinY
@@ -23,34 +23,33 @@ void checkMenuFocus()
 {
     if (checkFocus(40, 560, 810, 850))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Запускает программу" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Г‡Г ГЇГіГ±ГЄГ ГҐГІ ГЇГ°Г®ГЈГ°Г Г¬Г¬Гі" );
     }
 
     else if (checkFocus(40, 560, 880, 920))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Сохранение чего-то" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Г‘Г®ГµГ°Г Г­ГҐГ­ГЁГҐ Г·ГҐГЈГ®-ГІГ®" );
     }
 
     else if (checkFocus(40, 560, 940, 980))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Загрузка выбранной планировки" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Г‡Г ГЈГ°ГіГ§ГЄГ  ГўГ»ГЎГ°Г Г­Г­Г®Г© ГЇГ«Г Г­ГЁГ°Г®ГўГЄГЁ" );
     }
 
     else if (checkFocus(40, 560, 1000, 1040))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Как ни странно, но это настройки" );
+        txTextOut(txMouseX(), txMouseY() - 20, "ГЉГ ГЄ Г­ГЁ Г±ГІГ°Г Г­Г­Г®, Г­Г® ГЅГІГ® Г­Г Г±ГІГ°Г®Г©ГЄГЁ" );
     }
 }
 
 void drawMenu (int screenW, int screenH, HDC fon_menu)
 {
-    HDC background = txLoadImage("\Pics\fon_menu2.bmp");
-    txBitBlt (txDC(), 0, 0, 600, 800, background, 0, 0);
+    txSetColor(TX_BLACK);
+    txClear();
+    txBitBlt (txDC(), 0, 0, screenW, screenH, fon_menu, 0, 0);
 
-
-//txDeleteDC (background_FromTXLibHelp);
-txTextOut (40, 810, "Новая планировка");
-txTextOut (40, 940, "Загрузить");
-txTextOut (40, 1000, "Настройки");
-txTextOut (40, 1010, "Выйти");
+    txTextOut (40, 810, "ГЌГ®ГўГ Гї ГЇГ«Г Г­ГЁГ°Г®ГўГЄГ ");
+    txTextOut (40, 940, "Г‡Г ГЈГ°ГіГ§ГЁГІГј");
+    txTextOut (40, 1000, "ГЌГ Г±ГІГ°Г®Г©ГЄГЁ");
+    txTextOut (40, 1050, "Г‚Г»Г©ГІГЁ");
 }

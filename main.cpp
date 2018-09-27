@@ -1,5 +1,6 @@
 #include "Lib\\TXLib.h"
 #include "Lib\\MENU.cpp"
+
 bool total_exit ();
 
 int main()
@@ -8,7 +9,7 @@ int main()
     int screenH = GetSystemMetrics (SM_CXSCREEN);
     txCreateWindow (screenW, screenH);
 
-    HDC fon_menu = txLoadImage ("Pics\\fon_menu.bmp");
+    HDC fon_menu = txLoadImage ("Pics\\fon_menu2.bmp");
 
     while (true/*!GetAsyncKeyState(VK_ESCAPE)*/)
     {
@@ -19,6 +20,7 @@ int main()
             txDisableAutoPause();
             return 0;
         };
+
         txSleep(10);
     }
 
@@ -26,8 +28,6 @@ int main()
 
     return 0;
 }
-
-
 
 bool total_exit ()  {
 if (txMouseX()>30 &&
@@ -38,5 +38,3 @@ if (txMouseX()>30 &&
  }
  return false;
 }
-
-
