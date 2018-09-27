@@ -6,22 +6,25 @@ bool total_exit ();
 int main()
 {
     int screenW = GetSystemMetrics (SM_CXSCREEN);
-    int screenH = GetSystemMetrics (SM_CXSCREEN);
+    int screenH = GetSystemMetrics (SM_CYSCREEN);
     txCreateWindow (screenW, screenH);
 
-    HDC fon_menu = txLoadImage ("Pics\\fon_menu2.bmp");
+    HDC fon_menu = txLoadImage ("Pics\\fon_menu.bmp");
+    bool isExit = false;
 
-    while (true/*!GetAsyncKeyState(VK_ESCAPE)*/)
+    while (!isExit)
     {
+        txBegin();
         drawMenu (screenW, screenH, fon_menu);
         checkMenuFocus();
         if (total_exit ())
         {
             txDisableAutoPause();
-            return 0;
+            isExit = true;
         };
 
         txSleep(10);
+        txEnd();
     }
 
     txDeleteDC(fon_menu);
@@ -29,12 +32,16 @@ int main()
     return 0;
 }
 
-bool total_exit ()  {
-if (txMouseX()>30 &&
-    txMouseY()> 1066&&
-     txMouseX() <818 &&
-    txMouseY()<1107 && txMouseButtons() & 1){
-    return true;
- }
- return false;
+bool total_exit ()
+{
+    if (txMouseX() > exitButton.x  &&
+        txMouseX() < exitButton.x1 &&
+        txMouseY() > exitButton.y  &&
+        txMouseY() < exitButton.y1 &&
+        txMouseButtons() & 1)
+    {
+        return true;
+    }
+
+    return false;
 }

@@ -1,15 +1,13 @@
-void click(button b){
-
-}
-struct button
+struct Button
 {
     int x;
     int y;
     int x1;
     int y1;
     HDC picture;
-}
+};
 
+Button exitButton = {240, 550, 400, 600};
 
 
 struct furnature
@@ -19,12 +17,12 @@ struct furnature
     int x1;
     int y1;
     HDC picture;
-}
+};
 
 
- struct model
- {
-   int sizeX;
-   int sizeY;
-   int title;
- }
+struct model
+{
+    int sizeX;
+    int sizeY;
+    int title;
+};

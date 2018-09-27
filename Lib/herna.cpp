@@ -48,3 +48,9 @@ if( txMouseX>40 && //ÍÎÂÀß ÏËÀÍÈÐÎÂÊÀ
      return 0;
     }
 }
+
+void draw_menu(){
+
+
+
+}

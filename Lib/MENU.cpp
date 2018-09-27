@@ -1,4 +1,5 @@
 #include "TXLib.h"
+#include "struct.cpp"
 
 bool checkFocus(int MinX, int MaxX, int MinY, int MaxY);
 void checkMenuFocus();
@@ -7,7 +8,7 @@ void drawMenu (int screenW, int screenH, HDC fon_menu);
 bool checkFocus(int MinX, int MaxX, int MinY, int MaxY)
 {
     if (
-        txMouseX() >= MinX && //  мышь находится на кнопке
+        txMouseX() >= MinX && //  iuou iaoiaeony ia eiiiea
         txMouseX() <= MaxX &&
         txMouseY() <= MaxY &&
         txMouseY() >= MinY
@@ -23,26 +24,33 @@ void checkMenuFocus()
 {
     if (checkFocus(40, 560, 810, 850))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Запускает программу" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Caioneaao i?ia?aiio" );
     }
 
     else if (checkFocus(40, 560, 880, 920))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Сохранение чего-то" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Nio?aiaiea ?aai-oi" );
     }
 
     else if (checkFocus(40, 560, 940, 980))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Загрузка выбранной планировки" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Caa?ocea aua?aiiie ieaie?iaee" );
     }
 
-    else if (checkFocus(40, 560, 1000, 1040))
+    else if (checkFocus(exitButton.x, exitButton.y, exitButton.x1, exitButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Как ни странно, но это настройки" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Точно хотите выйти" );
     }
 }
 
 void drawMenu (int screenW, int screenH, HDC fon_menu)
 {
+    txSetColor(TX_BLACK);
+    txClear();
     txBitBlt (txDC(), 0, 0, screenW, screenH, fon_menu, 0, 0);
+
+    txTextOut (40, 810, "Новая планировка");
+    txTextOut (40, 940, "Сохранить");
+    txTextOut (40, 1000, "Загрузить");
+    txTextOut (exitButton.x, exitButton.y, "Выйти");
 }
