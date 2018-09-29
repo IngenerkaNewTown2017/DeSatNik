@@ -2,6 +2,7 @@
 #include "Lib\\MENU.cpp"
 
 bool total_exit ();
+void menu_escape();
 
 int main()
 {
@@ -45,3 +46,31 @@ bool total_exit ()
 
     return false;
 }
+
+void menu_escape()
+{
+    int screenW = GetSystemMetrics (SM_CXSCREEN);
+    int screenH = GetSystemMetrics (SM_CYSCREEN);
+
+    HDC escape= txLoadImage ("Pics\\menu_escape.bmp");
+        bool isreturn = false;
+        if (GetAsyncKeyState(VK_ESCAPE))
+        {
+            txSleep(1000);
+
+            while (!isreturn)
+            {                     //x   y    шир  выс        x    y
+                txBitBlt (txDC(), screenH/2, screenW/2 - 300, 215, 291, escape, 0, 0);
+                if (txMouseButtons() & 1 &&
+                    txMouseX() > 0 && txMouseX() < 800
+                &&  txMouseY() > 0 && txMouseY() < 321)
+                {
+                    isreturn = true;
+                }
+                txSleep(10);
+            }
+
+        }
+        txDeleteDC(escape);
+    }
+
