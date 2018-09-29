@@ -9,6 +9,8 @@ int main()
     int screenH = GetSystemMetrics (SM_CYSCREEN);
     txCreateWindow (screenW, screenH);
 
+    exitButton = {0, screenH * 0.95, 200, screenH};
+
     HDC fon_menu = txLoadImage ("Pics\\fon_menu.bmp");
     bool isExit = false;
 

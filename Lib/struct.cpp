@@ -7,7 +7,7 @@ struct Button
     HDC picture;
 };
 
-Button exitButton = {240, 550, 400, 600};
+Button exitButton;
 
 
 struct furnature
