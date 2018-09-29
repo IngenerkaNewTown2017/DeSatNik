@@ -49,8 +49,8 @@ void drawMenu (int screenW, int screenH, HDC fon_menu)
     txClear();
     txBitBlt (txDC(), 0, 0, screenW, screenH, fon_menu, 0, 0);
 
-    txTextOut (40, 810, "Новая планировка");
-    txTextOut (40, 940, "Сохранить");
-    txTextOut (40, 1000, "Загрузить");
+	txTextOut(newplanButton.x, newplanButton.y, "Новая планировка");
+	txTextOut(saveButton.x, saveButton.y, "Сохранить");
+	txTextOut(loadButton.x, loadButton.y, "Загрузить");
     txTextOut (exitButton.x, exitButton.y, "Выйти");
 }
