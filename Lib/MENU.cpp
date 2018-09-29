@@ -4,6 +4,8 @@
 bool checkFocus(int MinX, int MaxX, int MinY, int MaxY);
 void checkMenuFocus();
 void drawMenu (int screenW, int screenH, HDC fon_menu);
+void startWorkspace ();
+
 
 bool checkFocus(int MinX, int MaxX, int MinY, int MaxY)
 {
@@ -47,10 +49,21 @@ void drawMenu (int screenW, int screenH, HDC fon_menu)
 {
     txSetColor(TX_BLACK);
     txClear();
-    txBitBlt (txDC(), 0, 0, screenW, screenH, fon_menu, 0, 0);
 
+    Win32::TransparentBlt (txDC(), 0, 0, screenW, screenH, fon_menu, 0, 0, 1950, 1400, -1);
+    //txBitBlt (txDC(), 0, 0, screenW, screenH, fon_menu, 0, 0);
+
+    txSelectFont("Harlow Solid Italic", 40);
+    txSetColor(TX_WHITE);
     txTextOut (40, 810, "Новая планировка");
     txTextOut (40, 940, "Сохранить");
     txTextOut (40, 1000, "Загрузить");
     txTextOut (exitButton.x, exitButton.y, "Выйти");
+}
+
+
+void startWorkspace () {     //DODELAT!!!!
+
+
+
 }
