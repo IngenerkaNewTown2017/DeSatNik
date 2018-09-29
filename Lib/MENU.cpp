@@ -4,6 +4,7 @@
 bool checkFocus(int MinX, int MaxX, int MinY, int MaxY);
 void checkMenuFocus();
 void drawMenu (int screenW, int screenH, HDC fon_menu);
+void startWorkspace ();
 
 bool checkFocus(int MinX, int MaxX, int MinY, int MaxY)
 {
@@ -22,24 +23,24 @@ bool checkFocus(int MinX, int MaxX, int MinY, int MaxY)
 
 void checkMenuFocus()
 {
-    if (checkFocus(40, 560, 810, 850))
+    if (checkFocus(newplanButton.x, newplanButton.y, newplanButton.x1, newplanButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Caioneaao i?ia?aiio" );
+        txTextOut(txMouseX(), txMouseY() - 20, "РЎРѕР·РґР°С‚СЊ РїР»Р°РЅРёСЂРѕРІРєСѓ?" );
     }
 
-    else if (checkFocus(40, 560, 880, 920))
+    else if (checkFocus(saveButton.x, saveButton.y, saveButton.x1, saveButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Nio?aiaiea ?aai-oi" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Р—Р°РіСЂСѓР·РёС‚СЊ С‡С‚Рѕ Р»СЊ?" );
     }
 
-    else if (checkFocus(40, 560, 940, 980))
+    else if (checkFocus(loadButton.x, loadButton.y, loadButton.x1, loadButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Caa?ocea aua?aiiie ieaie?iaee" );
+        txTextOut(txMouseX(), txMouseY() - 20, "РЎРѕС…СЂР°РЅРёРј С‡С‚Рѕ РёРјРµРµРј?" );
     }
 
     else if (checkFocus(exitButton.x, exitButton.y, exitButton.x1, exitButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Точно хотите выйти" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Р”Р° РЅСѓ Р»Р°РЅ, РЅРµ СѓС…РѕРґРё" );
     }
 }
 
@@ -47,10 +48,20 @@ void drawMenu (int screenW, int screenH, HDC fon_menu)
 {
     txSetColor(TX_BLACK);
     txClear();
-    txBitBlt (txDC(), 0, 0, screenW, screenH, fon_menu, 0, 0);
+    Win32::TransparentBlt (txDC(), 0, 0, screenW, screenH, fon_menu, 0, 0, 1950, 1400, -1);
+    //txBitBlt (txDC(), 0, 0, screenW, screenH, fon_menu, 0, 0);
 
-	txTextOut(newplanButton.x, newplanButton.y, "Новая планировка");
-	txTextOut(saveButton.x, saveButton.y, "Сохранить");
-	txTextOut(loadButton.x, loadButton.y, "Загрузить");
-    txTextOut (exitButton.x, exitButton.y, "Выйти");
+    txSelectFont("Harlow Solid Italic", 40);
+    txSetColor(TX_WHITE);
+	  txTextOut(newplanButton.x, newplanButton.y, "РќРѕРІР°СЏ РїР»Р°РЅРёСЂРѕРІРєР°");
+	  txTextOut(saveButton.x, saveButton.y, "Р—Р°РіСЂСѓР·РёС‚СЊ");
+	  txTextOut(loadButton.x, loadButton.y, "РЎРѕС…СЂР°РЅРёС‚СЊ");
+    txTextOut (exitButton.x, exitButton.y, "Р’С‹Р№С‚Рё");
+}
+
+
+void startWorkspace () {     //DODELAT!!!!
+
+
+
 }
