@@ -25,22 +25,22 @@ void checkMenuFocus()
 {
     if (checkFocus(newplanButton.x, newplanButton.y, newplanButton.x1, newplanButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "РЎРѕР·РґР°С‚СЊ РїР»Р°РЅРёСЂРѕРІРєСѓ?" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Создать планировку?" );
     }
 
     else if (checkFocus(saveButton.x, saveButton.y, saveButton.x1, saveButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Р—Р°РіСЂСѓР·РёС‚СЊ С‡С‚Рѕ Р»СЊ?" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Загрузить что ль?" );
     }
 
     else if (checkFocus(loadButton.x, loadButton.y, loadButton.x1, loadButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "РЎРѕС…СЂР°РЅРёРј С‡С‚Рѕ РёРјРµРµРј?" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Сохраним что имеем?" );
     }
 
     else if (checkFocus(exitButton.x, exitButton.y, exitButton.x1, exitButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Р”Р° РЅСѓ Р»Р°РЅ, РЅРµ СѓС…РѕРґРё" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Да ну лан, не уходи" );
     }
 }
 
@@ -53,10 +53,10 @@ void drawMenu (int screenW, int screenH, HDC fon_menu)
 
     txSelectFont("Harlow Solid Italic", 40);
     txSetColor(TX_WHITE);
-	  txTextOut(newplanButton.x, newplanButton.y, "РќРѕРІР°СЏ РїР»Р°РЅРёСЂРѕРІРєР°");
-	  txTextOut(saveButton.x, saveButton.y, "Р—Р°РіСЂСѓР·РёС‚СЊ");
-	  txTextOut(loadButton.x, loadButton.y, "РЎРѕС…СЂР°РЅРёС‚СЊ");
-    txTextOut (exitButton.x, exitButton.y, "Р’С‹Р№С‚Рё");
+    txTextOut(newplanButton.x, newplanButton.y, "Новая планировка");
+	txTextOut(saveButton.x, saveButton.y, "Загрузить");
+	txTextOut(loadButton.x, loadButton.y, "Сохранить");
+    txTextOut (exitButton.x, exitButton.y, "Выйти");
 }
 
 

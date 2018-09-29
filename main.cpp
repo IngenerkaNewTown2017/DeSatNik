@@ -14,7 +14,7 @@ int main()
     loadButton = {0, screenH * 0.85, 200, screenH * 0.90};
     saveButton = {0, screenH * 0.90, 200, screenH * 0.95};
     exitButton = {0, screenH * 0.95, 200, screenH};
-  
+
     HDC fon_menu = txLoadImage ("Pics\\fon_menu.bmp");
     bool isExit = false;
 
@@ -23,6 +23,7 @@ int main()
         txBegin();
         drawMenu (screenW, screenH, fon_menu);
         checkMenuFocus();
+        menu_escape();
         if (total_exit ())
         {
             txDisableAutoPause();
