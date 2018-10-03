@@ -3,9 +3,16 @@
 
 bool total_exit ();
 void menu_escape();
-
+int count_models = 10;
 int main()
 {
+    model Mas_models[count_models];
+    for (int i=0; i<count_models; i++)
+    {
+        Mas_models[i] = {100, 300, "sdf"};
+    }
+
+
     int screenW = GetSystemMetrics (SM_CXSCREEN);
     int screenH = GetSystemMetrics (SM_CYSCREEN);
     txCreateWindow (screenW, screenH);
@@ -24,11 +31,12 @@ int main()
         drawMenu (screenW, screenH, fon_menu);
         checkMenuFocus();
         menu_escape();
-        if (total_exit ())
-        {
+        testova(Mas_models, count_models);
+        if (total_exit ()) {
+
             txDisableAutoPause();
             isExit = true;
-        };
+        }
 
         txSleep(10);
         txEnd();
