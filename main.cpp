@@ -10,20 +10,33 @@ int main()
     int screenH = GetSystemMetrics (SM_CYSCREEN);
     txCreateWindow (screenW, screenH);
 
-    newplanButton = {0, screenH * 0.80, 200, screenH * 0.85};
-    loadButton = {0, screenH * 0.85, 200, screenH * 0.90};
-    saveButton = {0, screenH * 0.90, 200, screenH * 0.95};
-    exitButton = {0, screenH * 0.95, 200, screenH};
+    bool startWS = false;
 
-    HDC fon_menu = txLoadImage ("Pics\\fon_menu.bmp");
+
+    newplanButton = {0, screenH * 80/100, 200, screenH * 85/100};
+    loadButton = {0, screenH * 85/100, 200, screenH * 90/100};
+    saveButton = {0, screenH * 90/100, 200, screenH * 95/100};
+    exitButton = {0, screenH * 95/100, 200, screenH};
+
+	HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
+    HDC fon_menu = txLoadImage ("Pics\\fon_menu .bmp");
     bool isExit = false;
 
     while (!isExit)
     {
         txBegin();
-        drawMenu (screenW, screenH, fon_menu);
-        checkMenuFocus();
-        menu_escape();
+        if (startWS)
+        {
+			Win32::TransparentBlt (txDC(), 0, 0, screenW, screenH, WSpace, 0, 0, 1966, 1104, -1);
+			//txTransparentBlt (txDC(), 0, 0, screenW, screenH, WSpace);
+		}
+		else
+		{
+			drawMenu (screenW, screenH, fon_menu);
+			checkMenuFocus();
+			//menu_escape();
+			startWS = (startWorkspace (startWS));
+        }
         if (total_exit ())
         {
             txDisableAutoPause();
