@@ -4,13 +4,14 @@
 bool checkFocus(int MinX, int MaxX, int MinY, int MaxY);
 void checkMenuFocus();
 void drawMenu (int screenW, int screenH, HDC fon_menu);
-void testova ( model* Mas_models, int count_Models);
-void startWorkspace ();
 
-bool checkFocus(int MinX, int MaxX, int MinY, int MaxY)
+void testova ( model* Mas_models, int count_Models);
+bool startWorkspace (bool startWork);
+
+bool checkFocus(int MinX, int MinY, int MaxX, int MaxY)
 {
     if (
-        txMouseX() >= MinX && //  iuou iaoiaeony ia eiiiea
+        txMouseX() >= MinX &&
         txMouseX() <= MaxX &&
         txMouseY() <= MaxY &&
         txMouseY() >= MinY
@@ -26,22 +27,22 @@ void checkMenuFocus()
 {
     if (checkFocus(newplanButton.x, newplanButton.y, newplanButton.x1, newplanButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Создать планировку?" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Г‘Г®Г§Г¤Г ГІГј ГЇГ«Г Г­ГЁГ°Г®ГўГЄГі?" );
     }
 
     else if (checkFocus(saveButton.x, saveButton.y, saveButton.x1, saveButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Загрузить что ль?" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Г‘Г®ГµГ°Г Г­ГЁГ¬ Г·ГІГ® ГЁГ¬ГҐГҐГ¬?" );
     }
 
     else if (checkFocus(loadButton.x, loadButton.y, loadButton.x1, loadButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Сохраним что имеем?" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Г‡Г ГЈГ°ГіГ§ГЁГІГј Г·ГІГ® Г«Гј?" );
     }
 
     else if (checkFocus(exitButton.x, exitButton.y, exitButton.x1, exitButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Да ну лан, не уходи" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Г„Г  Г­Гі Г«Г Г­, Г­ГҐ ГіГµГ®Г¤ГЁ" );
     }
 }
 
@@ -54,16 +55,12 @@ void drawMenu (int screenW, int screenH, HDC fon_menu)
 
     txSelectFont("Harlow Solid Italic", 40);
     txSetColor(TX_WHITE);
-    txTextOut(newplanButton.x, newplanButton.y, "Новая планировка");
-	txTextOut(saveButton.x, saveButton.y, "Загрузить");
-	txTextOut(loadButton.x, loadButton.y, "Сохранить");
-    txTextOut (exitButton.x, exitButton.y, "Выйти");
+    txTextOut(newplanButton.x, newplanButton.y, "ГЌГ®ГўГ Гї ГЇГ«Г Г­ГЁГ°Г®ГўГЄГ ");
+  	txTextOut(saveButton.x, saveButton.y, "Г‡Г ГЈГ°ГіГ§ГЁГІГј");
+	  txTextOut(loadButton.x, loadButton.y, "Г‘Г®ГµГ°Г Г­ГЁГІГј");
+    txTextOut (exitButton.x, exitButton.y, "Г‚Г»Г©ГІГЁ");
 }
 
-
-void startWorkspace () {     //DODELAT!!!!}
-
-}
 
 void testova ( model* Mas_models, int count_Models) {     //DODELAT!!!!
 
@@ -73,4 +70,19 @@ void testova ( model* Mas_models, int count_Models) {     //DODELAT!!!!
  txRectangle(10*i, 10*i, 10*i+Mas_models[i].sizeX, 10*i+Mas_models[i].sizeY);
  }
 
+  bool startWorkspace (bool startWork)
+{
+
+    if (checkFocus(newplanButton.x, newplanButton.y, newplanButton.x1, newplanButton.y1) &&
+        txMouseButtons() & 1)
+    {
+		startWork = true;
+    }
+
+    return startWork;
+}
+
+void nazad ()
+{    //dodelat
+    return;
 }
