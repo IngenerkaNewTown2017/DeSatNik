@@ -4,12 +4,12 @@
 bool checkFocus(int MinX, int MaxX, int MinY, int MaxY);
 void checkMenuFocus();
 void drawMenu (int screenW, int screenH, HDC fon_menu);
-bool startWorkspace (bool startWork);
+void startWorkspace ();
 
 bool checkFocus(int MinX, int MinY, int MaxX, int MaxY)
 {
     if (
-        txMouseX() >= MinX &&
+        txMouseX() >= MinX && //  iuou iaoiaeony ia eiiiea
         txMouseX() <= MaxX &&
         txMouseY() <= MaxY &&
         txMouseY() >= MinY
@@ -60,18 +60,8 @@ void drawMenu (int screenW, int screenH, HDC fon_menu)
 }
 
 
-bool startWorkspace (bool startWork) {
+void startWorkspace () {     //DODELAT!!!!
 
-    if (checkFocus(newplanButton.x, newplanButton.y, newplanButton.x1, newplanButton.y1) &&
-        txMouseButtons() & 1)
-    {
-		startWork = true;
-    }
-
-    return startWork;
-}
-void nazad () {    //dodelat
- return;
 
 
 }
