@@ -4,8 +4,16 @@
 bool total_exit ();
 void menu_escape(HDC escape);
 
+int count_models = 10;
+
 int main()
 {
+    model Mas_models[count_models];
+    for (int i=0; i<count_models; i++)
+    {
+        Mas_models[i] = {100, 300, "sdf"};
+    }
+
     int screenW = GetSystemMetrics (SM_CXSCREEN);
     int screenH = GetSystemMetrics (SM_CYSCREEN);
     txCreateWindow (screenW, screenH);
@@ -17,8 +25,8 @@ int main()
     saveButton = {0, screenH * 90/100, 200, screenH * 95/100};
     exitButton = {0, screenH * 95/100, 200, screenH};
     //continueButton = {829, 447, 1065, 483};
-
-   	HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
+    
+    HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
     HDC fon_menu = txLoadImage ("Pics\\fon_menu .bmp");
     HDC escape= txLoadImage ("Pics\\menu_escape.bmp");
     bool isExit = false;
@@ -38,6 +46,7 @@ int main()
 			      checkMenuFocus();
       			//menu_escape(escape);
 			      startWS = startWorkspace(startWS);
+            testova(Mas_models, count_models);
         }
       
         if (total_exit ())
