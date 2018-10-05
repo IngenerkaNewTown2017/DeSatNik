@@ -28,5 +28,6 @@ struct model
 {
     int sizeX;
     int sizeY;
-    int title;
+    string title;
+    HDC pic;
 };

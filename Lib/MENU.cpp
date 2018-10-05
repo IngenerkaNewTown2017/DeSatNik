@@ -4,6 +4,7 @@
 bool checkFocus(int MinX, int MaxX, int MinY, int MaxY);
 void checkMenuFocus();
 void drawMenu (int screenW, int screenH, HDC fon_menu);
+void testova ( model* Mas_models, int count_Models);
 void startWorkspace ();
 
 bool checkFocus(int MinX, int MaxX, int MinY, int MaxY)
@@ -60,8 +61,16 @@ void drawMenu (int screenW, int screenH, HDC fon_menu)
 }
 
 
-void startWorkspace () {     //DODELAT!!!!
+void startWorkspace () {     //DODELAT!!!!}
 
+}
 
+void testova ( model* Mas_models, int count_Models) {     //DODELAT!!!!
+
+ for(int i =0; i<count_Models; i++)
+ {
+ txSetFillColor(TX_RED);
+ txRectangle(10*i, 10*i, 10*i+Mas_models[i].sizeX, 10*i+Mas_models[i].sizeY);
+ }
 
 }
