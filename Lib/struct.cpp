@@ -14,7 +14,7 @@ Button loadButton;
 Button continueButton;
 
 
-struct furneture
+struct furnature
 {
     int x;
     int y;

@@ -2,7 +2,7 @@
 #include "Lib\\MENU.cpp"
 
 bool total_exit ();
-void menu_escape();
+void menu_escape(HDC escape);
 
 int main()
 {
@@ -12,33 +12,34 @@ int main()
 
     bool startWS = false;
 
-
     newplanButton = {0, screenH * 80/100, 200, screenH * 85/100};
     loadButton = {0, screenH * 85/100, 200, screenH * 90/100};
     saveButton = {0, screenH * 90/100, 200, screenH * 95/100};
     exitButton = {0, screenH * 95/100, 200, screenH};
     //continueButton = {829, 447, 1065, 483};
 
-	HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
+   	HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
     HDC fon_menu = txLoadImage ("Pics\\fon_menu .bmp");
+    HDC escape= txLoadImage ("Pics\\menu_escape.bmp");
     bool isExit = false;
 
     while (!isExit)
     {
         txBegin();
+
         if (startWS)
         {
-			Win32::TransparentBlt (txDC(), 0, 0, screenW, screenH, WSpace, 0, 0, 1966, 1104, -1);
-            menu_escape ();
-
+			      Win32::TransparentBlt (txDC(), 0, 0, screenW, screenH, WSpace, 0, 0, 1966, 1104, -1);
+            menu_escape (escape);
         }
-		else
-		{
-			drawMenu (screenW, screenH, fon_menu);
-			checkMenuFocus();
-			//menu_escape();
-			startWS = (startWorkspace (startWS));
+		    else
+		    {
+			      drawMenu (screenW, screenH, fon_menu);
+			      checkMenuFocus();
+      			//menu_escape(escape);
+			      startWS = startWorkspace(startWS);
         }
+      
         if (total_exit ())
         {
             txDisableAutoPause();
@@ -50,6 +51,8 @@ int main()
     }
 
     txDeleteDC(fon_menu);
+    txDeleteDC(escape);
+    txDeleteDC(WSpace);
 
     return 0;
 }
@@ -68,12 +71,11 @@ bool total_exit ()
     return false;
 }
 
-void menu_escape()
+void menu_escape(HDC escape)
 {
     int screenW = GetSystemMetrics (SM_CXSCREEN);
     int screenH = GetSystemMetrics (SM_CYSCREEN);
 
-    HDC escape= txLoadImage ("Pics\\menu_escape.bmp");
     bool isreturn = false;
     if (GetAsyncKeyState(VK_ESCAPE))
     {
@@ -82,21 +84,15 @@ void menu_escape()
         while (!isreturn)
         {                     //x   y    ���  ���        x    y
             txBitBlt (txDC(), screenH/2, screenW/2 - 300, 215, 291, escape, 0, 0);
+          
             if ((txMouseButtons() & 1 &&
-                txMouseX() >  && txMouseX() <
-            &&  txMouseY() >  && txMouseY() < ) or GetAsyncKeyState(VK_ESCAPE))
+                txMouseX() > 0 && txMouseX() < 800
+            &&  txMouseY() > 0 && txMouseY() < 321) or GetAsyncKeyState(VK_ESCAPE)
             {
                 isreturn = true;
             }
-          /* load   if ((txMouseButtons() & 1 &&
-                txMouseX() >  && txMouseX() <
-            &&  txMouseY() >  && txMouseY() < ))*/
-
+                
             txSleep(10);
         }
-
-    }
-
-
-    txDeleteDC(escape);
+    }               
 }
