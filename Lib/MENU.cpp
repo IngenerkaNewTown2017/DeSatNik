@@ -6,7 +6,7 @@ void checkMenuFocus();
 void drawMenu (int screenW, int screenH, HDC fon_menu);
 void startWorkspace ();
 
-bool checkFocus(int MinX, int MaxX, int MinY, int MaxY)
+bool checkFocus(int MinX, int MinY, int MaxX, int MaxY)
 {
     if (
         txMouseX() >= MinX && //  iuou iaoiaeony ia eiiiea
@@ -30,12 +30,12 @@ void checkMenuFocus()
 
     else if (checkFocus(saveButton.x, saveButton.y, saveButton.x1, saveButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Загрузить что ль?" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Сохраним что имеем?" );
     }
 
     else if (checkFocus(loadButton.x, loadButton.y, loadButton.x1, loadButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Сохраним что имеем?" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Загрузить что ль?" );
     }
 
     else if (checkFocus(exitButton.x, exitButton.y, exitButton.x1, exitButton.y1))

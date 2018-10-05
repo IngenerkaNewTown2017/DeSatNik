@@ -10,12 +10,13 @@ int main()
     int screenH = GetSystemMetrics (SM_CYSCREEN);
     txCreateWindow (screenW, screenH);
 
-    newplanButton = {0, screenH * 0.80, 200, screenH * 0.85};
-    loadButton = {0, screenH * 0.85, 200, screenH * 0.90};
-    saveButton = {0, screenH * 0.90, 200, screenH * 0.95};
-    exitButton = {0, screenH * 0.95, 200, screenH};
 
-    HDC fon_menu = txLoadImage ("Pics\\fon_menu.bmp");
+    newplanButton = {0, screenH * 80/100, 200, screenH * 85/100};
+    loadButton = {0, screenH * 85/100, 200, screenH * 90/100};
+    saveButton = {0, screenH * 90/100, 200, screenH * 95/100};
+    exitButton = {0, screenH * 95/100, 200, screenH};
+
+    HDC fon_menu = txLoadImage ("Pics\\fon_menu .bmp");
     bool isExit = false;
 
     while (!isExit)
