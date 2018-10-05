@@ -11,7 +11,7 @@ Button exitButton;
 Button saveButton;
 Button newplanButton;
 Button loadButton;
-
+Button continueButton;
 
 
 struct furnature
