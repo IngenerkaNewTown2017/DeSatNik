@@ -24,7 +24,18 @@ int main()
     loadButton = {0, screenH * 85/100, 200, screenH * 90/100};
     saveButton = {0, screenH * 90/100, 200, screenH * 95/100};
     exitButton = {0, screenH * 95/100, 200, screenH};
+
+HDC sofa = txLoadImage ("Pics\\Диван.bmp");
+
+
+    Button sofaButton = {100, screenH * 80/100, 200, screenH * 85/100, sofa};
     //continueButton = {829, 447, 1065, 483};
+/*HDC WSpace = txLoadImage ("Pics\\.bmp");
+HDC WSpace = txLoadImage ("Pics\\.bmp");
+HDC WSpace = txLoadImage ("Pics\\.bmp");
+HDC WSpace = txLoadImage ("Pics\\.bmp");*/
+
+
 
     HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
     HDC fon_menu = txLoadImage ("Pics\\fon_menu .bmp");
@@ -35,13 +46,20 @@ int main()
     {
         txBegin();
 
+		//Редактор
         if (startWS)
         {
-			      Win32::TransparentBlt (txDC(), 0, 0, screenW, screenH, WSpace, 0, 0, 1966, 1104, -1);
+			Win32::TransparentBlt (txDC(), 0, 0, screenW, screenH, WSpace, 0, 0, 1966, 1104, -1);
             menu_escape (escape);
+			ikons (sofaButton);
+			if (txMouseButtons() & 2)
+			{
+				startWS = false;
+			}
         }
-		    else
-		    {
+        //Главное меню
+		else
+		{
 			      drawMenu (screenW, screenH, fon_menu);
 			      checkMenuFocus();
       			//menu_escape(escape);
