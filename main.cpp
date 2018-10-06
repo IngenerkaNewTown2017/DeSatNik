@@ -25,7 +25,7 @@ int main()
     saveButton = {0, screenH * 90/100, 200, screenH * 95/100};
     exitButton = {0, screenH * 95/100, 200, screenH};
     //continueButton = {829, 447, 1065, 483};
-    
+
     HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
     HDC fon_menu = txLoadImage ("Pics\\fon_menu .bmp");
     HDC escape= txLoadImage ("Pics\\menu_escape.bmp");
@@ -48,7 +48,7 @@ int main()
 			      startWS = startWorkspace(startWS);
             testova(Mas_models, count_models);
         }
-      
+
         if (total_exit ())
         {
             txDisableAutoPause();
@@ -93,15 +93,15 @@ void menu_escape(HDC escape)
         while (!isreturn)
         {                     //x   y    ���  ���        x    y
             txBitBlt (txDC(), screenH/2, screenW/2 - 300, 215, 291, escape, 0, 0);
-          
+
             if ((txMouseButtons() & 1 &&
                 txMouseX() > 0 && txMouseX() < 800
-            &&  txMouseY() > 0 && txMouseY() < 321) or GetAsyncKeyState(VK_ESCAPE)
+            &&  txMouseY() > 0 && txMouseY() < 321) or GetAsyncKeyState(VK_ESCAPE))
             {
                 isreturn = true;
             }
-                
+
             txSleep(10);
         }
-    }               
+    }
 }
