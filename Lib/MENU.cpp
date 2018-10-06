@@ -28,22 +28,22 @@ void checkMenuFocus()
 {
     if (checkFocus(newplanButton.x, newplanButton.y, newplanButton.x1, newplanButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Создать планировку?" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Г‘Г®Г§Г¤Г ГІГј ГЇГ«Г Г­ГЁГ°Г®ГўГЄГі?" );
     }
 
     else if (checkFocus(saveButton.x, saveButton.y, saveButton.x1, saveButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Сохраним что имеем?" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Г‘Г®ГµГ°Г Г­ГЁГ¬ Г·ГІГ® ГЁГ¬ГҐГҐГ¬?" );
     }
 
     else if (checkFocus(loadButton.x, loadButton.y, loadButton.x1, loadButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Загрузить что ль?" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Г‡Г ГЈГ°ГіГ§ГЁГІГј Г·ГІГ® Г«Гј?" );
     }
 
     else if (checkFocus(exitButton.x, exitButton.y, exitButton.x1, exitButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Да ну лан, не уходи" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Г„Г  Г­Гі Г«Г Г­, Г­ГҐ ГіГµГ®Г¤ГЁ" );
     }
 }
 
@@ -56,10 +56,10 @@ void drawMenu (int screenW, int screenH, HDC fon_menu)
 
     txSelectFont("Harlow Solid Italic", 40);
     txSetColor(TX_WHITE);
-    txTextOut(newplanButton.x, newplanButton.y, "Новая планировка");
-	txTextOut(saveButton.x, saveButton.y, "Сохранить");
-	txTextOut(loadButton.x, loadButton.y, "Загрузить");
-    txTextOut (exitButton.x, exitButton.y, "Выйти");
+    txTextOut(newplanButton.x, newplanButton.y, "ГЌГ®ГўГ Гї ГЇГ«Г Г­ГЁГ°Г®ГўГЄГ ");
+	txTextOut(saveButton.x, saveButton.y, "Г‘Г®ГµГ°Г Г­ГЁГІГј");
+	txTextOut(loadButton.x, loadButton.y, "Г‡Г ГЈГ°ГіГ§ГЁГІГј");
+    txTextOut (exitButton.x, exitButton.y, "Г‚Г»Г©ГІГЁ");
 }
 
 
@@ -89,10 +89,7 @@ void nazad ()
     return;
 }
 
-void ikons (Button sofaButton)
-{
+void ikons (Button sofaButton) {
 	         //txBitBlt (txDC(), sofaButton.x, sofaButton.y, sofaButton.x1 - sofaButton.x, sofaButton.y1 - sofaButton.y, sofaButton.picture);
 Win32::TransparentBlt (txDC(), sofaButton.x, sofaButton.y, sofaButton.x1 - sofaButton.x, sofaButton.y1 - sofaButton.y, sofaButton.picture, 0, 0, sofaButton.width, sofaButton.height, -1);
-
-
 }
