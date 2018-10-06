@@ -25,10 +25,10 @@ int main()
     saveButton = {0, screenH * 90/100, 200, screenH * 95/100};
     exitButton = {0, screenH * 95/100, 200, screenH};
 
-HDC sofa = txLoadImage ("Pics\\Диван.bmp");
+HDC sofa = txLoadImage ("Pics\\Г„ГЁГўГ Г­.bmp");
 
 
-    Button sofaButton = {100, screenH * 80/100, 200, screenH * 85/100, sofa};
+    Button sofaButton = {100, screenH * 80/100, 100 + screenH * 5/100, screenH * 85/100, sofa, 241, 142};
     //continueButton = {829, 447, 1065, 483};
 /*HDC WSpace = txLoadImage ("Pics\\.bmp");
 HDC WSpace = txLoadImage ("Pics\\.bmp");
@@ -46,18 +46,31 @@ HDC WSpace = txLoadImage ("Pics\\.bmp");*/
     {
         txBegin();
 
-		//Редактор
+		//ГђГҐГ¤Г ГЄГІГ®Г°
         if (startWS)
         {
-			Win32::TransparentBlt (txDC(), 0, 0, screenW, screenH, WSpace, 0, 0, 1966, 1104, -1);
+
+          Win32::TransparentBlt (txDC(), 0, 0, screenW, screenH, WSpace, 0, 0, 1966, 1104, RGB(123,124,1));
+
+            txSetColor(TX_BLACK);
+            txRectangle(0, screenH - 300, screenW, screenH);
             menu_escape (escape);
 			ikons (sofaButton);
 			if (txMouseButtons() & 2)
 			{
 				startWS = false;
 			}
+
+                txSetColor (TX_BLACK);
+                txLine(127, 955, 1833, 955);
+
+                for (int x = 0; x <= 831; x = x + 30)
+                {
+                    txLine   (x, 790, x, 790);
+                }
+
         }
-        //Главное меню
+        //ГѓГ«Г ГўГ­Г®ГҐ Г¬ГҐГ­Гѕ
 		else
 		{
 			      drawMenu (screenW, screenH, fon_menu);
@@ -109,7 +122,7 @@ void menu_escape(HDC escape)
         txSleep(1000);
 
         while (!isreturn)
-        {                     //x   y    пїЅпїЅпїЅ  пїЅпїЅпїЅ        x    y
+        {                     //x   y    ГЇВїВЅГЇВїВЅГЇВїВЅ  ГЇВїВЅГЇВїВЅГЇВїВЅ        x    y
             txBitBlt (txDC(), screenH/2, screenW/2 - 300, 215, 291, escape, 0, 0);
 
             if ((txMouseButtons() & 1 &&
