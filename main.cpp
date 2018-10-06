@@ -25,15 +25,12 @@ int main()
     saveButton = {0, screenH * 90/100, 200, screenH * 95/100};
     exitButton = {0, screenH * 95/100, 200, screenH};
 
-HDC sofa = txLoadImage ("Pics\\√Ñ√®√¢√†√≠.bmp");
+    HDC sofa = txLoadImage ("Pics\\ƒË‚‡Ì.bmp");
 
 
     Button sofaButton = {100, screenH * 80/100, 100 + screenH * 5/100, screenH * 85/100, sofa, 241, 142};
     //continueButton = {829, 447, 1065, 483};
-/*HDC WSpace = txLoadImage ("Pics\\.bmp");
-HDC WSpace = txLoadImage ("Pics\\.bmp");
-HDC WSpace = txLoadImage ("Pics\\.bmp");
-HDC WSpace = txLoadImage ("Pics\\.bmp");*/
+
 
 
 
@@ -46,14 +43,14 @@ HDC WSpace = txLoadImage ("Pics\\.bmp");*/
     {
         txBegin();
 
-		//√ê√•√§√†√™√≤√Æ√∞
+		//–Â‰‡ÍÚÓ
         if (startWS)
         {
-
-          Win32::TransparentBlt (txDC(), 0, 0, screenW, screenH, WSpace, 0, 0, 1966, 1104, RGB(123,124,1));
+            Win32::TransparentBlt (txDC(), 0, 0, screenW, screenH, WSpace, 0, 0, 1966, 1104, RGB(123,124,1));
 
             txSetColor(TX_BLACK);
             txRectangle(0, screenH - 300, screenW, screenH);
+
             menu_escape (escape);
 			ikons (sofaButton);
 			if (txMouseButtons() & 2)
@@ -61,22 +58,21 @@ HDC WSpace = txLoadImage ("Pics\\.bmp");*/
 				startWS = false;
 			}
 
-                txSetColor (TX_BLACK);
-                txLine(127, 955, 1833, 955);
+            txSetColor (TX_BLACK);
+            txLine(127, 955, 1833, 955);
 
-                for (int x = 0; x <= 831; x = x + 30)
-                {
-                    txLine   (x, 790, x, 790);
-                }
-
+            for (int x = 0; x <= 831; x = x + 30)
+            {
+                txLine   (x, 700, x, 790);
+            }
         }
-        //√É√´√†√¢√≠√Æ√• √¨√•√≠√æ
+        //√Î‡‚ÌÓÂ ÏÂÌ˛
 		else
 		{
-			      drawMenu (screenW, screenH, fon_menu);
-			      checkMenuFocus();
-      			//menu_escape(escape);
-			      startWS = startWorkspace(startWS);
+            drawMenu (screenW, screenH, fon_menu);
+            checkMenuFocus();
+            //menu_escape(escape);
+            startWS = startWorkspace(startWS);
             testova(Mas_models, count_models);
         }
 
