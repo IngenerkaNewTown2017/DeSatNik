@@ -5,6 +5,8 @@ struct Button
     int x1;
     int y1;
     HDC picture;
+    int width;
+    int height;
 };
 
 Button exitButton;
