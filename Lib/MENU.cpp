@@ -51,7 +51,7 @@ void drawMenu (int screenW, int screenH, HDC fon_menu)
 {
     txSetColor(TX_BLACK);
     txClear();
-    Win32::TransparentBlt (txDC(), 0, 0, screenW, screenH, fon_menu, 0, 0, 1950, 1400, -1);
+    Win32::TransparentBlt (txDC(), 0, 0, screenW, screenH, fon_menu, 0, 0, 1556, 976, RGB(123,124,1));
     //txBitBlt (txDC(), 0, 0, screenW, screenH, fon_menu, 0, 0);
 
     txSelectFont("Harlow Solid Italic", 40);

@@ -25,16 +25,16 @@ int main()
     saveButton = {0, screenH * 90/100, 200, screenH * 95/100};
     exitButton = {0, screenH * 95/100, 200, screenH};
 
-    HDC sofa = txLoadImage ("Pics\\Äèâàí.bmp");//Divan
+    HDC sofa = txLoadImage ("Pics\\Sofa.bmp");//Divan
 
 
     Button sofaButton =  {    RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 2 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, sofa, 241, 142};
     Button sofaButton2 = {4 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 5 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, sofa, 241, 142};
 
     HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
-    HDC fon_menu = txLoadImage ("Pics\\fon_menu .bmp");
+    HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp");
     HDC escape= txLoadImage ("Pics\\menu_escape.bmp");
-  
+
     bool isExit = false;
     bool startWS = false;
     bool returnToMenu = false;
@@ -43,22 +43,25 @@ int main()
     {
         txBegin();
 
-		//Ðåäàêòîð
+		//Redactor
         if (startWS)
         {
-            Win32::TransparentBlt (txDC(), 0, 0, screenW, screenH, WSpace, 0, 0, 1966, 1104, RGB(123,124,1));
+            //Win32::TransparentBlt (txDC(), 0, 0, screenW, screenH, WSpace, 0, 0, 1966, 1104, RGB(123,124,1));
 
+            txClear();
+            txSetColor(TX_BLACK, 5);
+            txRectangle(50, 50, screenW - 50, screenH - 350);
             txSetColor(TX_WHITE);
             txRectangle(0, screenH - 300, screenW, screenH);
 
-		       	returnToMenu = nazad (returnToMenu);
-      			startWS = !returnToMenu;
+            returnToMenu = nazad (returnToMenu);
+            startWS = !returnToMenu;
             menu_escape (escape);
-			      ikons (sofaButton);
-      			ikons (sofaButton2);
+            ikons (sofaButton);
+            ikons (sofaButton2);
 
 
-
+            //Function!!!
             txSetColor(TX_BLACK);
             for (int y = screenH; y >= screenH - 300; y = y - RAZMER_KNOPKI)
             {
@@ -76,15 +79,15 @@ int main()
                 txLine   (x, screenH - 300, x, screenH);
             }
         }
-        //Ãëàâíîå ìåíþ
-		   else
-		   {
-			      returnToMenu = false;
+        //MainMenu
+        else
+        {
+            returnToMenu = false;
             drawMenu (screenW, screenH, fon_menu);
             checkMenuFocus();
             //menu_escape(escape);
             startWS = startWorkspace(startWS);
-            testova(Mas_models, count_models);
+            //testova(Mas_models, count_models);
         }
 
         if (total_exit ())
@@ -97,6 +100,8 @@ int main()
         txEnd();
     }
 
+    txDeleteDC(sofa);
+    txDeleteDC(fon_menu);
     txDeleteDC(fon_menu);
     txDeleteDC(escape);
     txDeleteDC(WSpace);
