@@ -19,6 +19,7 @@ int main()
     txCreateWindow (screenW, screenH);
 
     bool startWS = false;
+    bool returnToMenu = false;
 
     newplanButton = {0, screenH * 80/100, 200, screenH * 85/100};
     loadButton = {0, screenH * 85/100, 200, screenH * 90/100};
@@ -50,13 +51,10 @@ int main()
 
             txSetColor(TX_BLACK);
             txRectangle(0, screenH - 300, screenW, screenH);
-
             menu_escape (escape);
 			ikons (sofaButton);
-			if (txMouseButtons() & 2)
-			{
-				startWS = false;
-			}
+			returnToMenu = nazad (returnToMenu);
+			startWS = !returnToMenu;
 
             txSetColor (TX_BLACK);
             txLine(127, 955, 1833, 955);
@@ -69,6 +67,7 @@ int main()
         //Главное меню
 		else
 		{
+			returnToMenu = false;
             drawMenu (screenW, screenH, fon_menu);
             checkMenuFocus();
             //menu_escape(escape);
