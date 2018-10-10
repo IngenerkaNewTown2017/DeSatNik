@@ -49,8 +49,3 @@ if( txMouseX>40 && //ÍÎÂÀß ÏËÀÍÈÐÎÂÊÀ
     }
 }
 
-void draw_menu(){
-
-
-
-}
