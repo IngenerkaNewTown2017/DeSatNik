@@ -4,6 +4,8 @@
 bool total_exit ();
 void menu_escape(HDC escape);
 
+const int RAZMER_KNOPKI = 100;
+
 int count_models = 10;
 
 int main()
@@ -28,7 +30,9 @@ int main()
     HDC sofa = txLoadImage ("Pics\\Диван.bmp");
 
 
-    Button sofaButton = {100, screenH * 80/100, 100 + screenH * 5/100, screenH * 85/100, sofa, 241, 142};
+    Button sofaButton =  {RAZMER_KNOPKI, screenH - 300, 2 * RAZMER_KNOPKI, screenH - 200, sofa, 241, 142};
+    Button sofaButton2 = {4 * RAZMER_KNOPKI, screenH - 300, 5 * RAZMER_KNOPKI, screenH - 200, sofa, 241, 142};
+    //Button sofaButton = {100, screenH * 80/100, 100 + screenH * 5/100, screenH * 85/100, sofa, 241, 142};
     //continueButton = {829, 447, 1065, 483};
 
 
@@ -48,22 +52,34 @@ int main()
         {
             Win32::TransparentBlt (txDC(), 0, 0, screenW, screenH, WSpace, 0, 0, 1966, 1104, RGB(123,124,1));
 
-            txSetColor(TX_BLACK);
+            txSetColor(TX_WHITE);
             txRectangle(0, screenH - 300, screenW, screenH);
 
             menu_escape (escape);
 			ikons (sofaButton);
+			ikons (sofaButton2);
 			if (txMouseButtons() & 2)
 			{
 				startWS = false;
 			}
 
-            txSetColor (TX_BLACK);
-            txLine(127, 955, 1833, 955);
 
-            for (int x = 0; x <= 831; x = x + 30)
+
+            txSetColor(TX_BLACK);
+            for (int y = screenH; y >= screenH - 300; y = y - RAZMER_KNOPKI)
             {
-                txLine   (x, 700, x, 790);
+                txLine   (0, y, RAZMER_KNOPKI * (screenW / RAZMER_KNOPKI), y);
+            }
+
+            for (int x = 0; x <= screenW; x = x + RAZMER_KNOPKI)
+            {
+                txLine   (x, screenH - 300, x, screenH);
+            }
+
+            txSetColor(TX_BLACK, 4);
+            for (int x = 0; x <= screenW; x = x + 5 * RAZMER_KNOPKI)
+            {
+                txLine   (x, screenH - 300, x, screenH);
             }
         }
         //Главное меню
