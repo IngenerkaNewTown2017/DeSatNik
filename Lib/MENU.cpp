@@ -5,7 +5,7 @@ bool checkFocus(int MinX, int MaxX, int MinY, int MaxY);
 void ikons (Button sofaButton);
 void checkMenuFocus();
 void drawMenu (int screenW, int screenH, HDC fon_menu);
-
+bool nazad (bool returnToMenu);
 void testova ( model* Mas_models, int count_Models);
 bool startWorkspace (bool startWork);
 
@@ -84,10 +84,17 @@ bool startWorkspace (bool startWork)
     return startWork;
 }
 
-void nazad ()
-{    //dodelat
-    return;
+bool nazad (bool returnToMenu)
+{
+	if (GetAsyncKeyState(VK_RETURN))
+	{
+		returnToMenu = true;
+	}
+
+	return returnToMenu;
 }
+
+
 
 void ikons (Button sofaButton) {
 	         //txBitBlt (txDC(), sofaButton.x, sofaButton.y, sofaButton.x1 - sofaButton.x, sofaButton.y1 - sofaButton.y, sofaButton.picture);
