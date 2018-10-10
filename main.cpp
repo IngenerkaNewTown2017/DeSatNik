@@ -20,34 +20,30 @@ int main()
     int screenH = GetSystemMetrics (SM_CYSCREEN);
     txCreateWindow (screenW, screenH);
 
-    bool startWS = false;
-
     newplanButton = {0, screenH * 80/100, 200, screenH * 85/100};
     loadButton = {0, screenH * 85/100, 200, screenH * 90/100};
     saveButton = {0, screenH * 90/100, 200, screenH * 95/100};
     exitButton = {0, screenH * 95/100, 200, screenH};
 
-    HDC sofa = txLoadImage ("Pics\\�����.bmp");
+    HDC sofa = txLoadImage ("Pics\\Äèâàí.bmp");//Divan
 
 
-    Button sofaButton =  {RAZMER_KNOPKI, screenH - 300, 2 * RAZMER_KNOPKI, screenH - 200, sofa, 241, 142};
-    Button sofaButton2 = {4 * RAZMER_KNOPKI, screenH - 300, 5 * RAZMER_KNOPKI, screenH - 200, sofa, 241, 142};
-    //Button sofaButton = {100, screenH * 80/100, 100 + screenH * 5/100, screenH * 85/100, sofa, 241, 142};
-    //continueButton = {829, 447, 1065, 483};
-
-
-
+    Button sofaButton =  {    RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 2 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, sofa, 241, 142};
+    Button sofaButton2 = {4 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 5 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, sofa, 241, 142};
 
     HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
     HDC fon_menu = txLoadImage ("Pics\\fon_menu .bmp");
     HDC escape= txLoadImage ("Pics\\menu_escape.bmp");
+  
     bool isExit = false;
+    bool startWS = false;
+    bool returnToMenu = false;
 
     while (!isExit)
     {
         txBegin();
 
-		//��������
+		//Ðåäàêòîð
         if (startWS)
         {
             Win32::TransparentBlt (txDC(), 0, 0, screenW, screenH, WSpace, 0, 0, 1966, 1104, RGB(123,124,1));
@@ -55,13 +51,11 @@ int main()
             txSetColor(TX_WHITE);
             txRectangle(0, screenH - 300, screenW, screenH);
 
+		       	returnToMenu = nazad (returnToMenu);
+      			startWS = !returnToMenu;
             menu_escape (escape);
-			ikons (sofaButton);
-			ikons (sofaButton2);
-			if (txMouseButtons() & 2)
-			{
-				startWS = false;
-			}
+			      ikons (sofaButton);
+      			ikons (sofaButton2);
 
 
 
@@ -82,9 +76,10 @@ int main()
                 txLine   (x, screenH - 300, x, screenH);
             }
         }
-        //������� ����
-		else
-		{
+        //Ãëàâíîå ìåíþ
+		   else
+		   {
+			      returnToMenu = false;
             drawMenu (screenW, screenH, fon_menu);
             checkMenuFocus();
             //menu_escape(escape);
@@ -134,7 +129,7 @@ void menu_escape(HDC escape)
         txSleep(1000);
 
         while (!isreturn)
-        {                     //x   y    ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½        x    y
+        {                     //x   y    Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½  Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½        x    y
             txBitBlt (txDC(), screenH/2, screenW/2 - 300, 215, 291, escape, 0, 0);
 
             if ((txMouseButtons() & 1 &&
