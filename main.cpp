@@ -3,6 +3,7 @@
 
 bool total_exit ();
 void menu_escape(HDC escape);
+void background();
 
 const int RAZMER_KNOPKI = 100;
 
@@ -35,10 +36,15 @@ int main()
     HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
     HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp");
     HDC escape= txLoadImage ("Pics\\menu_escape.bmp");
+    HDC NEW_OBJECT = txLoadImage ("Pics\\��������.bmp");
 
     bool isExit = false;
     bool startWS = false;
     bool returnToMenu = false;
+    bool risovat = false;
+    int MOUSE_X;
+    int MOUSE_Y;
+
 
     while (!isExit)
     {
@@ -47,37 +53,52 @@ int main()
 		//Redactor
         if (startWS)
         {
-            //Win32::TransparentBlt (txDC(), 0, 0, screenW, screenH, WSpace, 0, 0, 1966, 1104, RGB(123,124,1));
-
-            txClear();
-            txSetColor(TX_BLACK, 5);
-            txRectangle(50, 50, screenW - 50, screenH - 350);
-            txSetColor(TX_WHITE);
-            txRectangle(0, screenH - 300, screenW, screenH);
+            background();
+            ikons (sofaButton);
+            ikons (sofaButton2);
 
             returnToMenu = nazad (returnToMenu);
             startWS = !returnToMenu;
             menu_escape (escape);
-            ikons (sofaButton);
-            ikons (sofaButton2);
 
-
-            //Function!!!
-            txSetColor(TX_BLACK);
-            for (int y = screenH; y >= screenH - 300; y = y - RAZMER_KNOPKI)
+            if (risovat)
             {
-                txLine   (0, y, RAZMER_KNOPKI * (screenW / RAZMER_KNOPKI), y);
+                Win32::TransparentBlt (txDC(), MOUSE_X, MOUSE_Y, 200, 200, NEW_OBJECT, 0, 0, 300, 300, TX_WHITE);
             }
 
-            for (int x = 0; x <= screenW; x = x + RAZMER_KNOPKI)
-            {
-                txLine   (x, screenH - 300, x, screenH);
-            }
 
-            txSetColor(TX_BLACK, 4);
-            for (int x = 0; x <= screenW; x = x + 5 * RAZMER_KNOPKI)
+            if (txMouseButtons() & 1 &&
+                txMouseX() >= sofaButton.x &&
+                txMouseX() <= sofaButton.x1 &&
+                txMouseY() >= sofaButton.y &&
+                txMouseY() <=  sofaButton.y1
+
+            )
             {
-                txLine   (x, screenH - 300, x, screenH);
+                while(txMouseButtons() & 1)
+                {
+                    background();
+                    ikons (sofaButton);
+                    ikons (sofaButton2);
+                    Win32::TransparentBlt (txDC(), txMouseX(), txMouseY(), 200, 200, NEW_OBJECT, 0, 0, 300, 300, TX_WHITE);
+
+                    MOUSE_X = txMouseX();
+                    MOUSE_Y = txMouseY();
+
+                    if (MOUSE_X >= 50 &&
+                        MOUSE_X <= screenW - 50 - 200 &&
+                        MOUSE_Y >= 50 &&
+                        MOUSE_Y <= screenH - 350 - 200   )
+                    {
+                        risovat = true;
+                    }
+                    else
+                    {
+                        risovat = false;
+                    }
+
+                    txSleep(10);
+                }
             }
         }
         //MainMenu
@@ -147,5 +168,32 @@ void menu_escape(HDC escape)
 
             txSleep(10);
         }
+    }
+}
+
+void background()
+{
+    int screenW = GetSystemMetrics (SM_CXSCREEN);
+    int screenH = GetSystemMetrics (SM_CYSCREEN);
+    txClear();
+    txSetColor(TX_BLACK, 5);
+    txRectangle(50, 50, screenW - 50, screenH - 350);
+    txSetColor(TX_WHITE);
+
+    txSetColor(TX_BLACK);
+    for (int y = screenH; y >= screenH - 300; y = y - RAZMER_KNOPKI)
+    {
+        txLine   (0, y, RAZMER_KNOPKI * (screenW / RAZMER_KNOPKI), y);
+    }
+
+    for (int x = 0; x <= screenW; x = x + RAZMER_KNOPKI)
+    {
+        txLine   (x, screenH - 300, x, screenH);
+    }
+
+    txSetColor(TX_BLACK, 4);
+    for (int x = 0; x <= screenW; x = x + 5 * RAZMER_KNOPKI)
+    {
+        txLine   (x, screenH - 300, x, screenH);
     }
 }
