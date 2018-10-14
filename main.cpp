@@ -3,7 +3,7 @@
 
 bool total_exit ();
 void menu_escape(HDC escape);
-void background();
+void workspace_background();
 
 const int RAZMER_KNOPKI = 100;
 
@@ -36,7 +36,7 @@ int main()
     HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
     HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp");
     HDC escape= txLoadImage ("Pics\\menu_escape.bmp");
-    HDC NEW_OBJECT = txLoadImage ("Pics\\��������.bmp");
+    HDC NEW_OBJECT = txLoadImage ("Pics\\Toomba.bmp");
 
     bool isExit = false;
     bool startWS = false;
@@ -53,7 +53,7 @@ int main()
 		//Redactor
         if (startWS)
         {
-            background();
+            workspace_background();
             ikons (sofaButton);
             ikons (sofaButton2);
 
@@ -67,17 +67,12 @@ int main()
             }
 
 
-            if (txMouseButtons() & 1 &&
-                txMouseX() >= sofaButton.x &&
-                txMouseX() <= sofaButton.x1 &&
-                txMouseY() >= sofaButton.y &&
-                txMouseY() <=  sofaButton.y1
-
-            )
+            if (checkClick(sofaButton.x, sofaButton.y,
+                           sofaButton.x1, sofaButton.y1))
             {
                 while(txMouseButtons() & 1)
                 {
-                    background();
+                    workspace_background();
                     ikons (sofaButton);
                     ikons (sofaButton2);
                     Win32::TransparentBlt (txDC(), txMouseX(), txMouseY(), 200, 200, NEW_OBJECT, 0, 0, 300, 300, TX_WHITE);
@@ -85,17 +80,16 @@ int main()
                     MOUSE_X = txMouseX();
                     MOUSE_Y = txMouseY();
 
-                    if (MOUSE_X >= 50 &&
-                        MOUSE_X <= screenW - 50 - 200 &&
-                        MOUSE_Y >= 50 &&
-                        MOUSE_Y <= screenH - 350 - 200   )
+                    risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
+
+                    /*if (checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200))
                     {
                         risovat = true;
                     }
                     else
                     {
                         risovat = false;
-                    }
+                    } */
 
                     txSleep(10);
                 }
@@ -171,7 +165,7 @@ void menu_escape(HDC escape)
     }
 }
 
-void background()
+void workspace_background()
 {
     int screenW = GetSystemMetrics (SM_CXSCREEN);
     int screenH = GetSystemMetrics (SM_CYSCREEN);
@@ -180,6 +174,7 @@ void background()
     txRectangle(50, 50, screenW - 50, screenH - 350);
     txSetColor(TX_WHITE);
 
+    //Grid
     txSetColor(TX_BLACK);
     for (int y = screenH; y >= screenH - 300; y = y - RAZMER_KNOPKI)
     {

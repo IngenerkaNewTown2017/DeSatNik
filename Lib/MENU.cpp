@@ -2,6 +2,7 @@
 #include "struct.cpp"
 
 bool checkFocus(int MinX, int MaxX, int MinY, int MaxY);
+bool checkClick(int MinX, int MinY, int MaxX, int MaxY);
 void ikons (Button sofaButton);
 void checkMenuFocus();
 void drawMenu (int screenW, int screenH, HDC fon_menu);
@@ -16,6 +17,22 @@ bool checkFocus(int MinX, int MinY, int MaxX, int MaxY)
         txMouseX() <= MaxX &&
         txMouseY() <= MaxY &&
         txMouseY() >= MinY
+        )
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool checkClick(int MinX, int MinY, int MaxX, int MaxY)
+{
+    if (
+        txMouseX() >= MinX &&
+        txMouseX() <= MaxX &&
+        txMouseY() <= MaxY &&
+        txMouseY() >= MinY &&
+        txMouseButtons() & 1
         )
     {
         return true;

@@ -1,3 +1,6 @@
+#include <fstream>
+#include <string>
+
 txSetColor(TX_BLACK);
 txRectangle(65, 97, screenW - 100, screenH -334);
 txLine(0, 800, screenW, 800);
@@ -21,4 +24,12 @@ void draw_fon()
     {
         txLine   (x, 0, x, MAP_SIZE_Y);
     }
+}
+
+void proMassivovKoordinatov(HDC pic, PicSize* Mas_SizeModels, int n){
+    HBITMAP hbm=(HBITMAP)Win32::GetCurrentObject(pic, OBJ_BITMAP);
+    BITMAP bm;
+    Win32::GetObject(hbm,sizeof(bm), (LPVOID)&bm);
+    Mas_SizeModels[n].sizeX= bm.bmWidth;
+    Mas_SizeModels[n].sizeY= bm.bmHight;
 }
