@@ -20,6 +20,7 @@ int main()
     int screenH = GetSystemMetrics (SM_CYSCREEN);
     txCreateWindow (screenW, screenH);
 
+    settingsButton = {0, screenH * 75/100, 200, screenH * 80/100};
     newplanButton = {0, screenH * 80/100, 200, screenH * 85/100};
     loadButton = {0, screenH * 85/100, 200, screenH * 90/100};
     saveButton = {0, screenH * 90/100, 200, screenH * 95/100};
