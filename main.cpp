@@ -21,6 +21,7 @@ int main()
     int screenH = GetSystemMetrics (SM_CYSCREEN);
     txCreateWindow (screenW, screenH);
 
+    settingsButton = {0, screenH * 75/100, 200, screenH * 80/100};
     newplanButton = {0, screenH * 80/100, 200, screenH * 85/100};
     loadButton = {0, screenH * 85/100, 200, screenH * 90/100};
     saveButton = {0, screenH * 90/100, 200, screenH * 95/100};
@@ -29,13 +30,13 @@ int main()
     HDC sofa = txLoadImage ("Pics\\Sofa.bmp");//Divan
 
 
-    Button sofaButton =  {    RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 2 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, sofa, 2 * RAZMER_KNOPKI + 41, RAZMER_KNOPKI + 42};
-    Button sofaButton2 = {4 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 5 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, sofa, 2 * RAZMER_KNOPKI + 41, RAZMER_KNOPKI + 42};
+    Button sofaButton =  {    RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 2 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, sofa, 241, 142};
+    Button sofaButton2 = {4 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 5 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, sofa, 241, 142};
 
     HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
     HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp");
     HDC escape= txLoadImage ("Pics\\menu_escape.bmp");
-    HDC NEW_OBJECT = txLoadImage ("Pics\\��������.bmp");
+    HDC NEW_OBJECT = txLoadImage ("Pics\\��������.bmp");
 
     bool isExit = false;
     bool startWS = false;
@@ -52,20 +53,13 @@ int main()
 		//Redactor
         if (startWS)
         {
-            //Win32::TransparentBlt (txDC(), 0, 0, screenW, screenH, WSpace, 0, 0, 1966, 1104, RGB(123,124,1));
-
-
             background();
             ikons (sofaButton);
             ikons (sofaButton2);
 
-
-
-
             returnToMenu = nazad (returnToMenu);
             startWS = !returnToMenu;
             menu_escape (escape);
-
 
             if (risovat)
             {
@@ -110,7 +104,6 @@ int main()
         //MainMenu
         else
         {
-
             returnToMenu = false;
             drawMenu (screenW, screenH, fon_menu);
             checkMenuFocus();
@@ -163,7 +156,7 @@ void menu_escape(HDC escape)
         txSleep(1000);
 
         while (!isreturn)
-        {
+        {                     //x   y    Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½  Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½        x    y
             txBitBlt (txDC(), screenH/2, screenW/2 - 300, 215, 291, escape, 0, 0);
 
             if ((txMouseButtons() & 1 &&
@@ -187,8 +180,6 @@ void background()
     txRectangle(50, 50, screenW - 50, screenH - 350);
     txSetColor(TX_WHITE);
 
-
-    //Function!!!
     txSetColor(TX_BLACK);
     for (int y = screenH; y >= screenH - 300; y = y - RAZMER_KNOPKI)
     {

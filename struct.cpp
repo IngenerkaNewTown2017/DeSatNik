@@ -14,7 +14,7 @@ Button saveButton;
 Button newplanButton;
 Button loadButton;
 Button continueButton;
-Button settingsButton;
+
 
 struct furnature
 {
@@ -33,3 +33,9 @@ struct model
     string title;
     HDC pic;
 };
+
+struct PicSize{
+
+int SizeX;
+int SizeY;
+}

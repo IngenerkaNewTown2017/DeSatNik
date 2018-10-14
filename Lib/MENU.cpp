@@ -57,10 +57,11 @@ void drawMenu (int screenW, int screenH, HDC fon_menu)
     txSelectFont("Harlow Solid Italic", 40);
     txSetColor(TX_WHITE);
     txTextOut(newplanButton.x, newplanButton.y, "Новая планировка");
-	txTextOut(saveButton.x, saveButton.y, "Загрузить");
-	txTextOut(loadButton.x, loadButton.y, "Сохранить");
+	txTextOut(saveButton.x, saveButton.y, "Сохранить");
+	txTextOut(loadButton.x, loadButton.y, "Загрузить");
     txTextOut (exitButton.x, exitButton.y, "Выйти");
-}
+    txTextOut(settingsButton.x, settingsButton.y, "Настройки");
+    }
 
 
 void testova ( model* Mas_models, int count_Models)
@@ -99,4 +100,20 @@ bool nazad (bool returnToMenu)
 void ikons (Button sofaButton) {
 	         //txBitBlt (txDC(), sofaButton.x, sofaButton.y, sofaButton.x1 - sofaButton.x, sofaButton.y1 - sofaButton.y, sofaButton.picture);
 Win32::TransparentBlt (txDC(), sofaButton.x, sofaButton.y, sofaButton.x1 - sofaButton.x, sofaButton.y1 - sofaButton.y, sofaButton.picture, 0, 0, sofaButton.width, sofaButton.height, -1);
+}
+
+void settings (Button settingsButton) {
+ if (txMouseX() > settingsButton.x  &&
+        txMouseX() < settingsButton.x1 &&
+        txMouseY() > settingsButton.y  &&
+        txMouseY() < settingsButton.y1 &&
+        txMouseButtons() & 1)
+    {
+      txClear();
+       txSetColor (TX_WHITE);
+        txSelectFont("Harlow Solid Italic", 40);
+        txTextOut(settingsButton.x, settingsButton.y, "Звук");
+     txTextOut(settingsButton.x, settingsButton.y, "Описание");
+     }
+
 }
