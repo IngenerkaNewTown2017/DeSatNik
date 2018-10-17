@@ -41,11 +41,11 @@ struct PicSize
     int SizeY;
 };
 
-struct Mebel
+struct Tomb
 {
-    bool risovat;
+    bool risovat = false;
     int MOUSE_X;
     int MOUSE_Y;
-};
+}
 
 

@@ -112,13 +112,13 @@ bool nazad (bool returnToMenu)
 	return returnToMenu;
 }
 
-void ikons (Button sofaButton)
+void ikons (Button sofaButton) 
 {
 //txBitBlt (txDC(), sofaButton.x, sofaButton.y, sofaButton.x1 - sofaButton.x, sofaButton.y1 - sofaButton.y, sofaButton.picture);
 Win32::TransparentBlt (txDC(), sofaButton.x, sofaButton.y, sofaButton.x1 - sofaButton.x, sofaButton.y1 - sofaButton.y, sofaButton.picture, 0, 0, sofaButton.width, sofaButton.height, -1);
 }
 
-void settings (Button settingsButton)
+void settings (Button settingsButton) 
 {
  if (txMouseX() > settingsButton.x  &&
         txMouseX() < settingsButton.x1 &&
