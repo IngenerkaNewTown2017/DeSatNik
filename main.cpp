@@ -28,20 +28,22 @@ int main()
     exitButton = {0, screenH * 95/100, 200, screenH};
 
     HDC sofa = txLoadImage ("Pics\\Sofa.bmp");//Divan
-    HDC divan = txLoadImage ("Pics\\Divan.bmp");
+    HDC tumba = txLoadImage ("Pics\\Toomba.bmp");
 
-    Button sofaButton =  {    RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 2 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, sofa, 241, 142};
-    Button sofaButton2 = {4 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 5 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, sofa, 241, 142};
+    int count_mebeli = 3;
+    Button mebel[count_mebeli];
+    mebel[0] = {    RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 2 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, tumba, 300, 300};
+    mebel[1] = {4 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 5 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, tumba, 300, 300};
+    mebel[2] = {2 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 3 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, sofa, 241, 142};
 
-    Button divanButton = {2 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 3 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, divan, 241, 142};
-
-    Mebel Tomb = {false, 0, 0};
+    Mebel Tomb0 = {false, 0, 0};
+    Mebel Tomb1 = {false, 0, 0};
+    Mebel Tomb2 = {false, 0, 0};
 
 
     HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
     HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp");
     HDC escape= txLoadImage ("Pics\\menu_escape.bmp");
-    HDC Toombs = txLoadImage ("Pics\\Toomba.bmp");
 
 
 
@@ -59,55 +61,46 @@ int main()
         if (startWS)
         {
             workspace_background();
-            ikons (sofaButton);
-            ikons (sofaButton2);
-            ikons (divanButton);
+            risovanieMenuWS(count_mebeli, mebel);
 
             returnToMenu = nazad (returnToMenu);
             startWS = !returnToMenu;
             menu_escape (escape);
 
-            if (Tomb.risovat)
+            if (Tomb0.risovat)
             {
-                Win32::TransparentBlt (txDC(), Tomb.MOUSE_X, Tomb.MOUSE_Y, 200, 200, Toombs, 0, 0, 300, 300, TX_WHITE);
+                Win32::TransparentBlt (txDC(), Tomb0.MOUSE_X, Tomb0.MOUSE_Y, 200, 200, Toombs, 0, 0, 300, 300, TX_WHITE);
             }
 
 
-            if (checkClick(sofaButton.x, sofaButton.y,
-                           sofaButton.x1, sofaButton.y1))
+            if (checkClick(mebel[0].x, mebel[0].y, mebel[0].x1, mebel[0].y1))
             {
                 while(txMouseButtons() & 1)
                 {
                     workspace_background();
-                    ikons (sofaButton);
-                    ikons (sofaButton2);
-                    ikons (divanButton);
-                    Win32::TransparentBlt (txDC(), txMouseX(), txMouseY(), 200, 200, Toombs, 0, 0, 300, 300, TX_WHITE);
+                    risovanieMenuWS(count_mebeli, mebel);
+                    Win32::TransparentBlt (txDC(), txMouseX(), txMouseY(), 200, 200, mebel[0].pic, 0, 0, 300, 300, TX_WHITE);
 
-                    Tomb.MOUSE_X = txMouseX();
-                    Tomb.MOUSE_Y = txMouseY();
-
-                    Tomb.risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
+                    Tomb0.MOUSE_X = txMouseX();
+                    Tomb0.MOUSE_Y = txMouseY();
+                    Tomb0.risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
 
                     txSleep(10);
                 }
             }
 
-            if (checkClick(divanButton.x, divanButton.y,
-                           divanButton.x1, divanButton.y1))
+            if (checkClick(mebel[2].x, mebel[2].y, mebel[2].x1, mebel[2].y1))
             {
                 while(txMouseButtons() & 1)
                 {
                     workspace_background();
-                    ikons (sofaButton);
-                    ikons (sofaButton2);
-                    ikons (divanButton);
-                    Win32::TransparentBlt (txDC(), Tomb.MOUSE_X, Tomb.MOUSE_Y, 200, 200, divan, 0, 0, 300, 300, TX_WHITE);
+                    risovanieMenuWS(count_mebeli, mebel);
+                    Win32::TransparentBlt (txDC(), Tomb2.MOUSE_X, Tomb2.MOUSE_Y, 200, 200, mebel[2].pic, 0, 0, 300, 300, TX_WHITE);
 
-                    Tomb.MOUSE_X = txMouseX();
-                    Tomb.MOUSE_Y = txMouseY();
+                    Tomb2.MOUSE_X = txMouseX();
+                    Tomb2.MOUSE_Y = txMouseY();
 
-                    Tomb.risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
+                    Tomb2.risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
 
 
 
