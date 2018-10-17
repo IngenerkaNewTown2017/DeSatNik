@@ -45,22 +45,22 @@ void checkMenuFocus()
 {
     if (checkFocus(newplanButton.x, newplanButton.y, newplanButton.x1, newplanButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Ñîçäàòü ïëàíèðîâêó?" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Ã‘Ã®Ã§Ã¤Ã Ã²Ã¼ Ã¯Ã«Ã Ã­Ã¨Ã°Ã®Ã¢ÃªÃ³?" );
     }
 
     else if (checkFocus(saveButton.x, saveButton.y, saveButton.x1, saveButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Ñîõðàíèì ÷òî èìååì?" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Ã‘Ã®ÃµÃ°Ã Ã­Ã¨Ã¬ Ã·Ã²Ã® Ã¨Ã¬Ã¥Ã¥Ã¬?" );
     }
 
     else if (checkFocus(loadButton.x, loadButton.y, loadButton.x1, loadButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Çàãðóçèòü ÷òî ëü?" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Ã‡Ã Ã£Ã°Ã³Ã§Ã¨Ã²Ã¼ Ã·Ã²Ã® Ã«Ã¼?" );
     }
 
     else if (checkFocus(exitButton.x, exitButton.y, exitButton.x1, exitButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Äà íó ëàí, íå óõîäè" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Ã„Ã  Ã­Ã³ Ã«Ã Ã­, Ã­Ã¥ Ã³ÃµÃ®Ã¤Ã¨" );
     }
 }
 
@@ -73,11 +73,11 @@ void drawMenu (int screenW, int screenH, HDC fon_menu)
 
     txSelectFont("Harlow Solid Italic", 40);
     txSetColor(TX_WHITE);
-    txTextOut(newplanButton.x, newplanButton.y, "Íîâàÿ ïëàíèðîâêà");
-	txTextOut(saveButton.x, saveButton.y, "Ñîõðàíèòü");
-	txTextOut(loadButton.x, loadButton.y, "Çàãðóçèòü");
-    txTextOut (exitButton.x, exitButton.y, "Âûéòè");
-    txTextOut(settingsButton.x, settingsButton.y, "Íàñòðîéêè");
+    txTextOut(newplanButton.x, newplanButton.y, "ÃÃ®Ã¢Ã Ã¿ Ã¯Ã«Ã Ã­Ã¨Ã°Ã®Ã¢ÃªÃ ");
+	txTextOut(saveButton.x, saveButton.y, "Ã‘Ã®ÃµÃ°Ã Ã­Ã¨Ã²Ã¼");
+	txTextOut(loadButton.x, loadButton.y, "Ã‡Ã Ã£Ã°Ã³Ã§Ã¨Ã²Ã¼");
+    txTextOut (exitButton.x, exitButton.y, "Ã‚Ã»Ã©Ã²Ã¨");
+    txTextOut(settingsButton.x, settingsButton.y, "ÃÃ Ã±Ã²Ã°Ã®Ã©ÃªÃ¨");
     }
 
 
@@ -114,23 +114,29 @@ bool nazad (bool returnToMenu)
 
 void ikons (Button sofaButton)
 {
-//txBitBlt (txDC(), sofaButton.x, sofaButton.y, sofaButton.x1 - sofaButton.x, sofaButton.y1 - sofaButton.y, sofaButton.picture);
-Win32::TransparentBlt (txDC(), sofaButton.x, sofaButton.y, sofaButton.x1 - sofaButton.x, sofaButton.y1 - sofaButton.y, sofaButton.picture, 0, 0, sofaButton.width, sofaButton.height, -1);
+    Win32::TransparentBlt (txDC(), sofaButton.x, sofaButton.y, sofaButton.x1 - sofaButton.x, sofaButton.y1 - sofaButton.y, sofaButton.picture, 0, 0, sofaButton.width, sofaButton.height, -1);
 }
 
-void settings (Button settingsButton)
+void risovanieMenuWS(int count_buttons, Button* SofaButtons)
 {
- if (txMouseX() > settingsButton.x  &&
+    for (int i=0; i<count_buttons; i++)
+    {
+        ikons (SofaButtons[i]);
+    }
+}
+
+void settings (Button settingsButton) 
+{
+    if (txMouseX() > settingsButton.x  &&
         txMouseX() < settingsButton.x1 &&
         txMouseY() > settingsButton.y  &&
         txMouseY() < settingsButton.y1 &&
         txMouseButtons() & 1)
     {
-      txClear();
-       txSetColor (TX_WHITE);
+        txClear();
+        txSetColor (TX_WHITE);
         txSelectFont("Harlow Solid Italic", 40);
-        txTextOut(settingsButton.x, settingsButton.y, "Çâóê");
-     txTextOut(settingsButton.x, settingsButton.y, "Îïèñàíèå");
+        txTextOut(settingsButton.x, settingsButton.y, "Ã‡Ã¢Ã³Ãª");
+        txTextOut(settingsButton.x, settingsButton.y, "ÃŽÃ¯Ã¨Ã±Ã Ã­Ã¨Ã¥");
      }
-
 }
