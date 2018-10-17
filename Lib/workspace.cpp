@@ -26,6 +26,25 @@ void draw_fon()
     }
 }
 
+void LecheniiVova(int screenW, int screenH,Button SofaButtons[], int count_buttons){
+
+                while(txMouseButtons() & 1)
+                {
+                    workspace_background();
+                    ikons (sofaButton);
+                    ikons (sofaButton2);
+                    Win32::TransparentBlt (txDC(), txMouseX(), txMouseY(), 200, 200, NEW_OBJECT, 0, 0, 300, 300, TX_WHITE);
+
+                   int MOUSE_X = txMouseX();
+                   int MOUSE_Y = txMouseY();
+
+                    risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
+
+
+                    txSleep(10);
+                }
+}
+
 void proMassivovKoordinatov(HDC pic, PicSize* Mas_SizeModels, int n){
     HBITMAP hbm=(HBITMAP)Win32::GetCurrentObject(pic, OBJ_BITMAP);
     BITMAP bm;
