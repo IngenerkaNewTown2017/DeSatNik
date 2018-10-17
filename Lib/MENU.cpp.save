@@ -119,12 +119,8 @@ void ikons (Button sofaButton) {
 Win32::TransparentBlt (txDC(), sofaButton.x, sofaButton.y, sofaButton.x1 - sofaButton.x, sofaButton.y1 - sofaButton.y, sofaButton.picture, 0, 0, sofaButton.width, sofaButton.height, -1);
 }
 
-void risovanieMenuWS(int count_buttons, Button* SofaButtons)
-{
-    for (int i=0; i<count_buttons; i++)
-    {
-        ikons (SofaButtons[i]);
-    }
+risovanieMenuWS(int count_buttons, Button So){
+
 }
 
 void settings (Button settingsButton) {
