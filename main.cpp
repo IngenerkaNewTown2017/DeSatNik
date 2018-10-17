@@ -28,22 +28,27 @@ int main()
     exitButton = {0, screenH * 95/100, 200, screenH};
 
     HDC sofa = txLoadImage ("Pics\\Sofa.bmp");//Divan
-
+    HDC divan = txLoadImage ("Pics\\Divan.bmp");
 
     Button sofaButton =  {    RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 2 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, sofa, 241, 142};
     Button sofaButton2 = {4 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 5 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, sofa, 241, 142};
 
+    Button divanButton = {2 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 3 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, divan, 241, 142};
+
+    Mebel Tomb = {false, 0, 0};
+
+
     HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
     HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp");
     HDC escape= txLoadImage ("Pics\\menu_escape.bmp");
-    HDC NEW_OBJECT = txLoadImage ("Pics\\Toomba.bmp");
+    HDC Toombs = txLoadImage ("Pics\\Toomba.bmp");
+
+
 
     bool isExit = false;
     bool startWS = false;
     bool returnToMenu = false;
-    bool risovat = false;
-    int MOUSE_X;
-    int MOUSE_Y;
+
 
 
     while (!isExit)
@@ -56,14 +61,15 @@ int main()
             workspace_background();
             ikons (sofaButton);
             ikons (sofaButton2);
+            ikons (divanButton);
 
             returnToMenu = nazad (returnToMenu);
             startWS = !returnToMenu;
             menu_escape (escape);
 
-            if (risovat)
+            if (Tomb.risovat)
             {
-                Win32::TransparentBlt (txDC(), MOUSE_X, MOUSE_Y, 200, 200, NEW_OBJECT, 0, 0, 300, 300, TX_WHITE);
+                Win32::TransparentBlt (txDC(), Tomb.MOUSE_X, Tomb.MOUSE_Y, 200, 200, Toombs, 0, 0, 300, 300, TX_WHITE);
             }
 
 
@@ -75,26 +81,44 @@ int main()
                     workspace_background();
                     ikons (sofaButton);
                     ikons (sofaButton2);
-                    Win32::TransparentBlt (txDC(), txMouseX(), txMouseY(), 200, 200, NEW_OBJECT, 0, 0, 300, 300, TX_WHITE);
+                    ikons (divanButton);
+                    Win32::TransparentBlt (txDC(), txMouseX(), txMouseY(), 200, 200, Toombs, 0, 0, 300, 300, TX_WHITE);
 
-                    MOUSE_X = txMouseX();
-                    MOUSE_Y = txMouseY();
+                    Tomb.MOUSE_X = txMouseX();
+                    Tomb.MOUSE_Y = txMouseY();
 
-                    risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
+                    Tomb.risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
 
-                    /*if (checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200))
-                    {
-                        risovat = true;
-                    }
-                    else
-                    {
-                        risovat = false;
-                    } */
+                    txSleep(10);
+                }
+            }
+
+            if (checkClick(divanButton.x, divanButton.y,
+                           divanButton.x1, divanButton.y1))
+            {
+                while(txMouseButtons() & 1)
+                {
+                    workspace_background();
+                    ikons (sofaButton);
+                    ikons (sofaButton2);
+                    ikons (divanButton);
+                    Win32::TransparentBlt (txDC(), Tomb.MOUSE_X, Tomb.MOUSE_Y, 200, 200, divan, 0, 0, 300, 300, TX_WHITE);
+
+                    Tomb.MOUSE_X = txMouseX();
+                    Tomb.MOUSE_Y = txMouseY();
+
+                    Tomb.risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
+
+
 
                     txSleep(10);
                 }
             }
         }
+
+
+
+
         //MainMenu
         else
         {
