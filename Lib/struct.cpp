@@ -46,6 +46,7 @@ struct Mebel
     bool risovat;
     int MOUSE_X;
     int MOUSE_Y;
+    HDC pctr;
 };
 
 
