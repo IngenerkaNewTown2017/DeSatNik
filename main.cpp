@@ -7,14 +7,14 @@ void workspace_background();
 
 const int RAZMER_KNOPKI = 100;
 
-int count_models = 10;
+int count_mebel = 3;
 
 int main()
 {
-    model Mas_models[count_models];
-    for (int i=0; i<count_models; i++)
+    Mebel Tomb[count_mebel];
+    for (int i=0; i<count_mebel; i++)
     {
-        Mas_models[i] = {100, 300, "sdf"};
+        Tomb[i] = {false, 0, 0};
     }
 
     int screenW = GetSystemMetrics (SM_CXSCREEN);
@@ -35,10 +35,6 @@ int main()
     mebel[0] = {    RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 2 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, tumba, 300, 300};
     mebel[1] = {4 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 5 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, tumba, 300, 300};
     mebel[2] = {2 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 3 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, sofa, 241, 142};
-
-    Mebel Tomb0 = {false, 0, 0};
-    Mebel Tomb1 = {false, 0, 0};
-    Mebel Tomb2 = {false, 0, 0};
 
 
     HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
@@ -64,14 +60,23 @@ int main()
             risovanieMenuWS(count_mebeli, mebel);
 
             returnToMenu = nazad (returnToMenu);
+            if (returnToMenu)
+            {
+                for (int i=0; i<count_mebel; i++)
+                {
+                    Tomb[i] = {false, 0, 0};
+                }
+            }
             startWS = !returnToMenu;
             menu_escape (escape);
 
-            if (Tomb0.risovat)
+            for (int i=0; i<count_mebel; i++)
             {
-                Win32::TransparentBlt (txDC(), Tomb0.MOUSE_X, Tomb0.MOUSE_Y, 200, 200, Toombs, 0, 0, 300, 300, TX_WHITE);
+                if (Tomb[i].risovat)
+                {
+                    Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, 200, 200, mebel[i].picture, 0, 0, mebel[i].width, mebel[i].height, TX_WHITE);
+                }
             }
-
 
             if (checkClick(mebel[0].x, mebel[0].y, mebel[0].x1, mebel[0].y1))
             {
@@ -79,12 +84,45 @@ int main()
                 {
                     workspace_background();
                     risovanieMenuWS(count_mebeli, mebel);
-                    Win32::TransparentBlt (txDC(), txMouseX(), txMouseY(), 200, 200, mebel[0].pic, 0, 0, 300, 300, TX_WHITE);
+                    Win32::TransparentBlt (txDC(), Tomb[0].MOUSE_X, Tomb[0].MOUSE_Y, 200, 200, Tomb[0].pctr, 0, 0, mebel[0].width, mebel[0].height, TX_WHITE);
 
-                    Tomb0.MOUSE_X = txMouseX();
-                    Tomb0.MOUSE_Y = txMouseY();
-                    Tomb0.risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
+                    for (int i=0; i<count_mebel; i++)
+                    {
+                        if (Tomb[i].risovat)
+                        {
+                            Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, 200, 200, mebel[i].picture, 0, 0, mebel[i].width, mebel[i].height, TX_WHITE);
+                        }
+                    }
 
+                    Tomb[0].pctr = mebel[0].picture;
+                    Tomb[0].MOUSE_X = txMouseX();
+                    Tomb[0].MOUSE_Y = txMouseY();
+                    Tomb[0].risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
+
+                    txSleep(10);
+                }
+            }
+
+            if (checkClick(Tomb[0].MOUSE_X, Tomb[0].MOUSE_Y, Tomb[0].MOUSE_X + 200, Tomb[0].MOUSE_Y + 200))
+            {
+                while(txMouseButtons() & 1)
+                {
+                    workspace_background();
+                    risovanieMenuWS(count_mebeli, mebel);
+
+                    Tomb[0].MOUSE_X = txMouseX();
+                    Tomb[0].MOUSE_Y = txMouseY();
+                    Tomb[0].risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
+
+
+
+                    for (int i=0; i<count_mebel; i++)
+                    {
+                        if (Tomb[i].risovat)
+                        {
+                            Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, 200, 200, mebel[i].picture, 0, 0, mebel[i].width, mebel[i].height, TX_WHITE);
+                        }
+                    }
                     txSleep(10);
                 }
             }
@@ -95,12 +133,21 @@ int main()
                 {
                     workspace_background();
                     risovanieMenuWS(count_mebeli, mebel);
-                    Win32::TransparentBlt (txDC(), Tomb2.MOUSE_X, Tomb2.MOUSE_Y, 200, 200, mebel[2].pic, 0, 0, 300, 300, TX_WHITE);
 
-                    Tomb2.MOUSE_X = txMouseX();
-                    Tomb2.MOUSE_Y = txMouseY();
+                    Win32::TransparentBlt (txDC(), Tomb[2].MOUSE_X, Tomb[2].MOUSE_Y, 200, 200, mebel[2].picture, 0, 0, 300, 300, TX_WHITE);
 
-                    Tomb2.risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
+
+                    for (int i=0; i<count_mebel; i++)
+                    {
+                        if (Tomb[i].risovat)
+                        {
+                            Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, 200, 200, mebel[i].picture, 0, 0, mebel[i].width, mebel[i].height, TX_WHITE);
+                        }
+                    }
+                    Tomb[2].MOUSE_X = txMouseX();
+                    Tomb[2].MOUSE_Y = txMouseY();
+
+                    Tomb[2].risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
 
 
 
@@ -120,18 +167,18 @@ int main()
             checkMenuFocus();
             //menu_escape(escape);
             startWS = startWorkspace(startWS);
-            //testova(Mas_models, count_models);
         }
 
         if (total_exit ())
         {
             txDisableAutoPause();
             isExit = true;
-        };
+        }
 
         txSleep(10);
         txEnd();
     }
+
 
     txDeleteDC(sofa);
     txDeleteDC(fon_menu);
@@ -167,7 +214,7 @@ void menu_escape(HDC escape)
         txSleep(1000);
 
         while (!isreturn)
-        {                     //x   y    Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½  Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½        x    y
+
             txBitBlt (txDC(), screenH/2, screenW/2 - 300, 215, 291, escape, 0, 0);
 
             if ((txMouseButtons() & 1 &&
@@ -180,7 +227,7 @@ void menu_escape(HDC escape)
             txSleep(10);
         }
     }
-}
+
 
 void workspace_background()
 {
