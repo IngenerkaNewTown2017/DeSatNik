@@ -27,7 +27,7 @@ int main()
     saveButton = {0, screenH * 90/100, 200, screenH * 95/100};
     exitButton = {0, screenH * 95/100, 200, screenH};
 
-    HDC turbalet = txLoadImage ("Pics\\Турбалет.bmp");
+    HDC tur = txLoadImage ("Pics\\Турбалет.bmp");
     HDC sofa = txLoadImage ("Pics\\Sofa.bmp");//Divan
     HDC tumba = txLoadImage ("Pics\\Toomba.bmp");
 
