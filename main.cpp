@@ -69,9 +69,12 @@ int main()
 
             if (Tomb0.risovat)
             {
-                Win32::TransparentBlt (txDC(), Tomb0.MOUSE_X, Tomb0.MOUSE_Y, 200, 200, Toombs, 0, 0, 300, 300, TX_WHITE);
+                Win32::TransparentBlt (txDC(), Tomb0.MOUSE_X, Tomb0.MOUSE_Y, 200, 200, mebel[0].picture, 0, 0, mebel[0].width, mebel[0].height, TX_WHITE);
             }
-
+            if (Tomb2.risovat)
+            {
+                Win32::TransparentBlt (txDC(), Tomb2.MOUSE_X, Tomb2.MOUSE_Y, 200, 200, mebel[2].picture, 0, 0, mebel[2].width, mebel[2].height, TX_WHITE);
+            }
 
             if (checkClick(mebel[0].x, mebel[0].y, mebel[0].x1, mebel[0].y1))
             {
@@ -79,8 +82,16 @@ int main()
                 {
                     workspace_background();
                     risovanieMenuWS(count_mebeli, mebel);
-                    Win32::TransparentBlt (txDC(), txMouseX(), txMouseY(), 200, 200, mebel[0].pic, 0, 0, 300, 300, TX_WHITE);
+                    Win32::TransparentBlt (txDC(), Tomb0.MOUSE_X, Tomb0.MOUSE_Y, 200, 200, mebel[0].picture, 0, 0, mebel[0].width, mebel[0].height, TX_WHITE);
 
+					if (Tomb0.risovat)
+					{
+						Win32::TransparentBlt (txDC(), Tomb0.MOUSE_X, Tomb0.MOUSE_Y, 200, 200, mebel[0].picture, 0, 0, mebel[0].width, mebel[0].height, TX_WHITE);
+					}
+					if (Tomb2.risovat)
+					{
+						Win32::TransparentBlt (txDC(), Tomb2.MOUSE_X, Tomb2.MOUSE_Y, 200, 200, mebel[2].picture, 0, 0, mebel[2].width, mebel[2].height, TX_WHITE);
+					}
                     Tomb0.MOUSE_X = txMouseX();
                     Tomb0.MOUSE_Y = txMouseY();
                     Tomb0.risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
@@ -95,8 +106,16 @@ int main()
                 {
                     workspace_background();
                     risovanieMenuWS(count_mebeli, mebel);
-                    Win32::TransparentBlt (txDC(), Tomb2.MOUSE_X, Tomb2.MOUSE_Y, 200, 200, mebel[2].pic, 0, 0, 300, 300, TX_WHITE);
+                    Win32::TransparentBlt (txDC(), Tomb2.MOUSE_X, Tomb2.MOUSE_Y, 200, 200, mebel[2].picture, 0, 0, 300, 300, TX_WHITE);
 
+					if (Tomb0.risovat)
+					{
+						Win32::TransparentBlt (txDC(), Tomb0.MOUSE_X, Tomb0.MOUSE_Y, 200, 200, mebel[0].picture, 0, 0, mebel[0].width, mebel[0].height, TX_WHITE);
+					}
+					if (Tomb2.risovat)
+					{
+						Win32::TransparentBlt (txDC(), Tomb2.MOUSE_X, Tomb2.MOUSE_Y, 200, 200, mebel[2].picture, 0, 0, mebel[2].width, mebel[2].height, TX_WHITE);
+					}
                     Tomb2.MOUSE_X = txMouseX();
                     Tomb2.MOUSE_Y = txMouseY();
 
