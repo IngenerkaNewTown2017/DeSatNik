@@ -4,6 +4,10 @@
 bool total_exit ();
 void menu_escape(HDC escape);
 void workspace_background();
+void unichtogitVsyuMebelPodryad (Mebel* Tomb, int count_mebel);
+void risovatVsyuMebelPodryad(Mebel* Tomb, int count_mebel);
+void savingChetoTam(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli);
+void CheckKavo(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli);
 
 const int RAZMER_KNOPKI = 100;
 
@@ -11,11 +15,8 @@ int main()
 {
     int count_mebel = 4;
     Mebel Tomb[count_mebel];
-    //Сделать функцией обнуления
-    for (int i=0; i<count_mebel; i++)
-    {
-        Tomb[i] = {false, 0, 0};
-    }
+    //СделаL функцию обнуления
+    unichtogitVsyuMebelPodryad (Tomb, count_mebel);
 
     int screenW = GetSystemMetrics (SM_CXSCREEN);
     int screenH = GetSystemMetrics (SM_CYSCREEN);
@@ -66,98 +67,44 @@ int main()
             returnToMenu = nazad (returnToMenu);
             if (returnToMenu)
             {
-                for (int i=0; i<count_mebel; i++)
-                {
-                    Tomb[i] = {false, 0, 0};
-                }
+                risovatVsyuMebelPodryad(Tomb, count_mebel);
             }
             startWS = !returnToMenu;
-            menu_escape (escape);
+            //menu_escape (escape);
 
-            for (int i=0; i<count_mebel; i++)
+            risovatVsyuMebelPodryad(Tomb, count_mebel);
+
+            for (int nomer_mebeli = 0; nomer_mebeli < count_knopok_mebeli; nomer_mebeli++)
             {
-                if (Tomb[i].risovat)
+                if (checkClick(knopki_mebeli[nomer_mebeli].x, knopki_mebeli[nomer_mebeli].y, knopki_mebeli[nomer_mebeli].x1, knopki_mebeli[nomer_mebeli].y1))
                 {
-                    Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, 200, 200, knopki_mebeli[i].picture, 0, 0, knopki_mebeli[i].width, knopki_mebeli[i].height, TX_WHITE);
-                }
-            }
-
-            if (checkClick(knopki_mebeli[0].x, knopki_mebeli[0].y, knopki_mebeli[0].x1, knopki_mebeli[0].y1))
-            {
-                while(txMouseButtons() & 1)
-                {
-                    workspace_background();
-                    risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-                    Win32::TransparentBlt (txDC(), Tomb[0].MOUSE_X, Tomb[0].MOUSE_Y, 200, 200, Tomb[0].pctr, 0, 0, knopki_mebeli[0].width, knopki_mebeli[0].height, TX_WHITE);
-
-                    //Сделать функцией (очень похоже на risovanieMenuWS)
-                    for (int i=0; i<count_mebel; i++)
+                    while(txMouseButtons() & 1)
                     {
-                        if (Tomb[i].risovat)
-                        {
-                            Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, 200, 200, Tomb[i].pctr, 0, 0, knopki_mebeli[i].width, knopki_mebeli[i].height, TX_WHITE);
-                        }
+                        workspace_background();
+                        risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
+                        risovatVsyuMebelPodryad(Tomb, count_mebel);
+                        savingChetoTam(screenW, screenH, &Tomb[nomer_mebeli], knopki_mebeli[nomer_mebeli]);
+
+                        txSleep(10);
                     }
-
-                    //Сделать функцией
-                    Tomb[0].pctr = knopki_mebeli[0].picture;
-                    Tomb[0].MOUSE_X = txMouseX();
-                    Tomb[0].MOUSE_Y = txMouseY();
-                    Tomb[0].risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
-
-                    txSleep(10);
                 }
             }
 
             //Перемецения внутри ВоркСпейса
-            if (checkClick(Tomb[0].MOUSE_X, Tomb[0].MOUSE_Y, Tomb[0].MOUSE_X + 200, Tomb[0].MOUSE_Y + 200))
+
+
+            for (int nomer_mebeli = 0; nomer_mebeli < count_knopok_mebeli; nomer_mebeli++)
             {
-                while(txMouseButtons() & 1)
+                if (checkClick(Tomb[nomer_mebeli].MOUSE_X, Tomb[nomer_mebeli].MOUSE_Y, Tomb[nomer_mebeli].MOUSE_X + 200, Tomb[nomer_mebeli].MOUSE_Y + 200))
                 {
-                    workspace_background();
-                    risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-
-                    Tomb[0].MOUSE_X = txMouseX();
-                    Tomb[0].MOUSE_Y = txMouseY();
-                    Tomb[0].risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
-
-                    for (int i=0; i<count_mebel; i++)
+                    while(txMouseButtons() & 1)
                     {
-                        if (Tomb[i].risovat)
-                        {
-                            Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, 200, 200, knopki_mebeli[i].picture, 0, 0, knopki_mebeli[i].width, knopki_mebeli[i].height, TX_WHITE);
-                        }
+                        workspace_background();
+                        risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
+                        savingChetoTam(screenW, screenH, &Tomb[nomer_mebeli], knopki_mebeli[nomer_mebeli]);
+                        risovatVsyuMebelPodryad(Tomb, count_mebel);
+                        txSleep(10);
                     }
-                    txSleep(10);
-                }
-            }
-
-            if (checkClick(knopki_mebeli[2].x, knopki_mebeli[2].y, knopki_mebeli[2].x1, knopki_mebeli[2].y1))
-            {
-                while(txMouseButtons() & 1)
-                {
-                    workspace_background();
-                    risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-
-                    Win32::TransparentBlt (txDC(), Tomb[2].MOUSE_X, Tomb[2].MOUSE_Y, 200, 200, knopki_mebeli[2].picture, 0, 0, 300, 300, TX_WHITE);
-
-
-                    for (int i=0; i<count_mebel; i++)
-                    {
-                        if (Tomb[i].risovat)
-                        {
-                            Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, 200, 200, knopki_mebeli[i].picture, 0, 0, knopki_mebeli[i].width, knopki_mebeli[i].height, TX_WHITE);
-                        }
-                    }
-
-                    Tomb[2].MOUSE_X = txMouseX();
-                    Tomb[2].MOUSE_Y = txMouseY();
-                    Tomb[2].pctr = knopki_mebeli[2].picture;
-                    Tomb[2].risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
-
-
-
-                    txSleep(10);
                 }
             }
         }
@@ -235,7 +182,37 @@ void menu_escape(HDC escape)
     }
 
 
-void workspace_background()
+void unichtogitVsyuMebelPodryad (Mebel* Tomb, int count_mebel)
+{
+    for (int i=0; i<count_mebel; i++)
+    {
+        Tomb[i] = {false, 0, 0};
+    }
+}
+
+void risovatVsyuMebelPodryad(Mebel* Tomb, int count_mebel)
+{
+    for (int i=0; i<count_mebel; i++)
+    {
+        if (Tomb[i].risovat)
+        {
+            Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, 200, 200, Tomb[i].pctr, 0, 0, Tomb[i].width, Tomb[i].height, TX_WHITE);
+        }
+    }
+}
+
+ void savingChetoTam(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli){
+
+
+                    Tomb->pctr = knopki_mebeli.picture;
+                    Tomb->MOUSE_X = txMouseX();
+                    Tomb->MOUSE_Y = txMouseY();
+                    Tomb->width = knopki_mebeli.width;
+                    Tomb->height = knopki_mebeli.height;
+                    Tomb->risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
+
+  }
+  void workspace_background()
 {
     int screenW = GetSystemMetrics (SM_CXSCREEN);
     int screenH = GetSystemMetrics (SM_CYSCREEN);
