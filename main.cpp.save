@@ -28,6 +28,7 @@ int main()
     exitButton = {0, screenH * 95/100, 200, screenH};
 
 
+
     int count_knopok_mebeli = 4;
     Button knopki_mebeli[count_knopok_mebeli];
     //Брать размеры картинки из функции Демида
@@ -39,27 +40,25 @@ int main()
 
 
 //Бегаем по всем кнопкам
-for (int f = 0; f >= count_knopok_mebeli; f++)
+for (int f = 0; f >= count_knopok_mebeli)
 {
 bool kartinka_byla = false;
 int nomer_kartinki_v_kot_bulo = 0;
 //Бегаем по предыдущим картинкам
-
-
 for()
 {
-//если адрес совпалЮ, сохраняем kartinka_byla  и nomer_kartinki_v_kot_bulo
+если адрес совпалЮ, сохраняем kartinka_byla  и nomer_kartinki_v_kot_bulo
 }
 if (kartinka_byla)
 {
-knoppki[f].picture = knopki[nomer_kartinki_v_kot_bulo].picture;
+knoppki[i].picture = knopki[nomer_kartinki_v_kot_bulo].picture;
 }
 else
 {
 txLoadImage()
 }
-}
-
+}   
+   
     HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
     HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp");
     HDC escape= txLoadImage ("Pics\\menu_escape.bmp");
