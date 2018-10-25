@@ -21,24 +21,51 @@ int main()
     int screenH = GetSystemMetrics (SM_CYSCREEN);
     txCreateWindow (screenW, screenH);
 
-    settingsButton = {0, screenH * 75/100, 200, screenH * 80/100};
-    newplanButton = {0, screenH * 80/100, 200, screenH * 85/100};
-    loadButton = {0, screenH * 85/100, 200, screenH * 90/100};
-    saveButton = {0, screenH * 90/100, 200, screenH * 95/100};
-    exitButton = {0, screenH * 95/100, 200, screenH};
+    settingsButton = {nullptr, 0, screenH * 75/100, 200, screenH * 80/100};
+    newplanButton = {nullptr, 0, screenH * 80/100, 200, screenH * 85/100};
+    loadButton = {nullptr, 0, screenH * 85/100, 200, screenH * 90/100};
+    saveButton = {nullptr, 0, screenH * 90/100, 200, screenH * 95/100};
+    exitButton = {nullptr, 0, screenH * 95/100, 200, screenH};
 
     HDC sofa = txLoadImage ("Pics\\Sofa.bmp");
     HDC tumba = txLoadImage ("Pics\\Toomba.bmp");
     HDC turba = txLoadImage ("Pics\\TurboJet.bmp");
 
-    int count_knopok_mebeli = 4;
+    int count_knopok_mebeli = 7;
     Button knopki_mebeli[count_knopok_mebeli];
     //Брать размеры картинки из функции Демида
     //Получать координаты в зависимости от номера кнопки (см. код Вадима в СтарЛабиринте)
-    knopki_mebeli[0] = {    RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 2 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, tumba, 300, 300};
-    knopki_mebeli[1] = {2 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 3 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, tumba, 300, 300};
-    knopki_mebeli[2] = {3 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 4 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, sofa, 241, 142};
-    knopki_mebeli[3] = {4 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 5 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, turba, 160, 190};
+
+
+    knopki_mebeli[0] = {tumba};
+    knopki_mebeli[1] = {tumba};
+    knopki_mebeli[2] = {sofa};
+    knopki_mebeli[3] = {turba};
+    knopki_mebeli[4] = {turba};
+    knopki_mebeli[5] = {tumba};
+    knopki_mebeli[6] = {turba};
+
+
+    int CurrentX = RAZMER_KNOPKI;//Координата первой кнопки
+    int CurrentY = screenH - 3 * RAZMER_KNOPKI;//Координата первой кнопки
+
+    for (int i=0; i<count_knopok_mebeli; i++)
+    {
+        knopki_mebeli[i].x = CurrentX;
+        knopki_mebeli[i].y = CurrentY;
+        knopki_mebeli[i].x1 = CurrentX + RAZMER_KNOPKI;
+        knopki_mebeli[i].y1 = CurrentY + RAZMER_KNOPKI;
+        knopki_mebeli[i].width = vozvrat_wigth(knopki_mebeli[i].picture);
+        knopki_mebeli[i].height = vozvrat_hight(knopki_mebeli[i].picture);
+
+        CurrentX = CurrentX + RAZMER_KNOPKI;  //Следующая кнопка чуть правее предыдущей
+        //CurrentY = CurrentY + RAZMER_KNOPKI;  //Следующая кнопка чуть правее предыдущей
+        if (CurrentX > screenW - RAZMER_KNOPKI)
+        {
+            CurrentX =  RAZMER_KNOPKI;
+            CurrentY = CurrentY + RAZMER_KNOPKI;
+        }
+    }
 
 
     HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
@@ -233,7 +260,6 @@ void menu_escape(HDC escape)
             txSleep(10);
         }
     }
-
 
 void workspace_background()
 {
