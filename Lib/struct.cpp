@@ -1,11 +1,11 @@
 struct Button
 {
+    const char* adress;
+    HDC picture;
     int x;
     int y;
     int x1;
     int y1;
-    HDC picture;
-    const char* adress;
     int width;
     int height;
 };
@@ -33,23 +33,6 @@ struct model
     int sizeY;
     string title;
     HDC pic;
-};
-
-struct PicSize
-{
-
-    int SizeX;
-    int SizeY;
-};
-
-struct Mebel
-{
-    bool risovat;
-    int MOUSE_X;
-    int MOUSE_Y;
-    HDC pctr;
-    int width;
-    int height;
 };
 
 

@@ -4,61 +4,86 @@
 bool total_exit ();
 void menu_escape(HDC escape);
 void workspace_background();
+void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli);
+void CheckKavo(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli);
 
 const int RAZMER_KNOPKI = 100;
 
 int main()
 {
-    int count_mebel = 4;
+    int count_mebel = 100;
     Mebel Tomb[count_mebel];
-    //Сделать функцией обнуления
-    for (int i=0; i<count_mebel; i++)
-    {
-        Tomb[i] = {false, 0, 0};
-    }
+    unichtogitVsyuMebelPodryad (Tomb, count_mebel);
 
     int screenW = GetSystemMetrics (SM_CXSCREEN);
     int screenH = GetSystemMetrics (SM_CYSCREEN);
     txCreateWindow (screenW, screenH);
 
-    settingsButton = {0, screenH * 75/100, 200, screenH * 80/100};
-    newplanButton = {0, screenH * 80/100, 200, screenH * 85/100};
-    loadButton = {0, screenH * 85/100, 200, screenH * 90/100};
-    saveButton = {0, screenH * 90/100, 200, screenH * 95/100};
-    exitButton = {0, screenH * 95/100, 200, screenH};
+    settingsButton = {"", nullptr, 0, screenH * 75/100, 200, screenH * 80/100};
+    newplanButton = {"", nullptr, 0, screenH * 80/100, 200, screenH * 85/100};
+    loadButton = {"", nullptr, 0, screenH * 85/100, 200, screenH * 90/100};
+    saveButton = {"", nullptr, 0, screenH * 90/100, 200, screenH * 95/100};
+    exitButton = {"", nullptr, 0, screenH * 95/100, 200, screenH};
 
 
-
-    int count_knopok_mebeli = 4;
+    int count_knopok_mebeli = 7;
     Button knopki_mebeli[count_knopok_mebeli];
-    //Брать размеры картинки из функции Демида
-    //Получать координаты в зависимости от номера кнопки (см. код Вадима в СтарЛабиринте)
-    knopki_mebeli[0] = {    RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 2 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, txLoadImage ("Pics\\Toomba.bmp"), "Pics\\Toomba.bmp", 300, 300};
-    knopki_mebeli[1] = {2 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 3 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, txLoadImage ("Pics\\Toomba.bmp"), "Pics\\Toomba.bmp", 300, 300};
-    knopki_mebeli[2] = {3 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 4 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, txLoadImage ("Pics\\Sofa.bmp"), "Pics\\Sofa.bmp", 241, 142};
-    knopki_mebeli[3] = {4 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 5 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, txLoadImage ("Pics\\TurboJet.bmp"), "Pics\\TurboJet.bmp", 160, 190};
+
+    knopki_mebeli[0] = {"Pics\\Toomba.bmp"};
+    knopki_mebeli[1] = {"Pics\\Toomba.bmp"};
+    knopki_mebeli[2] = {"Pics\\Sofa.bmp"};
+    knopki_mebeli[3] = {"Pics\\TurboJet.bmp"};
+    knopki_mebeli[4] = {"Pics\\TurboJet.bmp"};
+    knopki_mebeli[5] = {"Pics\\Sofa.bmp"};
+    knopki_mebeli[6] = {"Pics\\TurboJet.bmp"};
+
+    //Coords of first button
+    int CurrentX = RAZMER_KNOPKI;
+    int CurrentY = screenH - 3 * RAZMER_KNOPKI;
+
+    for (int i=0; i<count_knopok_mebeli; i++)
+    {
+        knopki_mebeli[i].picture = txLoadImage(knopki_mebeli[i].adress);
+        knopki_mebeli[i].x = CurrentX;
+        knopki_mebeli[i].y = CurrentY;
+        knopki_mebeli[i].x1 = CurrentX + RAZMER_KNOPKI;
+        knopki_mebeli[i].y1 = CurrentY + RAZMER_KNOPKI;
+        knopki_mebeli[i].width = SizerX(knopki_mebeli[i].picture);
+        knopki_mebeli[i].height = SizerY(knopki_mebeli[i].picture);
+
+        //Generate coords for next button
+        CurrentX = CurrentX + RAZMER_KNOPKI;
+        if (CurrentX > screenW - RAZMER_KNOPKI)
+        {
+            CurrentX =  RAZMER_KNOPKI;
+            CurrentY = CurrentY + RAZMER_KNOPKI;
+        }
+    }
 
 
-//Бегаем по всем кнопкам
-for (int f = 0; f >= count_knopok_mebeli)
+//ГЃГҐГЈГ ГҐГ¬ ГЇГ® ГўГ±ГҐГ¬ ГЄГ­Г®ГЇГЄГ Г¬
+/*for (int f = 0; f >= count_knopok_mebeli; f++)
 {
 bool kartinka_byla = false;
 int nomer_kartinki_v_kot_bulo = 0;
-//Бегаем по предыдущим картинкам
+//ГЃГҐГЈГ ГҐГ¬ ГЇГ® ГЇГ°ГҐГ¤Г»Г¤ГіГ№ГЁГ¬ ГЄГ Г°ГІГЁГ­ГЄГ Г¬
+
+
 for()
 {
-если адрес совпалЮ, сохраняем kartinka_byla  и nomer_kartinki_v_kot_bulo
+//ГҐГ±Г«ГЁ Г Г¤Г°ГҐГ± Г±Г®ГўГЇГ Г«Гћ, Г±Г®ГµГ°Г Г­ГїГҐГ¬ kartinka_byla  ГЁ nomer_kartinki_v_kot_bulo
 }
 if (kartinka_byla)
 {
-knoppki[i].picture = knopki[nomer_kartinki_v_kot_bulo].picture;
+knoppki[f].picture = knopki[nomer_kartinki_v_kot_bulo].picture;
 }
 else
 {
 txLoadImage()
 }
-}   
-   
+}*/
+
+
     HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
     HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp");
     HDC escape= txLoadImage ("Pics\\menu_escape.bmp");
@@ -84,104 +109,46 @@ txLoadImage()
             returnToMenu = nazad (returnToMenu);
             if (returnToMenu)
             {
-                for (int i=0; i<count_mebel; i++)
-                {
-                    Tomb[i] = {false, 0, 0};
-                }
+                unichtogitVsyuMebelPodryad(Tomb, count_mebel);
             }
             startWS = !returnToMenu;
-            menu_escape (escape);
+            //menu_escape (escape);
 
-            for (int i=0; i<count_mebel; i++)
+            risovatVsyuMebelPodryad(Tomb, count_mebel);
+
+            //Drag-n-drop from toolstrip to workspace
+            for (int nomer_mebeli = 0; nomer_mebeli < count_knopok_mebeli; nomer_mebeli++)
             {
-                if (Tomb[i].risovat)
+                if (checkClick(knopki_mebeli[nomer_mebeli].x, knopki_mebeli[nomer_mebeli].y, knopki_mebeli[nomer_mebeli].x1, knopki_mebeli[nomer_mebeli].y1))
                 {
-                    Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, 200, 200, knopki_mebeli[i].picture, 0, 0, knopki_mebeli[i].width, knopki_mebeli[i].height, TX_WHITE);
+                    while(txMouseButtons() & 1)
+                    {
+                        workspace_background();
+                        risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
+                        risovatVsyuMebelPodryad(Tomb, count_mebel);
+                        vybratMebelNaPaneli(screenW, screenH, &Tomb[nomer_mebeli], knopki_mebeli[nomer_mebeli]);
+
+                        txSleep(10);
+                    }
                 }
             }
 
-            if (checkClick(knopki_mebeli[0].x, knopki_mebeli[0].y, knopki_mebeli[0].x1, knopki_mebeli[0].y1))
+            //Drag-n-drop in workspace
+            for (int nomer_mebeli = 0; nomer_mebeli < count_knopok_mebeli; nomer_mebeli++)
             {
-                while(txMouseButtons() & 1)
+                if (checkClick(Tomb[nomer_mebeli].MOUSE_X, Tomb[nomer_mebeli].MOUSE_Y, Tomb[nomer_mebeli].MOUSE_X + 200, Tomb[nomer_mebeli].MOUSE_Y + 200))
                 {
-                    workspace_background();
-                    risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-                    Win32::TransparentBlt (txDC(), Tomb[0].MOUSE_X, Tomb[0].MOUSE_Y, 200, 200, Tomb[0].pctr, 0, 0, knopki_mebeli[0].width, knopki_mebeli[0].height, TX_WHITE);
-
-                    //Сделать функцией (очень похоже на risovanieMenuWS)
-                    for (int i=0; i<count_mebel; i++)
+                    while(txMouseButtons() & 1)
                     {
-                        if (Tomb[i].risovat)
-                        {
-                            Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, 200, 200, Tomb[i].pctr, 0, 0, knopki_mebeli[i].width, knopki_mebeli[i].height, TX_WHITE);
-                        }
+                        workspace_background();
+                        risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
+                        vybratMebelNaPaneli(screenW, screenH, &Tomb[nomer_mebeli], knopki_mebeli[nomer_mebeli]);
+                        risovatVsyuMebelPodryad(Tomb, count_mebel);
+                        txSleep(10);
                     }
-
-                    //Сделать функцией
-                    Tomb[0].pctr = knopki_mebeli[0].picture;
-                    Tomb[0].MOUSE_X = txMouseX();
-                    Tomb[0].MOUSE_Y = txMouseY();
-                    Tomb[0].risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
-
-                    txSleep(10);
-                }
-            }
-
-            //Перемецения внутри ВоркСпейса
-            if (checkClick(Tomb[0].MOUSE_X, Tomb[0].MOUSE_Y, Tomb[0].MOUSE_X + 200, Tomb[0].MOUSE_Y + 200))
-            {
-                while(txMouseButtons() & 1)
-                {
-                    workspace_background();
-                    risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-
-                    Tomb[0].MOUSE_X = txMouseX();
-                    Tomb[0].MOUSE_Y = txMouseY();
-                    Tomb[0].risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
-
-                    for (int i=0; i<count_mebel; i++)
-                    {
-                        if (Tomb[i].risovat)
-                        {
-                            Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, 200, 200, knopki_mebeli[i].picture, 0, 0, knopki_mebeli[i].width, knopki_mebeli[i].height, TX_WHITE);
-                        }
-                    }
-                    txSleep(10);
-                }
-            }
-
-            if (checkClick(knopki_mebeli[2].x, knopki_mebeli[2].y, knopki_mebeli[2].x1, knopki_mebeli[2].y1))
-            {
-                while(txMouseButtons() & 1)
-                {
-                    workspace_background();
-                    risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-
-                    Win32::TransparentBlt (txDC(), Tomb[2].MOUSE_X, Tomb[2].MOUSE_Y, 200, 200, knopki_mebeli[2].picture, 0, 0, 300, 300, TX_WHITE);
-
-
-                    for (int i=0; i<count_mebel; i++)
-                    {
-                        if (Tomb[i].risovat)
-                        {
-                            Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, 200, 200, knopki_mebeli[i].picture, 0, 0, knopki_mebeli[i].width, knopki_mebeli[i].height, TX_WHITE);
-                        }
-                    }
-
-                    Tomb[2].MOUSE_X = txMouseX();
-                    Tomb[2].MOUSE_Y = txMouseY();
-                    Tomb[2].pctr = knopki_mebeli[2].picture;
-                    Tomb[2].risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
-
-
-
-                    txSleep(10);
                 }
             }
         }
-
-
-
 
         //MainMenu
         else
@@ -204,15 +171,15 @@ txLoadImage()
     }
 
 
-    //Удалять все картинки из 2 наших массивов (так будет проще)
-
-
+    //Delete all pics in for
     txDeleteDC(fon_menu);
     txDeleteDC(escape);
     txDeleteDC(WSpace);
 
     return 0;
 }
+
+
 
 bool total_exit ()
 {
@@ -239,6 +206,7 @@ void menu_escape(HDC escape)
         txSleep(1000);
 
         while (!isreturn)
+        {
 
             txBitBlt (txDC(), screenH/2, screenW/2 - 300, 215, 291, escape, 0, 0);
 
@@ -252,7 +220,7 @@ void menu_escape(HDC escape)
             txSleep(10);
         }
     }
-
+}
 
 void workspace_background()
 {
@@ -282,3 +250,12 @@ void workspace_background()
     }
 }
 
+void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli)
+{
+    Tomb->pctr = knopki_mebeli.picture;
+    Tomb->MOUSE_X = txMouseX();
+    Tomb->MOUSE_Y = txMouseY();
+    Tomb->width = knopki_mebeli.width;
+    Tomb->height = knopki_mebeli.height;
+    Tomb->risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
+}

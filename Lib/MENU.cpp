@@ -9,6 +9,26 @@ void drawMenu (int screenW, int screenH, HDC fon_menu);
 bool nazad (bool returnToMenu);
 void testova ( model* Mas_models, int count_Models);
 bool startWorkspace (bool startWork);
+int SizerX(HDC pic);
+int SizerY(HDC pic);
+
+
+int SizerX(HDC pic)
+{
+    HBITMAP hbm=(HBITMAP)Win32::GetCurrentObject(pic, OBJ_BITMAP);
+    BITMAP bm;
+    Win32::GetObject(hbm,sizeof(bm), (LPVOID)&bm);
+    return bm.bmWidth;
+}
+
+int SizerY(HDC pic)
+{
+    HBITMAP hbm=(HBITMAP)Win32::GetCurrentObject(pic, OBJ_BITMAP);
+    BITMAP bm;
+    Win32::GetObject(hbm,sizeof(bm), (LPVOID)&bm);
+    return bm.bmHeight;
+}
+
 
 bool checkFocus(int MinX, int MinY, int MaxX, int MaxY)
 {
