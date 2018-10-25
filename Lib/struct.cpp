@@ -48,6 +48,8 @@ struct Mebel
     int MOUSE_X;
     int MOUSE_Y;
     HDC pctr;
+    int width;
+    int height;
 };
 
 

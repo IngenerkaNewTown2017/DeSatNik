@@ -45,10 +45,26 @@ void LecheniiVova(int screenW, int screenH,Button SofaButtons[], int count_butto
                 }
 }
 
-void proMassivovKoordinatov(HDC pic, PicSize* Mas_SizeModels, int n){
+/*void proMassivovKoordinatov(HDC pic, PicSize* Mas_SizeModels, int n){
     HBITMAP hbm=(HBITMAP)Win32::GetCurrentObject(pic, OBJ_BITMAP);
     BITMAP bm;
     Win32::GetObject(hbm,sizeof(bm), (LPVOID)&bm);
     Mas_SizeModels[n].sizeX= bm.bmWidth;
     Mas_SizeModels[n].sizeY= bm.bmHight;
+} */
+
+int SizerX(HDC pic){
+    HBITMAP hbm=(HBITMAP)Win32::GetCurrentObject(pic, OBJ_BITMAP);
+    BITMAP bm;
+    Win32::GetObject(hbm,sizeof(bm), (LPVOID)&bm);
+        //int SizeX = bm.bmWidth;
+        return bm.bmWidth
+}
+
+int SizerY(HDC pic){
+    HBITMAP hbm=(HBITMAP)Win32::GetCurrentObject(pic, OBJ_BITMAP);
+    BITMAP bm;
+    Win32::GetObject(hbm,sizeof(bm), (LPVOID)&bm);
+        //int SizeY = bm.bmHight;;
+        return bm.bmHeight;
 }
