@@ -11,7 +11,7 @@ int main()
 {
     int count_mebel = 4;
     Mebel Tomb[count_mebel];
-    //Сделать функцией обнуления
+    //Г‘Г¤ГҐГ«Г ГІГј ГґГіГ­ГЄГ¶ГЁГҐГ© Г®ГЎГ­ГіГ«ГҐГ­ГЁГї
     for (int i=0; i<count_mebel; i++)
     {
         Tomb[i] = {false, 0, 0};
@@ -21,34 +21,66 @@ int main()
     int screenH = GetSystemMetrics (SM_CYSCREEN);
     txCreateWindow (screenW, screenH);
 
-    settingsButton = {0, screenH * 75/100, 200, screenH * 80/100};
-    newplanButton = {0, screenH * 80/100, 200, screenH * 85/100};
-    loadButton = {0, screenH * 85/100, 200, screenH * 90/100};
-    saveButton = {0, screenH * 90/100, 200, screenH * 95/100};
-    exitButton = {0, screenH * 95/100, 200, screenH};
+    settingsButton = {nullptr, 0, screenH * 75/100, 200, screenH * 80/100};
+    newplanButton = {nullptr, 0, screenH * 80/100, 200, screenH * 85/100};
+    loadButton = {nullptr, 0, screenH * 85/100, 200, screenH * 90/100};
+    saveButton = {nullptr, 0, screenH * 90/100, 200, screenH * 95/100};
+    exitButton = {nullptr, 0, screenH * 95/100, 200, screenH};
 
 
-    int count_knopok_mebeli = 4;
+    int count_knopok_mebeli = 7;
     Button knopki_mebeli[count_knopok_mebeli];
-    //Брать размеры картинки из функции Демида
-    //Получать координаты в зависимости от номера кнопки (см. код Вадима в СтарЛабиринте)
+    //ГЃГ°Г ГІГј Г°Г Г§Г¬ГҐГ°Г» ГЄГ Г°ГІГЁГ­ГЄГЁ ГЁГ§ ГґГіГ­ГЄГ¶ГЁГЁ Г„ГҐГ¬ГЁГ¤Г 
+    //ГЏГ®Г«ГіГ·Г ГІГј ГЄГ®Г®Г°Г¤ГЁГ­Г ГІГ» Гў Г§Г ГўГЁГ±ГЁГ¬Г®Г±ГІГЁ Г®ГІ Г­Г®Г¬ГҐГ°Г  ГЄГ­Г®ГЇГЄГЁ (Г±Г¬. ГЄГ®Г¤ Г‚Г Г¤ГЁГ¬Г  Гў Г‘ГІГ Г°Г‹Г ГЎГЁГ°ГЁГ­ГІГҐ)
+
     knopki_mebeli[0] = {    RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 2 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, txLoadImage ("Pics\\Toomba.bmp"), "Pics\\Toomba.bmp", 300, 300};
     knopki_mebeli[1] = {2 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 3 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, txLoadImage ("Pics\\Toomba.bmp"), "Pics\\Toomba.bmp", 300, 300};
     knopki_mebeli[2] = {3 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 4 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, txLoadImage ("Pics\\Sofa.bmp"), "Pics\\Sofa.bmp", 241, 142};
     knopki_mebeli[3] = {4 * RAZMER_KNOPKI, screenH - 3 * RAZMER_KNOPKI, 5 * RAZMER_KNOPKI, screenH - 2 * RAZMER_KNOPKI, txLoadImage ("Pics\\TurboJet.bmp"), "Pics\\TurboJet.bmp", 160, 190};
 
 
-//Бегаем по всем кнопкам
-for (int f = 0; f >= count_knopok_mebeli; f++)
+    knopki_mebeli[0] = {tumba};
+    knopki_mebeli[1] = {tumba};
+    knopki_mebeli[2] = {sofa};
+    knopki_mebeli[3] = {turba};
+    knopki_mebeli[4] = {turba};
+    knopki_mebeli[5] = {tumba};
+    knopki_mebeli[6] = {turba};
+
+
+    int CurrentX = RAZMER_KNOPKI;//ГЉГ®Г®Г°Г¤ГЁГ­Г ГІГ  ГЇГҐГ°ГўГ®Г© ГЄГ­Г®ГЇГЄГЁ
+    int CurrentY = screenH - 3 * RAZMER_KNOPKI;//ГЉГ®Г®Г°Г¤ГЁГ­Г ГІГ  ГЇГҐГ°ГўГ®Г© ГЄГ­Г®ГЇГЄГЁ
+
+    for (int i=0; i<count_knopok_mebeli; i++)
+    {
+        knopki_mebeli[i].x = CurrentX;
+        knopki_mebeli[i].y = CurrentY;
+        knopki_mebeli[i].x1 = CurrentX + RAZMER_KNOPKI;
+        knopki_mebeli[i].y1 = CurrentY + RAZMER_KNOPKI;
+        knopki_mebeli[i].width = vozvrat_wigth(knopki_mebeli[i].picture);
+        knopki_mebeli[i].height = vozvrat_hight(knopki_mebeli[i].picture);
+
+        CurrentX = CurrentX + RAZMER_KNOPKI;  //Г‘Г«ГҐГ¤ГіГѕГ№Г Гї ГЄГ­Г®ГЇГЄГ  Г·ГіГІГј ГЇГ°Г ГўГҐГҐ ГЇГ°ГҐГ¤Г»Г¤ГіГ№ГҐГ©
+        //CurrentY = CurrentY + RAZMER_KNOPKI;  //Г‘Г«ГҐГ¤ГіГѕГ№Г Гї ГЄГ­Г®ГЇГЄГ  Г·ГіГІГј ГЇГ°Г ГўГҐГҐ ГЇГ°ГҐГ¤Г»Г¤ГіГ№ГҐГ©
+        if (CurrentX > screenW - RAZMER_KNOPKI)
+        {
+            CurrentX =  RAZMER_KNOPKI;
+            CurrentY = CurrentY + RAZMER_KNOPKI;
+        }
+    }
+
+
+//ГЃГҐГЈГ ГҐГ¬ ГЇГ® ГўГ±ГҐГ¬ ГЄГ­Г®ГЇГЄГ Г¬
+/*for (int f = 0; f >= count_knopok_mebeli; f++)
 {
 bool kartinka_byla = false;
 int nomer_kartinki_v_kot_bulo = 0;
-//Бегаем по предыдущим картинкам
+//ГЃГҐГЈГ ГҐГ¬ ГЇГ® ГЇГ°ГҐГ¤Г»Г¤ГіГ№ГЁГ¬ ГЄГ Г°ГІГЁГ­ГЄГ Г¬
 
 
 for()
 {
-//если адрес совпалЮ, сохраняем kartinka_byla  и nomer_kartinki_v_kot_bulo
+//ГҐГ±Г«ГЁ Г Г¤Г°ГҐГ± Г±Г®ГўГЇГ Г«Гћ, Г±Г®ГµГ°Г Г­ГїГҐГ¬ kartinka_byla  ГЁ nomer_kartinki_v_kot_bulo
 }
 if (kartinka_byla)
 {
@@ -58,7 +90,7 @@ else
 {
 txLoadImage()
 }
-}
+}*/
 
     HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
     HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp");
@@ -109,7 +141,7 @@ txLoadImage()
                     risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
                     Win32::TransparentBlt (txDC(), Tomb[0].MOUSE_X, Tomb[0].MOUSE_Y, 200, 200, Tomb[0].pctr, 0, 0, knopki_mebeli[0].width, knopki_mebeli[0].height, TX_WHITE);
 
-                    //Сделать функцией (очень похоже на risovanieMenuWS)
+                    //Г‘Г¤ГҐГ«Г ГІГј ГґГіГ­ГЄГ¶ГЁГҐГ© (Г®Г·ГҐГ­Гј ГЇГ®ГµГ®Г¦ГҐ Г­Г  risovanieMenuWS)
                     for (int i=0; i<count_mebel; i++)
                     {
                         if (Tomb[i].risovat)
@@ -118,7 +150,7 @@ txLoadImage()
                         }
                     }
 
-                    //Сделать функцией
+                    //Г‘Г¤ГҐГ«Г ГІГј ГґГіГ­ГЄГ¶ГЁГҐГ©
                     Tomb[0].pctr = knopki_mebeli[0].picture;
                     Tomb[0].MOUSE_X = txMouseX();
                     Tomb[0].MOUSE_Y = txMouseY();
@@ -128,7 +160,7 @@ txLoadImage()
                 }
             }
 
-            //Перемецения внутри ВоркСпейса
+            //ГЏГҐГ°ГҐГ¬ГҐГ¶ГҐГ­ГЁГї ГўГ­ГіГІГ°ГЁ Г‚Г®Г°ГЄГ‘ГЇГҐГ©Г±Г 
             if (checkClick(Tomb[0].MOUSE_X, Tomb[0].MOUSE_Y, Tomb[0].MOUSE_X + 200, Tomb[0].MOUSE_Y + 200))
             {
                 while(txMouseButtons() & 1)
@@ -205,7 +237,7 @@ txLoadImage()
     }
 
 
-    //Удалять все картинки из 2 наших массивов (так будет проще)
+    //Г“Г¤Г Г«ГїГІГј ГўГ±ГҐ ГЄГ Г°ГІГЁГ­ГЄГЁ ГЁГ§ 2 Г­Г ГёГЁГµ Г¬Г Г±Г±ГЁГўГ®Гў (ГІГ ГЄ ГЎГіГ¤ГҐГІ ГЇГ°Г®Г№ГҐ)
 
 
     txDeleteDC(fon_menu);
@@ -253,7 +285,6 @@ void menu_escape(HDC escape)
             txSleep(10);
         }
     }
-
 
 void workspace_background()
 {
