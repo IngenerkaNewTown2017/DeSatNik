@@ -5,6 +5,7 @@ struct Button
     int x1;
     int y1;
     HDC picture;
+    const char* adress;
     int width;
     int height;
 };
