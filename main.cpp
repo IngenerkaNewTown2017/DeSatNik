@@ -1,12 +1,15 @@
 #include "Lib\\TXLib.h"
 #include "Lib\\MENU.cpp"
 #include "Lib\\Mebel.cpp"
+//#include <iostream>
+#include <fstream>
 
 bool total_exit ();
 void menu_escape(HDC escape);
 void workspace_background();
 void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli);
 void CheckKavo(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli);
+void read(Button* knopki_mebeli);
 
 const int RAZMER_KNOPKI = 100;
 
@@ -30,13 +33,22 @@ int main()
     int count_knopok_mebeli = 7;
     Button knopki_mebeli[count_knopok_mebeli];
 
-    knopki_mebeli[0] = {"Pics\\Toomba.bmp"};
+
+
+    for (int i=0; i<count_knopok_mebeli; i++)
+    {
+    read(&knopki_mebeli[i]);
+    }
+
+    /*knopki_mebeli[0] = {"Pics\\Toomba.bmp"};
     knopki_mebeli[1] = {"Pics\\Toomba.bmp"};
     knopki_mebeli[2] = {"Pics\\Sofa.bmp"};
     knopki_mebeli[3] = {"Pics\\TurboJet.bmp"};
     knopki_mebeli[4] = {"Pics\\TurboJet.bmp"};
     knopki_mebeli[5] = {"Pics\\Sofa.bmp"};
     knopki_mebeli[6] = {"Pics\\TurboJet.bmp"};
+    */
+
 
     //Coords of first button
     int CurrentX = RAZMER_KNOPKI;
@@ -173,6 +185,11 @@ txLoadImage()
 
 
     //Delete all pics in for
+    for (int i=0; i<count_knopok_mebeli; i++)
+    {
+        txDeleteDC(knopki_mebeli[i].picture);
+
+    }
     txDeleteDC(fon_menu);
     txDeleteDC(escape);
     txDeleteDC(WSpace);
@@ -249,6 +266,26 @@ void workspace_background()
     {
         txLine   (x, screenH - 300, x, screenH);
     }
+}
+
+void read(Button* knopki_mebeli){
+using namespace std;
+ifstream fout;
+
+fout.open("PicsButtons.txt");
+
+    while (fout.good()) {
+char* picAdress = new char[200];
+strcpy(picAdress, "Pics\\");
+strcat(picAdress, "\\");
+strcat(picAdress, ".bmp");
+ifstream picFile;
+picFile.open(picAdress);
+picFile.close();
+
+knopki_mebeli->adress = picAdress;
+knopki_mebeli->picture = txLoadImage(knopki_mebeli->adress);
+}
 }
 
 void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli)
