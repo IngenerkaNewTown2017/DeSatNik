@@ -1,3 +1,10 @@
+#include "TXLib.h"
+//#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstring>
+//#include "struct.cpp"
+
 struct Mebel
 {
     bool risovat;
@@ -31,3 +38,6 @@ void risovatVsyuMebelPodryad(Mebel* Tomb, int count_mebel)
         }
     }
 }
+
+
+
