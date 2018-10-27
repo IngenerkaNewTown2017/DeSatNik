@@ -5,11 +5,7 @@
 #include <fstream>
 #include "Lib\\all_exits.cpp"
 #include "Lib\\workspace and etc.cpp"
-
 using namespace std;
-
-
-
 
 
 int main()
@@ -17,6 +13,7 @@ int main()
     int count_knopok_mebeli = 7;
     int count_mebel = 100;
     Mebel Tomb[count_mebel];
+    int nomer_tomba = 0;
     decor_destruction(Tomb, count_mebel);
 
     int screenW = GetSystemMetrics (SM_CXSCREEN);
@@ -63,12 +60,12 @@ int main()
             returnToMenu = nazad (returnToMenu);
             if (returnToMenu)
             {
-                decor_destruction(Tomb, count_mebel);
+                decor_destruction(Tomb, nomer_tomba);
             }
             startWS = !returnToMenu;
             //menu_escape (escape);
 
-            draw_all_mebel(Tomb, count_mebel);
+            draw_all_mebel(Tomb, nomer_tomba);
 
             //Drag-n-drop from toolstrip to workspace
             for (int nomer_mebeli = 0; nomer_mebeli < count_knopok_mebeli; nomer_mebeli++)
@@ -80,23 +77,25 @@ int main()
                         workspace_background();
                         risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
                         draw_all_mebel(Tomb, count_mebel);
-                        button_selection(screenW, screenH, &Tomb[nomer_mebeli], knopki_mebeli[nomer_mebeli]);
+                        button_selection(screenW, screenH, &Tomb[nomer_tomba], knopki_mebeli[nomer_mebeli]);
 
                         txSleep(10);
                     }
+
+                    nomer_tomba++;
                 }
             }
 
             //Drag-n-drop in workspace
-            for (int nomer_mebeli = 0; nomer_mebeli < count_knopok_mebeli; nomer_mebeli++)
+            for (int i = 0; i < nomer_tomba; i++)
             {
-                if (checkClick(Tomb[nomer_mebeli].MOUSE_X, Tomb[nomer_mebeli].MOUSE_Y, Tomb[nomer_mebeli].MOUSE_X + 200, Tomb[nomer_mebeli].MOUSE_Y + 200))
+                if (checkClick(Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, Tomb[i].MOUSE_X + 200, Tomb[i].MOUSE_Y + 200))
                 {
                     while(txMouseButtons() & 1)
                     {
                         workspace_background();
                         risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-                        button_selection(screenW, screenH, &Tomb[nomer_mebeli], knopki_mebeli[nomer_mebeli]);
+                        button_selection(screenW, screenH, &Tomb[i], knopki_mebeli[i]);
                         draw_all_mebel(Tomb, count_mebel);
                         txSleep(10);
                     }
@@ -137,7 +136,3 @@ int main()
 
     return 0;
 }
-
-
-
-
