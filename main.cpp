@@ -4,12 +4,16 @@
 //#include <iostream>
 #include <fstream>
 
+
+using namespace std;
+
+
 bool total_exit ();
 void menu_escape(HDC escape);
 void workspace_background();
 void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli);
 void CheckKavo(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli);
-void read(Button* knopki_mebeli);
+void read(Button* knopki_mebeli, int count_knopok);
 
 const int RAZMER_KNOPKI = 100;
 
@@ -32,13 +36,8 @@ int main()
 
     int count_knopok_mebeli = 7;
     Button knopki_mebeli[count_knopok_mebeli];
+    read(knopki_mebeli, count_knopok_mebeli);
 
-
-
-    for (int i=0; i<count_knopok_mebeli; i++)
-    {
-    read(&knopki_mebeli[i]);
-    }
 
     /*knopki_mebeli[0] = {"Pics\\Toomba.bmp"};
     knopki_mebeli[1] = {"Pics\\Toomba.bmp"};
@@ -268,24 +267,26 @@ void workspace_background()
     }
 }
 
-void read(Button* knopki_mebeli){
-using namespace std;
-ifstream fout;
+void read(Button* knopki_mebeli, int count_knopok)
+{
+    ifstream fout;
+    fout.open("PicsButtons.txt");
 
-fout.open("PicsButtons.txt");
+    //while (fout.good())
+    {
+        for (int i = 0; i < count_knopok; i++)
+        {
+            string picAdress;
+            getline(fout, picAdress);
+            char* adress = new char[200];
+            strcpy(adress, picAdress.c_str());
 
-    while (fout.good()) {
-char* picAdress = new char[200];
-strcpy(picAdress, "Pics\\");
-strcat(picAdress, "\\");
-strcat(picAdress, ".bmp");
-ifstream picFile;
-picFile.open(picAdress);
-picFile.close();
+            knopki_mebeli[i].adress = adress;
+            knopki_mebeli[i].picture = txLoadImage(adress);
+        }
+    }
 
-knopki_mebeli->adress = picAdress;
-knopki_mebeli->picture = txLoadImage(knopki_mebeli->adress);
-}
+    fout.close();
 }
 
 void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli)
