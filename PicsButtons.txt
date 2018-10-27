@@ -1,0 +1,7 @@
+Pics\\Toomba.bmp
+Pics\\Sofa.bmp
+Pics\\TurboJet.bmp
+Pics\\3Dshkaf.bmp
+Pics\\Puffeg.bmp
+Pics\\Kreslo.bmp
+Pics\\TV.bmp
