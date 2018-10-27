@@ -1,3 +1,5 @@
+#include "TXLib.h"
+
 struct Mebel
 {
     bool risovat;
@@ -9,11 +11,11 @@ struct Mebel
 };
 
 //Clear workspace
-void unichtogitVsyuMebelPodryad (Mebel* Tomb, int count_mebel);
+void decor_destruction (Mebel* Tomb, int count_mebel);
 //Draw all workspace parts
-void risovatVsyuMebelPodryad(Mebel* Tomb, int count_mebel);
+void draw_all_mebel(Mebel* Tomb, int count_mebel);
 
-void unichtogitVsyuMebelPodryad (Mebel* Tomb, int count_mebel)
+void decor_destruction (Mebel* Tomb, int count_mebel)
 {
     for (int i=0; i<count_mebel; i++)
     {
@@ -21,7 +23,7 @@ void unichtogitVsyuMebelPodryad (Mebel* Tomb, int count_mebel)
     }
 }
 
-void risovatVsyuMebelPodryad(Mebel* Tomb, int count_mebel)
+void draw_all_mebel(Mebel* Tomb, int count_mebel)
 {
     for (int i=0; i<count_mebel; i++)
     {

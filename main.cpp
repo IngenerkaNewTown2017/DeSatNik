@@ -1,6 +1,6 @@
-#include "Lib\\all_exits.cpp"
 #include "Lib\\Mebel.cpp"
 #include "Lib\\MENU.cpp"
+#include "Lib\\all_exits.cpp"
 #include "Lib\\TXLib.h"
 #include "Lib\\workspace and etc.cpp"
 #include <fstream>
@@ -8,8 +8,6 @@
 #include <string>
 
 using namespace std;
-
-const int RAZMER_KNOPKI = 100;
 
 int read(Button* knopki_mebeli);
 void saving (Mebel* Tomb, int count_knopok);
@@ -119,7 +117,7 @@ int main()
             startWS = startWorkspace(startWS);
         }
 
-        if (total_exit ())
+        if (total_exit (exitButton))
         {
             txDisableAutoPause();
             isExit = true;
@@ -177,14 +175,14 @@ void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_me
     Tomb->risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
 }
 
-void saving (Mebel* Tomb, int count_knopok) 
+void saving (Mebel* Tomb, int count_knopok)
 {
     ofstream fout_save;
     fout_save.open("savings.txt");
 
     for (int i=0; i<count_knopok; i++) {
 
-        if (Tomb[i].risovat)
+        //if (Tomb[i].risovat)
         {
              fout_save <<   //Tomb[i].adress << ", " <<
                             Tomb[i].MOUSE_X << ", " <<
