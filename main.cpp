@@ -13,7 +13,7 @@ void menu_escape(HDC escape);
 void workspace_background();
 void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli);
 void CheckKavo(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli);
-void read(Button* knopki_mebeli, int count_knopok);
+int read(Button* knopki_mebeli);
 void saving (Mebel* Tomb, int count_knopok);
 
 const int RAZMER_KNOPKI = 100;
@@ -35,20 +35,8 @@ int main()
     exitButton = {"", nullptr, 0, screenH * 95/100, 200, screenH};
 
 
-    int count_knopok_mebeli = 7;
-    Button knopki_mebeli[count_knopok_mebeli];
-    read(knopki_mebeli, count_knopok_mebeli);
-
-
-    /*knopki_mebeli[0] = {"Pics\\Toomba.bmp"};
-    knopki_mebeli[1] = {"Pics\\Toomba.bmp"};
-    knopki_mebeli[2] = {"Pics\\Sofa.bmp"};
-    knopki_mebeli[3] = {"Pics\\TurboJet.bmp"};
-    knopki_mebeli[4] = {"Pics\\TurboJet.bmp"};
-    knopki_mebeli[5] = {"Pics\\Sofa.bmp"};
-    knopki_mebeli[6] = {"Pics\\TurboJet.bmp"};
-    */
-
+    Button knopki_mebeli[200];
+    int count_knopok_mebeli = read(knopki_mebeli);
 
     //Coords of first button
     int CurrentX = RAZMER_KNOPKI;
@@ -270,26 +258,25 @@ void workspace_background()
     }
 }
 
-void read(Button* knopki_mebeli, int count_knopok)
+int read(Button* knopki_mebeli)
 {
     ifstream fout;
     fout.open("PicsButtons.txt");
-
-    //while (fout.good())
+    int nomer = 0;
+    while (fout.good())
     {
-        for (int i = 0; i < count_knopok; i++)
-        {
-            string picAdress;
-            getline(fout, picAdress);
-            char* adress = new char[200];
-            strcpy(adress, picAdress.c_str());
+        string picAdress;
+        getline(fout, picAdress);
+        char* adress = new char[200];
+        strcpy(adress, picAdress.c_str());
 
-            knopki_mebeli[i].adress = adress;
-            knopki_mebeli[i].picture = txLoadImage(adress);
-        }
+        knopki_mebeli[nomer].adress = adress;
+        knopki_mebeli[nomer].picture = txLoadImage(adress);
+        nomer++;
     }
 
     fout.close();
+    return nomer;
 }
 
 void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli)
@@ -302,10 +289,8 @@ void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_me
     Tomb->risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
 }
 
-void saving (Mebel* Tomb, int count_knopok) {
-
-
-
+void saving (Mebel* Tomb, int count_knopok) 
+{
     ofstream fout_save;
     fout_save.open("savings.txt");
 
@@ -316,12 +301,8 @@ void saving (Mebel* Tomb, int count_knopok) {
              fout_save <<   //Tomb[i].adress << ", " <<
                             Tomb[i].MOUSE_X << ", " <<
                             Tomb[i].MOUSE_Y << endl;
-           // Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, 200, 200, Tomb[i].pctr, 0, 0, Tomb[i].width, Tomb[i].height, TX_WHITE);
         }
     }
-
-
-        //}
 
     fout_save.close();
 }
