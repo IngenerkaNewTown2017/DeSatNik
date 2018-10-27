@@ -1,28 +1,26 @@
-#include "Lib\\TXLib.h"
-#include "Lib\\MENU.cpp"
+#include "Lib\\all_exits.cpp"
 #include "Lib\\Mebel.cpp"
+#include "Lib\\MENU.cpp"
+#include "Lib\\TXLib.h"
+#include "Lib\\workspace and etc.cpp"
 #include <fstream>
 #include <iostream>
 #include <string>
 
 using namespace std;
 
+const int RAZMER_KNOPKI = 100;
 
-bool total_exit ();
-void menu_escape(HDC escape);
-void workspace_background();
-void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli);
-void CheckKavo(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli);
 int read(Button* knopki_mebeli);
 void saving (Mebel* Tomb, int count_knopok);
 
-const int RAZMER_KNOPKI = 100;
 
 int main()
 {
     int count_mebel = 100;
     Mebel Tomb[count_mebel];
-    unichtogitVsyuMebelPodryad (Tomb, count_mebel);
+    int nomer_tomba = 0;
+    decor_destruction(Tomb, count_mebel);
 
     int screenW = GetSystemMetrics (SM_CXSCREEN);
     int screenH = GetSystemMetrics (SM_CYSCREEN);
@@ -38,51 +36,9 @@ int main()
     Button knopki_mebeli[200];
     int count_knopok_mebeli = read(knopki_mebeli);
 
-    //Coords of first button
-    int CurrentX = RAZMER_KNOPKI;
-    int CurrentY = screenH - 3 * RAZMER_KNOPKI;
+    //coords of first button
+        coords_of_first_button(knopki_mebeli);
 
-    for (int i=0; i<count_knopok_mebeli; i++)
-    {
-        knopki_mebeli[i].picture = txLoadImage(knopki_mebeli[i].adress);
-        knopki_mebeli[i].x = CurrentX;
-        knopki_mebeli[i].y = CurrentY;
-        knopki_mebeli[i].x1 = CurrentX + RAZMER_KNOPKI;
-        knopki_mebeli[i].y1 = CurrentY + RAZMER_KNOPKI;
-        knopki_mebeli[i].width = SizerX(knopki_mebeli[i].picture);
-        knopki_mebeli[i].height = SizerY(knopki_mebeli[i].picture);
-
-        //Generate coords for next button
-        CurrentX = CurrentX + RAZMER_KNOPKI;
-        if (CurrentX > screenW - RAZMER_KNOPKI)
-        {
-            CurrentX =  RAZMER_KNOPKI;
-            CurrentY = CurrentY + RAZMER_KNOPKI;
-        }
-    }
-
-
-//Áåãàåì ïî âñåì êíîïêàì
-/*for (int f = 0; f >= count_knopok_mebeli; f++)
-{
-bool kartinka_byla = false;
-int nomer_kartinki_v_kot_bulo = 0;
-//Áåãàåì ïî ïðåäûäóùèì êàðòèíêàì
-
-
-for()
-{
-//åñëè àäðåñ ñîâïàëÞ, ñîõðàíÿåì kartinka_byla  è nomer_kartinki_v_kot_bulo
-}
-if (kartinka_byla)
-{
-knoppki[f].picture = knopki[nomer_kartinki_v_kot_bulo].picture;
-}
-else
-{
-txLoadImage()
-}
-}*/
 
 
     HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
@@ -110,12 +66,12 @@ txLoadImage()
             returnToMenu = nazad (returnToMenu);
             if (returnToMenu)
             {
-                unichtogitVsyuMebelPodryad(Tomb, count_mebel);
+                decor_destruction(Tomb, nomer_tomba);
             }
             startWS = !returnToMenu;
             //menu_escape (escape);
 
-            risovatVsyuMebelPodryad(Tomb, count_mebel);
+            draw_all_mebel(Tomb, nomer_tomba);
 
             //Drag-n-drop from toolstrip to workspace
             for (int nomer_mebeli = 0; nomer_mebeli < count_knopok_mebeli; nomer_mebeli++)
@@ -126,25 +82,27 @@ txLoadImage()
                     {
                         workspace_background();
                         risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-                        risovatVsyuMebelPodryad(Tomb, count_mebel);
-                        vybratMebelNaPaneli(screenW, screenH, &Tomb[nomer_mebeli], knopki_mebeli[nomer_mebeli]);
+                        draw_all_mebel(Tomb, count_mebel);
+                        button_selection(screenW, screenH, &Tomb[nomer_tomba], knopki_mebeli[nomer_mebeli]);
 
                         txSleep(10);
                     }
+
+                    nomer_tomba++;
                 }
             }
 
             //Drag-n-drop in workspace
-            for (int nomer_mebeli = 0; nomer_mebeli < count_knopok_mebeli; nomer_mebeli++)
+            for (int i = 0; i < nomer_tomba; i++)
             {
-                if (checkClick(Tomb[nomer_mebeli].MOUSE_X, Tomb[nomer_mebeli].MOUSE_Y, Tomb[nomer_mebeli].MOUSE_X + 200, Tomb[nomer_mebeli].MOUSE_Y + 200))
+                if (checkClick(Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, Tomb[i].MOUSE_X + 200, Tomb[i].MOUSE_Y + 200))
                 {
                     while(txMouseButtons() & 1)
                     {
                         workspace_background();
                         risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-                        vybratMebelNaPaneli(screenW, screenH, &Tomb[nomer_mebeli], knopki_mebeli[nomer_mebeli]);
-                        risovatVsyuMebelPodryad(Tomb, count_mebel);
+                        button_selection(screenW, screenH, &Tomb[i], knopki_mebeli[i]);
+                        draw_all_mebel(Tomb, count_mebel);
                         txSleep(10);
                     }
                 }
@@ -176,7 +134,6 @@ txLoadImage()
     for (int i=0; i<count_knopok_mebeli; i++)
     {
         txDeleteDC(knopki_mebeli[i].picture);
-
     }
     txDeleteDC(fon_menu);
     txDeleteDC(escape);
@@ -188,75 +145,6 @@ txLoadImage()
 }
 
 
-
-bool total_exit ()
-{
-    if (txMouseX() > exitButton.x  &&
-        txMouseX() < exitButton.x1 &&
-        txMouseY() > exitButton.y  &&
-        txMouseY() < exitButton.y1 &&
-        txMouseButtons() & 1)
-    {
-        return true;
-    }
-
-    return false;
-}
-
-void menu_escape(HDC escape)
-{
-    int screenW = GetSystemMetrics (SM_CXSCREEN);
-    int screenH = GetSystemMetrics (SM_CYSCREEN);
-
-    bool isreturn = false;
-    if (GetAsyncKeyState(VK_ESCAPE))
-    {
-        txSleep(1000);
-
-        while (!isreturn)
-        {
-
-            txBitBlt (txDC(), screenH/2, screenW/2 - 300, 215, 291, escape, 0, 0);
-
-            if ((txMouseButtons() & 1 &&
-                txMouseX() > 0 && txMouseX() < 800
-            &&  txMouseY() > 0 && txMouseY() < 321) or GetAsyncKeyState(VK_ESCAPE))
-            {
-                isreturn = true;
-            }
-
-            txSleep(10);
-        }
-    }
-}
-
-void workspace_background()
-{
-    int screenW = GetSystemMetrics (SM_CXSCREEN);
-    int screenH = GetSystemMetrics (SM_CYSCREEN);
-    txClear();
-    txSetColor(TX_BLACK, 5);
-    txRectangle(50, 50, screenW - 50, screenH - 350);
-    txSetColor(TX_WHITE);
-
-    //Grid
-    txSetColor(TX_BLACK);
-    for (int y = screenH; y >= screenH - 300; y = y - RAZMER_KNOPKI)
-    {
-        txLine   (0, y, RAZMER_KNOPKI * (screenW / RAZMER_KNOPKI), y);
-    }
-
-    for (int x = 0; x <= screenW; x = x + RAZMER_KNOPKI)
-    {
-        txLine   (x, screenH - 300, x, screenH);
-    }
-
-    txSetColor(TX_BLACK, 4);
-    for (int x = 0; x <= screenW; x = x + 5 * RAZMER_KNOPKI)
-    {
-        txLine   (x, screenH - 300, x, screenH);
-    }
-}
 
 int read(Button* knopki_mebeli)
 {
