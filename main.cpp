@@ -1,16 +1,22 @@
-#include "Lib\\TXLib.h"
-#include "Lib\\MENU.cpp"
-#include "Lib\\Mebel.cpp"
-#include <iostream>
-#include <fstream>
 #include "Lib\\all_exits.cpp"
+#include "Lib\\Mebel.cpp"
+#include "Lib\\MENU.cpp"
+#include "Lib\\TXLib.h"
 #include "Lib\\workspace and etc.cpp"
+#include <fstream>
+#include <iostream>
+#include <string>
+
 using namespace std;
+
+const int RAZMER_KNOPKI = 100;
+
+int read(Button* knopki_mebeli);
+void saving (Mebel* Tomb, int count_knopok);
 
 
 int main()
 {
-    int count_knopok_mebeli = 7;
     int count_mebel = 100;
     Mebel Tomb[count_mebel];
     int nomer_tomba = 0;
@@ -27,8 +33,8 @@ int main()
     exitButton = {"", nullptr, 0, screenH * 95/100, 200, screenH};
 
 
-    Button knopki_mebeli[count_knopok_mebeli];
-    reading_from_file(knopki_mebeli, count_knopok_mebeli);
+    Button knopki_mebeli[200];
+    int count_knopok_mebeli = read(knopki_mebeli);
 
     //coords of first button
         coords_of_first_button(knopki_mebeli);
@@ -128,11 +134,63 @@ int main()
     for (int i=0; i<count_knopok_mebeli; i++)
     {
         txDeleteDC(knopki_mebeli[i].picture);
-
     }
     txDeleteDC(fon_menu);
     txDeleteDC(escape);
     txDeleteDC(WSpace);
 
+    saving (Tomb, count_knopok_mebeli);
+
     return 0;
+}
+
+
+
+int read(Button* knopki_mebeli)
+{
+    ifstream fout;
+    fout.open("PicsButtons.txt");
+    int nomer = 0;
+    while (fout.good())
+    {
+        string picAdress;
+        getline(fout, picAdress);
+        char* adress = new char[200];
+        strcpy(adress, picAdress.c_str());
+
+        knopki_mebeli[nomer].adress = adress;
+        knopki_mebeli[nomer].picture = txLoadImage(adress);
+        nomer++;
+    }
+
+    fout.close();
+    return nomer;
+}
+
+void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli)
+{
+    Tomb->pctr = knopki_mebeli.picture;
+    Tomb->MOUSE_X = txMouseX();
+    Tomb->MOUSE_Y = txMouseY();
+    Tomb->width = knopki_mebeli.width;
+    Tomb->height = knopki_mebeli.height;
+    Tomb->risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
+}
+
+void saving (Mebel* Tomb, int count_knopok) 
+{
+    ofstream fout_save;
+    fout_save.open("savings.txt");
+
+    for (int i=0; i<count_knopok; i++) {
+
+        if (Tomb[i].risovat)
+        {
+             fout_save <<   //Tomb[i].adress << ", " <<
+                            Tomb[i].MOUSE_X << ", " <<
+                            Tomb[i].MOUSE_Y << endl;
+        }
+    }
+
+    fout_save.close();
 }
