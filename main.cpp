@@ -1,9 +1,9 @@
 #include "Lib\\TXLib.h"
 #include "Lib\\MENU.cpp"
 #include "Lib\\Mebel.cpp"
-//#include <iostream>
 #include <fstream>
-
+#include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -14,6 +14,7 @@ void workspace_background();
 void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli);
 void CheckKavo(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli);
 int read(Button* knopki_mebeli);
+void saving (Mebel* Tomb, int count_knopok);
 
 const int RAZMER_KNOPKI = 100;
 
@@ -36,17 +37,6 @@ int main()
 
     Button knopki_mebeli[200];
     int count_knopok_mebeli = read(knopki_mebeli);
-
-
-    /*knopki_mebeli[0] = {"Pics\\Toomba.bmp"};
-    knopki_mebeli[1] = {"Pics\\Toomba.bmp"};
-    knopki_mebeli[2] = {"Pics\\Sofa.bmp"};
-    knopki_mebeli[3] = {"Pics\\TurboJet.bmp"};
-    knopki_mebeli[4] = {"Pics\\TurboJet.bmp"};
-    knopki_mebeli[5] = {"Pics\\Sofa.bmp"};
-    knopki_mebeli[6] = {"Pics\\TurboJet.bmp"};
-    */
-
 
     //Coords of first button
     int CurrentX = RAZMER_KNOPKI;
@@ -192,6 +182,8 @@ txLoadImage()
     txDeleteDC(escape);
     txDeleteDC(WSpace);
 
+    saving (Tomb, count_knopok_mebeli);
+
     return 0;
 }
 
@@ -273,14 +265,14 @@ int read(Button* knopki_mebeli)
     int nomer = 0;
     while (fout.good())
     {
-            string picAdress;
-            getline(fout, picAdress);
-            char* adress = new char[200];
-            strcpy(adress, picAdress.c_str());
+        string picAdress;
+        getline(fout, picAdress);
+        char* adress = new char[200];
+        strcpy(adress, picAdress.c_str());
 
-            knopki_mebeli[nomer].adress = adress;
-            knopki_mebeli[nomer].picture = txLoadImage(adress);
-            nomer++;
+        knopki_mebeli[nomer].adress = adress;
+        knopki_mebeli[nomer].picture = txLoadImage(adress);
+        nomer++;
     }
 
     fout.close();
@@ -295,4 +287,22 @@ void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_me
     Tomb->width = knopki_mebeli.width;
     Tomb->height = knopki_mebeli.height;
     Tomb->risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
+}
+
+void saving (Mebel* Tomb, int count_knopok) 
+{
+    ofstream fout_save;
+    fout_save.open("savings.txt");
+
+    for (int i=0; i<count_knopok; i++) {
+
+        if (Tomb[i].risovat)
+        {
+             fout_save <<   //Tomb[i].adress << ", " <<
+                            Tomb[i].MOUSE_X << ", " <<
+                            Tomb[i].MOUSE_Y << endl;
+        }
+    }
+
+    fout_save.close();
 }
