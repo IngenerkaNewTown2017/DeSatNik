@@ -14,7 +14,6 @@ void workspace_background();
 void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli);
 void CheckKavo(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli);
 void read(Button* knopki_mebeli, int count_knopok);
-void saving (Mebel* Tomb, int count_knopok);
 
 const int RAZMER_KNOPKI = 100;
 
@@ -194,8 +193,6 @@ txLoadImage()
     txDeleteDC(escape);
     txDeleteDC(WSpace);
 
-    saving (Tomb, count_knopok_mebeli);
-
     return 0;
 }
 
@@ -305,7 +302,7 @@ void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_me
 void saving (Mebel* Tomb, int count_knopok) {
 
 
-
+    
     ofstream fout_save;
     fout_save.open("savings.txt");
 
