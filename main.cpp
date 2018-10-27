@@ -13,7 +13,7 @@ void menu_escape(HDC escape);
 void workspace_background();
 void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli);
 void CheckKavo(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli);
-void read(Button* knopki_mebeli, int count_knopok);
+int read(Button* knopki_mebeli);
 
 const int RAZMER_KNOPKI = 100;
 
@@ -34,9 +34,8 @@ int main()
     exitButton = {"", nullptr, 0, screenH * 95/100, 200, screenH};
 
 
-    int count_knopok_mebeli = 7;
-    Button knopki_mebeli[count_knopok_mebeli];
-    read(knopki_mebeli, count_knopok_mebeli);
+    Button knopki_mebeli[200];
+    int count_knopok_mebeli = read(knopki_mebeli);
 
 
     /*knopki_mebeli[0] = {"Pics\\Toomba.bmp"};
@@ -267,26 +266,25 @@ void workspace_background()
     }
 }
 
-void read(Button* knopki_mebeli, int count_knopok)
+int read(Button* knopki_mebeli)
 {
     ifstream fout;
     fout.open("PicsButtons.txt");
-
-    //while (fout.good())
+    int nomer = 0;
+    while (fout.good())
     {
-        for (int i = 0; i < count_knopok; i++)
-        {
             string picAdress;
             getline(fout, picAdress);
             char* adress = new char[200];
             strcpy(adress, picAdress.c_str());
 
-            knopki_mebeli[i].adress = adress;
-            knopki_mebeli[i].picture = txLoadImage(adress);
-        }
+            knopki_mebeli[nomer].adress = adress;
+            knopki_mebeli[nomer].picture = txLoadImage(adress);
+            nomer++;
     }
 
     fout.close();
+    return nomer;
 }
 
 void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli)
