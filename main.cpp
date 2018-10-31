@@ -35,7 +35,7 @@ int main()
     int count_knopok_mebeli = read(knopki_mebeli);
 
     //coords of first button
-        coords_of_first_button(knopki_mebeli);
+    coords_of_first_button(knopki_mebeli, count_knopok_mebeli);
 
 
 
@@ -68,7 +68,11 @@ int main()
             }
             startWS = !returnToMenu;
             //menu_escape (escape);
-
+            if (GetAsyncKeyState('A'))
+            {
+                saving (Tomb, count_knopok_mebeli);
+            }
+          
             draw_all_mebel(Tomb, nomer_tomba);
 
             //Drag-n-drop from toolstrip to workspace
@@ -88,7 +92,12 @@ int main()
                         txSleep(10);
                     }
 
-                    nomer_tomba++;
+                    checkalka(nomer_tomba, Tomb);
+
+                    if (Tomb[nomer_tomba].risovat)
+                    {
+                        nomer_tomba++;
+                    }
                 }
             }
 
@@ -105,7 +114,13 @@ int main()
                         {
                             workspace_background();
                             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-                            button_selection(screenW, screenH, &Tomb[i], knopki_mebeli[i]);
+
+                            Button Bomzh = {};
+                            Bomzh.picture = Tomb[i].pctr;
+                            Bomzh.width = Tomb[i].width;
+                            Bomzh.height = Tomb[i].height;
+                            button_selection(screenW, screenH, &Tomb[i], Bomzh);
+                      
                             draw_all_mebel(Tomb, count_mebel);
                             txSleep(10);
                         }
@@ -168,33 +183,8 @@ int main()
     txDeleteDC(fon_menu);
     txDeleteDC(escape);
     txDeleteDC(WSpace);
-
-    saving (Tomb, count_knopok_mebeli);
-
+  
     return 0;
-}
-
-
-
-int read(Button* knopki_mebeli)
-{
-    ifstream fout;
-    fout.open("PicsButtons.txt");
-    int nomer = 0;
-    while (fout.good())
-    {
-        string picAdress;
-        getline(fout, picAdress);
-        char* adress = new char[200];
-        strcpy(adress, picAdress.c_str());
-
-        knopki_mebeli[nomer].adress = adress;
-        knopki_mebeli[nomer].picture = txLoadImage(adress);
-        nomer++;
-    }
-
-    fout.close();
-    return nomer;
 }
 
 void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli)

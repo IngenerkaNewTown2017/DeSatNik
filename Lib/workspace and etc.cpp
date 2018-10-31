@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <fstream>
 
@@ -33,25 +35,25 @@ void workspace_background()
     }
 }
 
-void reading_from_file(Button* knopki_mebeli, int count_knopok)
+int read(Button* knopki_mebeli)
 {
     ifstream fout;
     fout.open("PicsButtons.txt");
-
-    //while (fout.good())
+    int nomer = 0;
+    while (fout.good())
     {
-        for (int i = 0; i < count_knopok; i++)
-        {
-            string picAdress;
-            getline(fout, picAdress);
-            char* adress = new char[200];
-            strcpy(adress, picAdress.c_str());
+        string picAdress;
+        getline(fout, picAdress);
+        char* adress = new char[200];
+        strcpy(adress, picAdress.c_str());
 
-            knopki_mebeli[i].adress = adress;
-        }
+        knopki_mebeli[nomer].adress = adress;
+        knopki_mebeli[nomer].picture = txLoadImage(adress);
+        nomer++;
     }
 
     fout.close();
+    return nomer;
 }
 
 void button_selection(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli)
@@ -64,13 +66,12 @@ void button_selection(int screenW, int screenH, Mebel* Tomb, Button knopki_mebel
     Tomb->risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
 }
 
-void coords_of_first_button(Button* knopki_mebeli)
+void coords_of_first_button(Button* knopki_mebeli, int count_knopok_mebeli)
 {
-    int screenW = GetSystemMetrics(SM_CXSCREEN);
-    int screenH = GetSystemMetrics(SM_CYSCREEN);
-    int count_knopok_mebeli = 7;
-    int CurrentX = RAZMER_KNOPKI;
-    int CurrentY = screenH - 3 * RAZMER_KNOPKI;
+        int screenW = GetSystemMetrics(SM_CXSCREEN);
+        int screenH = GetSystemMetrics(SM_CYSCREEN);
+        int CurrentX = 0;
+        int CurrentY = screenH - 3 * RAZMER_KNOPKI;
 
 
 
