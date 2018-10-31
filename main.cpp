@@ -68,7 +68,10 @@ int main()
             }
             startWS = !returnToMenu;
             //menu_escape (escape);
-
+if (GetAsyncKeyState('A'))
+    {
+    saving (Tomb, count_knopok_mebeli);
+     }
             draw_all_mebel(Tomb, nomer_tomba);
 
             //Drag-n-drop from toolstrip to workspace
@@ -137,8 +140,6 @@ int main()
     txDeleteDC(escape);
     txDeleteDC(WSpace);
 
-    saving (Tomb, count_knopok_mebeli);
-
     return 0;
 }
 
@@ -177,6 +178,8 @@ void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_me
 
 void saving (Mebel* Tomb, int count_knopok)
 {
+
+    {
     ofstream fout_save;
     fout_save.open("savings.txt");
 
@@ -191,4 +194,6 @@ void saving (Mebel* Tomb, int count_knopok)
     }
 
     fout_save.close();
-}
+  }
+  }
+
