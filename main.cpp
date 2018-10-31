@@ -82,6 +82,8 @@ int main()
                         risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
                         draw_all_mebel(Tomb, count_mebel);
                         button_selection(screenW, screenH, &Tomb[nomer_tomba], knopki_mebeli[nomer_mebeli]);
+                        Tomb[nomer_tomba].awidth = 200;
+                        Tomb[nomer_tomba].aheight = 200;
 
                         txSleep(10);
                     }
@@ -95,13 +97,43 @@ int main()
             {
                 if (checkClick(Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, Tomb[i].MOUSE_X + 200, Tomb[i].MOUSE_Y + 200))
                 {
-                    while(txMouseButtons() & 1)
+                    txSleep(500);
+
+                    if(txMouseButtons() & 1)
                     {
-                        workspace_background();
-                        risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-                        button_selection(screenW, screenH, &Tomb[i], knopki_mebeli[i]);
-                        draw_all_mebel(Tomb, count_mebel);
-                        txSleep(10);
+                        while(txMouseButtons() & 1)
+                        {
+                            workspace_background();
+                            risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
+                            button_selection(screenW, screenH, &Tomb[i], knopki_mebeli[i]);
+                            draw_all_mebel(Tomb, count_mebel);
+                            txSleep(10);
+                        }
+                    }
+                    else if (GetAsyncKeyState(VK_LEFT))
+                    {
+                        while(GetAsyncKeyState(VK_LEFT))
+                        {
+                            workspace_background();
+                            risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
+                            draw_all_mebel(Tomb, count_mebel);
+                            Tomb[i].awidth = Tomb[i].awidth * 1.05;
+                            Tomb[i].aheight = Tomb[i].awidth * 1.05;
+                            txSleep(100);
+                        }
+                    }
+
+                    else if (GetAsyncKeyState(VK_RIGHT))
+                    {
+                        while(GetAsyncKeyState(VK_RIGHT))
+                        {
+                            workspace_background();
+                            risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
+                            draw_all_mebel(Tomb, count_mebel);
+                            Tomb[i].awidth = Tomb[i].awidth  * 0.95;
+                            Tomb[i].aheight = Tomb[i].awidth  * 0.95;
+                            txSleep(100);
+                        }
                     }
                 }
             }
