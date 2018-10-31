@@ -1,5 +1,3 @@
-
-
 #include "Lib\\Mebel.cpp"
 #include "Lib\\MENU.cpp"
 #include "Lib\\all_exits.cpp"
@@ -37,7 +35,7 @@ int main()
     int count_knopok_mebeli = read(knopki_mebeli);
 
     //coords of first button
-        coords_of_first_button(knopki_mebeli, count_knopok_mebeli);
+    coords_of_first_button(knopki_mebeli, count_knopok_mebeli);
 
 
 
@@ -70,7 +68,11 @@ int main()
             }
             startWS = !returnToMenu;
             //menu_escape (escape);
-
+            if (GetAsyncKeyState('A'))
+            {
+                saving (Tomb, count_knopok_mebeli);
+            }
+          
             draw_all_mebel(Tomb, nomer_tomba);
 
             //Drag-n-drop from toolstrip to workspace
@@ -106,11 +108,13 @@ int main()
                     {
                         workspace_background();
                         risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
+
                         Button Bomzh = {};
                         Bomzh.picture = Tomb[i].pctr;
                         Bomzh.width = Tomb[i].width;
                         Bomzh.height = Tomb[i].height;
                         button_selection(screenW, screenH, &Tomb[i], Bomzh);
+                      
                         draw_all_mebel(Tomb, count_mebel);
                         txSleep(10);
                     }
@@ -147,15 +151,9 @@ int main()
     txDeleteDC(fon_menu);
     txDeleteDC(escape);
     txDeleteDC(WSpace);
-
-    saving (Tomb, count_knopok_mebeli);
-
+  
     return 0;
 }
-
-
-
-
 
 void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli)
 {
