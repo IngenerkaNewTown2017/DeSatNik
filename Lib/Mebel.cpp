@@ -1,14 +1,9 @@
-#include "TXLib.h"
+#pragma once
 
-struct Mebel
-{
-    bool risovat;
-    int MOUSE_X;
-    int MOUSE_Y;
-    HDC pctr;
-    int width;
-    int height;
-};
+#include "TXLib.h"
+#include "struct.cpp"
+
+
 
 //Clear workspace
 void decor_destruction (Mebel* Tomb, int count_mebel);
@@ -32,4 +27,34 @@ void draw_all_mebel(Mebel* Tomb, int count_mebel)
             Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, 200, 200, Tomb[i].pctr, 0, 0, Tomb[i].width, Tomb[i].height, TX_WHITE);
         }
     }
+}
+
+
+void checkalka( int nomer_kartinki, Mebel* Tomb){
+    if (//!Tomb[nomer_kartinki].risovat &&
+            txMouseButtons() & 1)
+        {
+            bool many = false;
+
+            for (int p = 0; p < nomer_kartinki; p++)
+            {
+                if (Tomb[nomer_kartinki].MOUSE_X >= Tomb[p].MOUSE_X - 50 &&
+                    Tomb[nomer_kartinki].MOUSE_X <= Tomb[p].MOUSE_X + 50 &&
+                    Tomb[nomer_kartinki].MOUSE_Y >= Tomb[p].MOUSE_Y - 50 &&
+                    Tomb[nomer_kartinki].MOUSE_Y <= Tomb[p].MOUSE_Y + 50
+                    && Tomb[p].risovat)
+                {
+                    many = true;
+                }
+            }
+
+            if (!many)
+            {
+                Tomb[nomer_kartinki].risovat = true;
+            }
+            else
+{
+ //Tomb[nomer_kartinki].risovat = false;
+}
+}
 }
