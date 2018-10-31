@@ -1,3 +1,6 @@
+#pragma once
+
+
 struct Button
 {
     const char* adress;
@@ -33,6 +36,16 @@ struct model
     int sizeY;
     string title;
     HDC pic;
+};
+
+struct Mebel
+{
+    bool risovat;
+    int MOUSE_X;
+    int MOUSE_Y;
+    HDC pctr;
+    int width;
+    int height;
 };
 
 
