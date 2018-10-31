@@ -1,7 +1,7 @@
 #pragma once
 
 #include "TXLib.h"
-#include "struct.cpp"
+#include "Button.cpp"
 
 bool checkFocus(int MinX, int MaxX, int MinY, int MaxY);
 bool checkClick(int MinX, int MinY, int MaxX, int MaxY);
@@ -9,7 +9,6 @@ void ikons (Button sofaButton);
 void checkMenuFocus();
 void drawMenu (int screenW, int screenH, HDC fon_menu);
 bool nazad (bool returnToMenu);
-void testova ( model* Mas_models, int count_Models);
 bool startWorkspace (bool startWork);
 int SizerX(HDC pic);
 int SizerY(HDC pic);
@@ -100,17 +99,6 @@ void drawMenu (int screenW, int screenH, HDC fon_menu)
 	txTextOut(loadButton.x, loadButton.y, "Загрузить");
     txTextOut (exitButton.x, exitButton.y, "Выйти");
     txTextOut(settingsButton.x, settingsButton.y, "Настройки");
-}
-
-
-void testova ( model* Mas_models, int count_Models)
-{
-
-    for(int i =0; i<count_Models; i++)
-    {
-        //txSetFillColor(TX_RED);
-        txRectangle(10*i, 10*i, 10*i+Mas_models[i].sizeX, 10*i+Mas_models[i].sizeY);
-    }
 }
 
 bool startWorkspace (bool startWork)

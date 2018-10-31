@@ -72,7 +72,7 @@ int main()
             {
                 saving (Tomb, count_knopok_mebeli);
             }
-          
+
             draw_all_mebel(Tomb, nomer_tomba);
 
             //Drag-n-drop from toolstrip to workspace
@@ -88,11 +88,11 @@ int main()
                         button_selection(screenW, screenH, &Tomb[nomer_tomba], knopki_mebeli[nomer_mebeli]);
                         Tomb[nomer_tomba].awidth = 200;
                         Tomb[nomer_tomba].aheight = 200;
+                        checkalka(nomer_tomba, Tomb);
 
                         txSleep(10);
                     }
 
-                    checkalka(nomer_tomba, Tomb);
 
                     if (Tomb[nomer_tomba].risovat)
                     {
@@ -120,7 +120,7 @@ int main()
                             Bomzh.width = Tomb[i].width;
                             Bomzh.height = Tomb[i].height;
                             button_selection(screenW, screenH, &Tomb[i], Bomzh);
-                      
+
                             draw_all_mebel(Tomb, count_mebel);
                             txSleep(10);
                         }
@@ -183,7 +183,7 @@ int main()
     txDeleteDC(fon_menu);
     txDeleteDC(escape);
     txDeleteDC(WSpace);
-  
+
     return 0;
 }
 

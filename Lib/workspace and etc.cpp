@@ -48,7 +48,6 @@ int read(Button* knopki_mebeli)
         strcpy(adress, picAdress.c_str());
 
         knopki_mebeli[nomer].adress = adress;
-        knopki_mebeli[nomer].picture = txLoadImage(adress);
         nomer++;
     }
 
@@ -68,12 +67,10 @@ void button_selection(int screenW, int screenH, Mebel* Tomb, Button knopki_mebel
 
 void coords_of_first_button(Button* knopki_mebeli, int count_knopok_mebeli)
 {
-        int screenW = GetSystemMetrics(SM_CXSCREEN);
-        int screenH = GetSystemMetrics(SM_CYSCREEN);
-        int CurrentX = 0;
-        int CurrentY = screenH - 3 * RAZMER_KNOPKI;
-
-
+    int screenW = GetSystemMetrics(SM_CXSCREEN);
+    int screenH = GetSystemMetrics(SM_CYSCREEN);
+    int CurrentX = 0;
+    int CurrentY = screenH - 3 * RAZMER_KNOPKI;
 
     for (int i=0; i<count_knopok_mebeli; i++)
     {

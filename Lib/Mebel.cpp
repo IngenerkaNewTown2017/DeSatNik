@@ -62,7 +62,7 @@ void checkalka( int nomer_kartinki, Mebel* Tomb){
             }
             else
 {
- //Tomb[nomer_kartinki].risovat = false;
+ Tomb[nomer_kartinki].risovat = false;
 }
 }
 }
