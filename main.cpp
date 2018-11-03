@@ -206,7 +206,7 @@ void saving (Mebel* Tomb, int count_knopok)
 
         //if (Tomb[i].risovat)
         {
-             fout_save <<   //Tomb[i].adress << ", " <<
+             fout_save <<   Tomb[i].adress << ", " <<
                             Tomb[i].MOUSE_X << ", " <<
                             Tomb[i].MOUSE_Y << endl;
         }
