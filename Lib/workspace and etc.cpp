@@ -64,6 +64,7 @@ void button_selection(int screenW, int screenH, Mebel* Tomb, Button knopki_mebel
     Tomb->width = knopki_mebeli.width;
     Tomb->height = knopki_mebeli.height;
     Tomb->risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
+    Tomb->adressMebeli = knopki_mebeli.adress;
 }
 
 void coords_of_first_button(Button* knopki_mebeli, int count_knopok_mebeli)

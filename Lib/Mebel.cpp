@@ -4,6 +4,7 @@
 
 struct Mebel
 {
+    const char* adressMebeli;
     bool risovat;
     int MOUSE_X;
     int MOUSE_Y;
@@ -57,13 +58,7 @@ void checkalka( int nomer_kartinki, Mebel* Tomb)
                 }
             }
 
-            if (!many)
-            {
-                Tomb[nomer_kartinki].risovat = true;
-            }
-            else
-            {
-             Tomb[nomer_kartinki].risovat = false;
-            }
+            Tomb[nomer_kartinki].risovat = !many;
         }
     }
+}

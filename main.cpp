@@ -1,3 +1,4 @@
+#include "Lib\\savingInBMP.cpp"
 #include "Lib\\Mebel.cpp"
 #include "Lib\\MENU.cpp"
 #include "Lib\\all_exits.cpp"
@@ -69,9 +70,12 @@ int main()
             }
             startWS = !returnToMenu;
             //menu_escape (escape);
-            if (GetAsyncKeyState('A'))
+            if (GetAsyncKeyState('L'))
             {
                 saving (Tomb, count_knopok_mebeli);
+            }
+            if (GetAsyncKeyState('Q')) {
+					      ScreenCapture(0, 15, screenW, screenH - 310, "picture.bmp");
             }
 
             draw_all_mebel(Tomb, nomer_tomba);
@@ -85,8 +89,9 @@ int main()
                     {
                         workspace_background();
                         risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-                        draw_all_mebel(Tomb, count_mebel);
                         button_selection(screenW, screenH, &Tomb[nomer_tomba], knopki_mebeli[nomer_mebeli]);
+                        draw_all_mebel(Tomb, count_mebel);
+
                         Tomb[nomer_tomba].awidth = 200;
                         Tomb[nomer_tomba].aheight = 200;
                         checkalka(nomer_tomba, Tomb);
@@ -188,15 +193,6 @@ int main()
     return 0;
 }
 
-void vybratMebelNaPaneli(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli)
-{
-    Tomb->pctr = knopki_mebeli.picture;
-    Tomb->MOUSE_X = txMouseX();
-    Tomb->MOUSE_Y = txMouseY();
-    Tomb->width = knopki_mebeli.width;
-    Tomb->height = knopki_mebeli.height;
-    Tomb->risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
-}
 
 void saving (Mebel* Tomb, int count_knopok)
 {
@@ -207,7 +203,7 @@ void saving (Mebel* Tomb, int count_knopok)
 
         //if (Tomb[i].risovat)
         {
-             fout_save <<   //Tomb[i].adress << ", " <<
+             fout_save <<   Tomb[i].adressMebeli << ", " <<
                             Tomb[i].MOUSE_X << ", " <<
                             Tomb[i].MOUSE_Y << endl;
         }
@@ -215,5 +211,3 @@ void saving (Mebel* Tomb, int count_knopok)
 
     fout_save.close();
 }
-
-
