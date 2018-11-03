@@ -12,6 +12,7 @@ struct Mebel
     int height;
     int awidth;
     int aheight;
+    const char* adress;
 };
 
 //Clear workspace
@@ -46,10 +47,10 @@ void checkalka( int nomer_kartinki, Mebel* Tomb){
 
             for (int p = 0; p < nomer_kartinki; p++)
             {
-                if (Tomb[nomer_kartinki].MOUSE_X >= Tomb[p].MOUSE_X - 50 &&
-                    Tomb[nomer_kartinki].MOUSE_X <= Tomb[p].MOUSE_X + 50 &&
-                    Tomb[nomer_kartinki].MOUSE_Y >= Tomb[p].MOUSE_Y - 50 &&
-                    Tomb[nomer_kartinki].MOUSE_Y <= Tomb[p].MOUSE_Y + 50
+                if (Tomb[nomer_kartinki].MOUSE_X >= Tomb[p].MOUSE_X - Tomb[p].awidth &&
+                    Tomb[nomer_kartinki].MOUSE_X <= Tomb[p].MOUSE_X + Tomb[p].awidth &&
+                    Tomb[nomer_kartinki].MOUSE_Y >= Tomb[p].MOUSE_Y - Tomb[p].aheight &&
+                    Tomb[nomer_kartinki].MOUSE_Y <= Tomb[p].MOUSE_Y + Tomb[p].aheight
                     && Tomb[p].risovat)
                 {
                     many = true;

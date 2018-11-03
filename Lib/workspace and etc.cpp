@@ -57,6 +57,7 @@ int read(Button* knopki_mebeli)
 
 void button_selection(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli)
 {
+    Tomb->adress = knopki_mebeli.adress;
     Tomb->pctr = knopki_mebeli.picture;
     Tomb->MOUSE_X = txMouseX();
     Tomb->MOUSE_Y = txMouseY();
