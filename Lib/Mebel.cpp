@@ -43,22 +43,21 @@ void checkalka( int nomer_kartinki, Mebel* Tomb)
 {
     if (//!Tomb[nomer_kartinki].risovat &&
             txMouseButtons() & 1)
+    {
+        bool many = false;
+
+        for (int p = 0; p < nomer_kartinki; p++)
         {
-            bool many = false;
-
-            for (int p = 0; p < nomer_kartinki; p++)
+            if (Tomb[nomer_kartinki].MOUSE_X >= Tomb[p].MOUSE_X - 50 &&
+                Tomb[nomer_kartinki].MOUSE_X <= Tomb[p].MOUSE_X + 50 &&
+                Tomb[nomer_kartinki].MOUSE_Y >= Tomb[p].MOUSE_Y - 50 &&
+                Tomb[nomer_kartinki].MOUSE_Y <= Tomb[p].MOUSE_Y + 50
+                && Tomb[p].risovat)
             {
-                if (Tomb[nomer_kartinki].MOUSE_X >= Tomb[p].MOUSE_X - 50 &&
-                    Tomb[nomer_kartinki].MOUSE_X <= Tomb[p].MOUSE_X + 50 &&
-                    Tomb[nomer_kartinki].MOUSE_Y >= Tomb[p].MOUSE_Y - 50 &&
-                    Tomb[nomer_kartinki].MOUSE_Y <= Tomb[p].MOUSE_Y + 50
-                    && Tomb[p].risovat)
-                {
-                    many = true;
-                }
+                many = true;
             }
-
-            Tomb[nomer_kartinki].risovat = !many;
         }
+
+        Tomb[nomer_kartinki].risovat = !many;
     }
 }

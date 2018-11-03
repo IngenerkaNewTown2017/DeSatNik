@@ -1,4 +1,4 @@
-Pics\\Sofa.bmp, 301, 196
-Pics\\Toomba.bmp, 797, 313
-Pics\\Puffeg.bmp, 273, 426
-Pics\\3Dshkaf.bmp, 593, 141
+Pics\\3Dshkaf.bmp, 158, 132
+Pics\\Puffeg.bmp, 1068, 227
+Pics\\Kreslo.bmp, 546, 167
+Pics\\Toomba.bmp, 810, 166

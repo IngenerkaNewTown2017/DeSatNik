@@ -72,7 +72,7 @@ int main()
             //menu_escape (escape);
             if (GetAsyncKeyState('L'))
             {
-                saving (Tomb, count_knopok_mebeli);
+                saving (Tomb, nomer_tomba);
             }
             if (GetAsyncKeyState('Q')) {
 					      ScreenCapture(0, 15, screenW, screenH - 310, "picture.bmp");
@@ -120,6 +120,14 @@ int main()
                         {
                             workspace_background();
                             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
+
+
+                    for (int e = 0; e < nomer_tomba; e++)
+                    {
+                    	checkalka(e, Tomb);
+                    }
+
+
 
                             Button Bomzh = {};
                             Bomzh.picture = Tomb[i].pctr;

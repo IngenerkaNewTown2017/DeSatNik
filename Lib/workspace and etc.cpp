@@ -99,7 +99,9 @@ void coords_of_first_button(Button* knopki_mebeli, int count_knopok_mebeli)
 int download_mebel(Mebel* knopki_mebeli)
 {
     int nomer = 0;
-                ifstream fout;
+    ifstream fout;
+    fout.open("savings.txt");
+
     if (fout)
     {
         string get = "1";
@@ -120,7 +122,7 @@ int download_mebel(Mebel* knopki_mebeli)
                 int pos3 = get.find(',');
                 string y = get.substr(0, pos3);
 
-                knopki_mebeli[nomer] = {true, atoi(x.c_str()), atoi(y.c_str()), txLoadImage(adress.c_str()), 200, 200, 200, 200};
+                knopki_mebeli[nomer] = {adress.c_str(), true, atoi(x.c_str()), atoi(y.c_str()), txLoadImage(adress.c_str()), 200, 200, 200, 200};
                 nomer++;
             }
         }
