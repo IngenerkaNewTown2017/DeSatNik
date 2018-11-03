@@ -121,7 +121,15 @@ int main()
                             Bomzh.height = Tomb[i].height;
                             button_selection(screenW, screenH, &Tomb[i], Bomzh);
 
+
                             draw_all_mebel(Tomb, count_mebel);
+
+
+            for (int e = 0; e < nomer_tomba; e++)
+            {
+checkalka(e, Tomb);
+}
+
                             txSleep(10);
                         }
                     }
@@ -206,7 +214,7 @@ void saving (Mebel* Tomb, int count_knopok)
 
         //if (Tomb[i].risovat)
         {
-             fout_save <<   //Tomb[i].adress << ", " <<
+             fout_save <<   Tomb[i].adress << ", " <<
                             Tomb[i].MOUSE_X << ", " <<
                             Tomb[i].MOUSE_Y << endl;
         }
