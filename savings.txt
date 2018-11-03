@@ -1,7 +1,4 @@
-419, 220
-223, 214
-751, 161
-0, 0
-0, 0
-0, 0
-0, 0
+Pics\\Sofa.bmp, 301, 196
+Pics\\Toomba.bmp, 797, 313
+Pics\\Puffeg.bmp, 273, 426
+Pics\\3Dshkaf.bmp, 593, 141
