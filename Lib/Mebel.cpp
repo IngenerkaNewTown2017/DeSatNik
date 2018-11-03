@@ -4,6 +4,7 @@
 
 struct Mebel
 {
+    const char* adressMebeli;
     bool risovat;
     int MOUSE_X;
     int MOUSE_Y;
