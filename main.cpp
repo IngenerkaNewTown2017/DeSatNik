@@ -44,6 +44,7 @@ int main()
     HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp");
     HDC escape= txLoadImage ("Pics\\menu_escape.bmp");
 
+    nomer_tomba = download_mebel(Tomb);
 
 
     bool isExit = false;
@@ -73,9 +74,9 @@ int main()
             {
                 saving (Tomb, count_knopok_mebeli);
             }
-              if (GetAsyncKeyState('Q')) {
-					ScreenCapture(0, 15, screenW, screenH - 310, "picture.bmp");
-              }
+            if (GetAsyncKeyState('Q')) {
+					      ScreenCapture(0, 15, screenW, screenH - 310, "picture.bmp");
+            }
 
             draw_all_mebel(Tomb, nomer_tomba);
 
@@ -90,6 +91,7 @@ int main()
                         risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
                         button_selection(screenW, screenH, &Tomb[nomer_tomba], knopki_mebeli[nomer_mebeli]);
                         draw_all_mebel(Tomb, count_mebel);
+
                         Tomb[nomer_tomba].awidth = 200;
                         Tomb[nomer_tomba].aheight = 200;
                         checkalka(nomer_tomba, Tomb);
@@ -191,6 +193,7 @@ int main()
     return 0;
 }
 
+
 void saving (Mebel* Tomb, int count_knopok)
 {
     ofstream fout_save;
@@ -208,5 +211,3 @@ void saving (Mebel* Tomb, int count_knopok)
 
     fout_save.close();
 }
-
-

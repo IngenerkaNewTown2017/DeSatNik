@@ -55,6 +55,7 @@ int read(Button* knopki_mebeli)
     return nomer;
 }
 
+
 void button_selection(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli)
 {
     Tomb->pctr = knopki_mebeli.picture;
@@ -92,3 +93,76 @@ void coords_of_first_button(Button* knopki_mebeli, int count_knopok_mebeli)
         }
     }
 }
+
+
+
+int download_mebel(Mebel* knopki_mebeli)
+{
+    int nomer = 0;
+                ifstream fout;
+    if (fout)
+    {
+        string get = "1";
+        while (fout.good() && strlen(get.c_str()) > 0)
+        {
+            getline (fout, get);
+
+            if (strlen(get.c_str()) > 0)
+            {
+                int pos1 = get.find(',');
+                string adress = get.substr(0, pos1 );
+                get = get.substr(pos1 + 1);
+
+                int pos2 = get.find(',');
+                string x = get.substr(0, pos2);
+                get = get.substr(pos2 + 1);
+
+                int pos3 = get.find(',');
+                string y = get.substr(0, pos3);
+
+                knopki_mebeli[nomer] = {true, atoi(x.c_str()), atoi(y.c_str()), txLoadImage(adress.c_str()), 200, 200, 200, 200};
+                nomer++;
+            }
+        }
+
+        fout.close();
+     }
+
+     return nomer;
+
+}
+  void drDre(Mebel* knopki_mebeli)
+{
+
+    const char* adress = "";
+    ifstream fout;
+    const char* imya_faila = txInputBox ("Ââåäèòå íàçâàíèå ôàéëà(Ïðèìåð:Lenin)", "System", "");
+    adress = imya_faila;
+    fout.open(imya_faila);
+
+    if (!fout)
+    {
+        fout.close();
+        char* imya_faila2 = new char[195];
+        strcpy(imya_faila2, "Files\\");
+        strcat(imya_faila2, imya_faila);
+        fout.open(imya_faila2);
+        adress = imya_faila2;
+    }
+    if (!fout)
+    {
+        fout.close();
+        char* imya_faila3 = new char[195];
+        strcpy(imya_faila3, "Files\\");
+        strcat(imya_faila3, imya_faila);
+        strcat(imya_faila3, ".txt");
+        fout.open(imya_faila3);
+        adress = imya_faila3;
+    }
+
+
+
+
+
+
+ }
