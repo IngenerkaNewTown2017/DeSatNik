@@ -38,7 +38,8 @@ void draw_all_mebel(Mebel* Tomb, int count_mebel)
     }
 }
 
-void checkalka( int nomer_kartinki, Mebel* Tomb){
+void checkalka( int nomer_kartinki, Mebel* Tomb)
+{
     if (//!Tomb[nomer_kartinki].risovat &&
             txMouseButtons() & 1)
         {
@@ -61,8 +62,8 @@ void checkalka( int nomer_kartinki, Mebel* Tomb){
                 Tomb[nomer_kartinki].risovat = true;
             }
             else
-{
- Tomb[nomer_kartinki].risovat = false;
-}
-}
-}
+            {
+             Tomb[nomer_kartinki].risovat = false;
+            }
+        }
+    }

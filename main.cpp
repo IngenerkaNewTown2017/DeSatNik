@@ -43,6 +43,7 @@ int main()
     HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp");
     HDC escape= txLoadImage ("Pics\\menu_escape.bmp");
 
+    nomer_tomba = download_mebel(Tomb);
 
 
     bool isExit = false;
@@ -214,3 +215,5 @@ void saving (Mebel* Tomb, int count_knopok)
 
     fout_save.close();
 }
+
+

@@ -30,7 +30,6 @@ int SizerY(HDC pic)
     return bm.bmHeight;
 }
 
-
 bool checkFocus(int MinX, int MinY, int MaxX, int MaxY)
 {
     if (
