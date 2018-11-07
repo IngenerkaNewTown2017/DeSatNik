@@ -113,6 +113,10 @@ int download_mebel(Mebel* knopki_mebeli)
             {
                 int pos1 = get.find(',');
                 string adress = get.substr(0, pos1 );
+                get = get.substr(pos4 + 1);
+                
+                int pos1 = get.find(',');
+                string adress = get.substr(0, pos1 );
                 get = get.substr(pos1 + 1);
 
                 int pos2 = get.find(',');
@@ -121,17 +125,14 @@ int download_mebel(Mebel* knopki_mebeli)
 
                 int pos3 = get.find(',');
                 string y = get.substr(0, pos3);
-                get = get.substr(pos3 + 1);
-
+                
                 int pos4 = get.find(',');
                 string awidth = get.substr(0, pos4);
-                get = get.substr(pos4 + 1);
-
-
+                
                 int pos5 = get.find(',');
                 string aheight = get.substr(0, pos5);
 
-                knopki_mebeli[nomer] = {adress.c_str(), true, atoi(x.c_str()), atoi(y.c_str()), txLoadImage(adress.c_str()), atoi(awidth.c_str()), atoi(aheight.c_str()), atoi(awidth.c_str()), atoi(aheight.c_str())};
+                knopki_mebeli[nomer] = {adress.c_str(), true, atoi(x.c_str()), atoi(y.c_str()), txLoadImage(adress.c_str()), 200, 200, 200, 200};
                 nomer++;
             }
         }

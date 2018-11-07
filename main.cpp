@@ -16,9 +16,12 @@ void saving (Mebel* Tomb, int count_knopok);
 
 int main()
 {
+    char s[100];
+    string ss;
     int count_mebel = 100;
     Mebel Tomb[count_mebel];
     int nomer_tomba = 0;
+    int n = 0;
     decor_destruction(Tomb, count_mebel);
 
     int screenW = GetSystemMetrics (SM_CXSCREEN);
@@ -74,8 +77,17 @@ int main()
             {
                 saving (Tomb, nomer_tomba);
             }
+
             if (GetAsyncKeyState('Q')) {
-					      ScreenCapture(0, 15, screenW, screenH - 310, "picture.bmp");
+
+					     itoa(n,s,10);
+					     ss = s;
+
+					     string ScrScrScr = "picture" + ss + ".jpg";
+
+					      ScreenCapture(0, 15, screenW, screenH - 310, ScrScrScr.c_str()); // ETO VACHNO, NE TROGAI! -fpermissive
+                          Sleep(1000);
+                          n++;
             }
 
             draw_all_mebel(Tomb, nomer_tomba);
@@ -213,7 +225,9 @@ void saving (Mebel* Tomb, int count_knopok)
         {
              fout_save <<   Tomb[i].adressMebeli << ", " <<
                             Tomb[i].MOUSE_X << ", " <<
-                            Tomb[i].MOUSE_Y << endl;
+                            Tomb[i].MOUSE_Y <<", "<<
+                            Tomb[i].awidth << ", " <<
+                            Tomb[i].aheight<<  endl;
         }
     }
 
