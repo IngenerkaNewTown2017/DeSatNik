@@ -62,8 +62,13 @@ int main()
         {
             workspace_background();
             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-
+            grid();
             returnToMenu = nazad (returnToMenu);
+
+            /*if ()
+                ; */
+
+
             if (returnToMenu)
             {
                 decor_destruction(Tomb, nomer_tomba);
@@ -89,6 +94,7 @@ int main()
                     {
                         workspace_background();
                         risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
+                    grid();
                         button_selection(screenW, screenH, &Tomb[nomer_tomba], knopki_mebeli[nomer_mebeli]);
                         draw_all_mebel(Tomb, count_mebel);
 
@@ -120,12 +126,12 @@ int main()
                         {
                             workspace_background();
                             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
+                            grid();
 
-
-                    for (int e = 0; e < nomer_tomba; e++)
-                    {
-                    	checkalka(e, Tomb);
-                    }
+                            for (int e = 0; e < nomer_tomba; e++)
+                            {
+                                checkalka(e, Tomb);
+                            }
 
 
 

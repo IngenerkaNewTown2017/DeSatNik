@@ -9,7 +9,8 @@
 
 }
 
-bool SaveBMPFile(char *filename, HBITMAP bitmap, HDC bitmapDC, int width, int height){
+bool SaveBMPFile(char *filename, HBITMAP bitmap, HDC bitmapDC, int width, int height)
+{
     bool Success=0;
     HDC SurfDC=NULL;
     HBITMAP OffscrBmp=NULL;
@@ -80,6 +81,7 @@ bool SaveBMPFile(char *filename, HBITMAP bitmap, HDC bitmapDC, int width, int he
     return 1;
 
 }
+
 bool ScreenCapture(int x, int y, int width, int height, char *filename){
     HDC hDc = Win32::CreateCompatibleDC(0);
     HBITMAP hBmp = Win32::CreateCompatibleBitmap(GetDC(0), width, height);
