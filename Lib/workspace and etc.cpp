@@ -1,10 +1,14 @@
 #pragma once
 
+#include "Button.cpp"
 #include <iostream>
 #include <fstream>
 
 using namespace std;
+
 void grid();
+int read(Button* knopki_mebeli);
+
 const int RAZMER_KNOPKI = 100;
 
 void workspace_background()
@@ -115,6 +119,9 @@ int download_mebel(Mebel* knopki_mebeli)
 
             if (strlen(get.c_str()) > 0)
             {
+                int pos0 = get.find(',');
+                get = get.substr(pos0 + 1);
+
                 int pos1 = get.find(',');
                 string adress = get.substr(0, pos1 );
                 get = get.substr(pos1 + 1);
@@ -135,7 +142,12 @@ int download_mebel(Mebel* knopki_mebeli)
                 int pos5 = get.find(',');
                 string aheight = get.substr(0, pos5);
 
-                knopki_mebeli[nomer] = {adress.c_str(), true, atoi(x.c_str()), atoi(y.c_str()), txLoadImage(adress.c_str()), atoi(awidth.c_str()), atoi(aheight.c_str()), atoi(awidth.c_str()), atoi(aheight.c_str())};
+                char* picAdress = new char[195];
+                strcpy(picAdress, adress.c_str());
+
+                knopki_mebeli[nomer] = {picAdress, true, atoi(x.c_str()), atoi(y.c_str()), txLoadImage(picAdress), atoi(awidth.c_str()), atoi(aheight.c_str()), atoi(awidth.c_str()), atoi(aheight.c_str())};
+//PicSize
+
                 nomer++;
             }
         }

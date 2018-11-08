@@ -9,7 +9,7 @@
 
 }
 
-bool SaveBMPFile(char *filename, HBITMAP bitmap, HDC bitmapDC, int width, int height)
+bool SaveBMPFile(const char *filename, HBITMAP bitmap, HDC bitmapDC, int width, int height)
 {
     bool Success=0;
     HDC SurfDC=NULL;
@@ -82,7 +82,8 @@ bool SaveBMPFile(char *filename, HBITMAP bitmap, HDC bitmapDC, int width, int he
 
 }
 
-bool ScreenCapture(int x, int y, int width, int height, char *filename){
+bool ScreenCapture(int x, int y, int width, int height, const char *filename)
+{
     HDC hDc = Win32::CreateCompatibleDC(0);
     HBITMAP hBmp = Win32::CreateCompatibleBitmap(GetDC(0), width, height);
     Win32::SelectObject(hDc, hBmp);
@@ -91,14 +92,4 @@ bool ScreenCapture(int x, int y, int width, int height, char *filename){
     Win32::DeleteObject(hBmp);
 
     return ret;
-}
-
-int  mscreen()
-{
-
-     ScreenCapture(50, 115, 450, 450, "picture.bmp");
-
-
-
-    return 0;
 }

@@ -10,7 +10,6 @@
 
 using namespace std;
 
-int read(Button* knopki_mebeli);
 void saving (Mebel* Tomb, int count_knopok);
 
 
@@ -18,10 +17,12 @@ int main()
 {
     char s[100];
     string ss;
+    int ScreenshotIndex = 0;
+
     int count_mebel = 100;
     Mebel Tomb[count_mebel];
     int nomer_tomba = 0;
-    int n = 0;
+
     decor_destruction(Tomb, count_mebel);
 
     int screenW = GetSystemMetrics (SM_CXSCREEN);
@@ -33,7 +34,7 @@ int main()
     loadButton = {"", nullptr, 0, screenH * 85/100, 200, screenH * 90/100};
     saveButton = {"", nullptr, 0, screenH * 90/100, 200, screenH * 95/100};
     exitButton = {"", nullptr, 0, screenH * 95/100, 200, screenH};
-  
+
 
     Button knopki_mebeli[200];
     int count_knopok_mebeli = read(knopki_mebeli);
@@ -50,7 +51,7 @@ int main()
     bool isExit = false;
     bool startWS = false;
     bool returnToMenu = false;
-  
+
     while (!isExit)
     {
         txBegin();
@@ -69,21 +70,23 @@ int main()
             }
             startWS = !returnToMenu;
             //menu_escape (escape);
+
+            //Save to text
             if (GetAsyncKeyState('L'))
             {
                 saving (Tomb, nomer_tomba);
             }
 
-            if (GetAsyncKeyState('Q')) 
+            //Screenshot
+            if (GetAsyncKeyState('Q'))
             {
-					     itoa(n,s,10);
-					     ss = s;
+                itoa(ScreenshotIndex,s,10);
+                ss = s;
+                const char* ScreenshotName = ("picture" + ss + ".jpg").c_str();
 
-					     string ScrScrScr = "picture" + ss + ".jpg";
-
-					     ScreenCapture(0, 15, screenW, screenH - 310, ScrScrScr.c_str()); // ETO VACHNO, NE TROGAI! -fpermissive
-               Sleep(1000);
-               n++;
+                ScreenCapture(0, 15, screenW, screenH - 310, ScreenshotName); // ETO VACHNO, NE TROGAI! -fpermissive
+                txSleep(1000);
+                ScreenshotIndex++;
             }
             draw_all_mebel(Tomb, nomer_tomba);
 
@@ -98,10 +101,10 @@ int main()
                         risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
                         grid();
                         button_selection(screenW, screenH, &Tomb[nomer_tomba], knopki_mebeli[nomer_mebeli]);
-                        draw_all_mebel(Tomb, count_mebel);
-
                         Tomb[nomer_tomba].awidth = 200;
                         Tomb[nomer_tomba].aheight = 200;
+                        draw_all_mebel(Tomb, count_mebel);
+
                         checkalka(nomer_tomba, Tomb);
 
                         txSleep(10);
@@ -114,11 +117,11 @@ int main()
                     }
                 }
             }
-          
+
             //Drag-n-drop in workspace
             for (int i = 0; i < nomer_tomba; i++)
             {
-                if (checkClick(Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, Tomb[i].MOUSE_X + 200, Tomb[i].MOUSE_Y + 200))
+                if (checkClick(Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, Tomb[i].MOUSE_X + Tomb[i].awidth, Tomb[i].MOUSE_Y + Tomb[i].aheight))
                 {
                     txSleep(500);
 
@@ -173,7 +176,7 @@ int main()
                 }
             }
         }
-      
+
         //MainMenu
         else
         {
@@ -213,14 +216,15 @@ void saving (Mebel* Tomb, int count_knopok)
     ofstream fout_save;
     fout_save.open("savings.txt");
 
-    for (int i=0; i<count_knopok; i++) {
-
+    for (int i=0; i<count_knopok; i++)
+    {
         //if (Tomb[i].risovat)
         {
-             fout_save <<   Tomb[i].adressMebeli << ", " <<
-                            Tomb[i].MOUSE_X << ", " <<
-                            Tomb[i].MOUSE_Y <<", "<<
-                            Tomb[i].awidth << ", " <<
+             fout_save <<   Tomb[i].risovat << "," <<
+                            Tomb[i].adressMebeli << "," <<
+                            Tomb[i].MOUSE_X << "," <<
+                            Tomb[i].MOUSE_Y <<","<<
+                            Tomb[i].awidth << "," <<
                             Tomb[i].aheight<<  endl;
         }
     }

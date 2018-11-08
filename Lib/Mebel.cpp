@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Button.cpp"
 #include "TXLib.h"
 
 struct Mebel
@@ -44,14 +45,14 @@ void checkalka( int nomer_kartinki, Mebel* Tomb)
     int screenW = GetSystemMetrics (SM_CXSCREEN);
     int screenH = GetSystemMetrics (SM_CYSCREEN);
 
-    if (Tomb[nomer_kartinki].MOUSE_Y < screenH-300 &&
-            txMouseButtons() & 1)
+    if (txMouseButtons() & 1)
     {
         bool many = false;
 
         for (int p = 0; p < nomer_kartinki; p++)
         {
-            if (Tomb[nomer_kartinki].MOUSE_X >= Tomb[p].MOUSE_X + Tomb[p].awidth &&
+            if (Tomb[nomer_kartinki].MOUSE_Y < screenH-300 &&
+                Tomb[nomer_kartinki].MOUSE_X >= Tomb[p].MOUSE_X + Tomb[p].awidth &&
                 Tomb[nomer_kartinki].MOUSE_X + Tomb[nomer_kartinki].awidth <= Tomb[p].MOUSE_X &&
                 Tomb[nomer_kartinki].MOUSE_Y >= Tomb[p].MOUSE_Y + Tomb[p].awidth &&
                 Tomb[nomer_kartinki].MOUSE_Y + Tomb[nomer_kartinki].awidth <= Tomb[p].MOUSE_Y
