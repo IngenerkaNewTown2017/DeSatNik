@@ -41,17 +41,20 @@ void draw_all_mebel(Mebel* Tomb, int count_mebel)
 
 void checkalka( int nomer_kartinki, Mebel* Tomb)
 {
-    if (//!Tomb[nomer_kartinki].risovat &&
+    int screenW = GetSystemMetrics (SM_CXSCREEN);
+    int screenH = GetSystemMetrics (SM_CYSCREEN);
+
+    if (Tomb[nomer_kartinki].MOUSE_Y < screenH-300 &&
             txMouseButtons() & 1)
     {
         bool many = false;
 
         for (int p = 0; p < nomer_kartinki; p++)
         {
-            if (Tomb[nomer_kartinki].MOUSE_X >= Tomb[p].MOUSE_X - 50 &&
-                Tomb[nomer_kartinki].MOUSE_X <= Tomb[p].MOUSE_X + 50 &&
-                Tomb[nomer_kartinki].MOUSE_Y >= Tomb[p].MOUSE_Y - 50 &&
-                Tomb[nomer_kartinki].MOUSE_Y <= Tomb[p].MOUSE_Y + 50
+            if (Tomb[nomer_kartinki].MOUSE_X >= Tomb[p].MOUSE_X + Tomb[p].awidth &&
+                Tomb[nomer_kartinki].MOUSE_X + Tomb[nomer_kartinki].awidth <= Tomb[p].MOUSE_X &&
+                Tomb[nomer_kartinki].MOUSE_Y >= Tomb[p].MOUSE_Y + Tomb[p].awidth &&
+                Tomb[nomer_kartinki].MOUSE_Y + Tomb[nomer_kartinki].awidth <= Tomb[p].MOUSE_Y
                 && Tomb[p].risovat)
             {
                 many = true;

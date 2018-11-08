@@ -62,8 +62,9 @@ int main()
         {
             workspace_background();
             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-
+            grid();
             returnToMenu = nazad (returnToMenu);
+          
             if (returnToMenu)
             {
                 decor_destruction(Tomb, nomer_tomba);
@@ -89,6 +90,7 @@ int main()
                     {
                         workspace_background();
                         risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
+                        grid();
                         button_selection(screenW, screenH, &Tomb[nomer_tomba], knopki_mebeli[nomer_mebeli]);
                         draw_all_mebel(Tomb, count_mebel);
 
@@ -120,14 +122,12 @@ int main()
                         {
                             workspace_background();
                             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
+                            grid();
 
-
-                    for (int e = 0; e < nomer_tomba; e++)
-                    {
-                    	checkalka(e, Tomb);
-                    }
-
-
+                            for (int e = 0; e < nomer_tomba; e++)
+                            {
+                                checkalka(e, Tomb);
+                            }
 
                             Button Bomzh = {};
                             Bomzh.picture = Tomb[i].pctr;
@@ -207,9 +207,9 @@ void saving (Mebel* Tomb, int count_knopok)
     ofstream fout_save;
     fout_save.open("savings.txt");
 
-    for (int i=0; i<count_knopok; i++) {
-
-        //if (Tomb[i].risovat)
+    for (int i=0; i<count_knopok; i++) 
+    {
+        if (Tomb[i].risovat)
         {
              fout_save <<   Tomb[i].adressMebeli << ", " <<
                             Tomb[i].MOUSE_X << ", " <<

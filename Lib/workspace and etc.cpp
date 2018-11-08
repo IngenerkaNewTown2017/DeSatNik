@@ -4,7 +4,7 @@
 #include <fstream>
 
 using namespace std;
-
+void grid();
 const int RAZMER_KNOPKI = 100;
 
 void workspace_background()
@@ -17,6 +17,13 @@ void workspace_background()
     txSetColor(TX_WHITE);
 
     //Grid
+    grid();
+}
+
+void grid()
+{
+    int screenW = GetSystemMetrics (SM_CXSCREEN);
+    int screenH = GetSystemMetrics (SM_CYSCREEN);
     txSetColor(TX_BLACK);
     for (int y = screenH; y >= screenH - 300; y = y - RAZMER_KNOPKI)
     {
@@ -54,7 +61,6 @@ int read(Button* knopki_mebeli)
     fout.close();
     return nomer;
 }
-
 
 void button_selection(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli)
 {
@@ -94,8 +100,6 @@ void coords_of_first_button(Button* knopki_mebeli, int count_knopok_mebeli)
     }
 }
 
-
-
 int download_mebel(Mebel* knopki_mebeli)
 {
     int nomer = 0;
@@ -133,7 +137,8 @@ int download_mebel(Mebel* knopki_mebeli)
      return nomer;
 
 }
-  void drDre(Mebel* knopki_mebeli)
+
+void drDre(Mebel* knopki_mebeli)
 {
 
     const char* adress = "";
