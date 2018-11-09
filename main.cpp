@@ -9,7 +9,7 @@
 #include <string>
 
 using namespace std;
-
+int GetFolderCountFiles(const char* szPath);
 void saving (Mebel* Tomb, int count_knopok);
 
 
@@ -17,7 +17,7 @@ int main()
 {
     char s[100];
     string ss;
-    int ScreenshotIndex = 0;
+    int ScreenshotIndex=GetFolderCountFiles("Screenshots\\");
 
     int count_mebel = 100;
     Mebel Tomb[count_mebel];
@@ -44,10 +44,10 @@ int main()
     HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
     HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp");
     HDC escape= txLoadImage ("Pics\\menu_escape.bmp");
+    HDC WatherMark= txLoadImage ("Pics\\TempWather.bmp");
 
-    nomer_tomba = download_mebel(Tomb);
 
-
+    bool wather= true;
     bool isExit = false;
     bool startWS = false;
     bool returnToMenu = false;
@@ -72,24 +72,42 @@ int main()
             //menu_escape (escape);
 
             //Save to text
-            if (GetAsyncKeyState('L'))
+            if (GetAsyncKeyState('S'))
             {
                 saving (Tomb, nomer_tomba);
             }
+
+            if (GetAsyncKeyState('L'))
+            {
+               nomer_tomba = download_mebel(Tomb);
+            }
+
 
             //Screenshot
             if (GetAsyncKeyState('Q'))
             {
                 itoa(ScreenshotIndex,s,10);
                 ss = s;
-                const char* ScreenshotName = ("picture" + ss + ".jpg").c_str();
+                const char* ScreenshotName = ("Screenshots\\picture" + ss + ".jpg").c_str();
+
+                //txTransparentBlt (txDC(), 0, 0, SizerX(WatherMark), Sizer(WatherMark), WatherMark, 0, 0);
 
                 ScreenCapture(0, 15, screenW, screenH - 310, ScreenshotName); // ETO VACHNO, NE TROGAI! -fpermissive
                 txSleep(1000);
-                ScreenshotIndex++;
+                ScreenshotIndex=GetFolderCountFiles("Screenshots\\");
+            wather=true;
             }
-            draw_all_mebel(Tomb, nomer_tomba);
+            if(wather){
 
+                txTransparentBlt (txDC(), 800, 200, 101, 100, WatherMark, 0, 0);
+                wather=false;
+                }
+            draw_all_mebel(Tomb, nomer_tomba);
+                if(wather){
+
+                txTransparentBlt (txDC(), 800, 200, 101, 100, WatherMark, 0, 0);
+                wather=false;
+                }
             //Drag-n-drop from toolstrip to workspace
             for (int nomer_mebeli = 0; nomer_mebeli < count_knopok_mebeli; nomer_mebeli++)
             {
@@ -224,10 +242,52 @@ void saving (Mebel* Tomb, int count_knopok)
                             Tomb[i].adressMebeli << "," <<
                             Tomb[i].MOUSE_X << "," <<
                             Tomb[i].MOUSE_Y <<","<<
+                            Tomb[i].width << "," <<
+                            Tomb[i].height <<","<<
                             Tomb[i].awidth << "," <<
                             Tomb[i].aheight<<  endl;
         }
     }
 
     fout_save.close();
+}
+
+int GetFolderCountFiles( const char* szPath)
+{
+      if( !szPath || !*szPath) return 0;
+      __int64      i64CountFiles = 0;
+      char Path[ _MAX_PATH];
+      WIN32_FIND_DATA      data;
+
+      strcpy( Path, szPath);
+      if( Path[ strlen( Path) - 1] != '\\')
+            strcat( Path, "\\");
+      strcat( Path,"*.*");
+      HANDLE hFind = FindFirstFile( Path, &data);
+      if( hFind != INVALID_HANDLE_VALUE)
+      {
+            while(1)
+            {
+                  if( data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+                  {
+                        if( strcmp(data.cFileName, ".") && strcmp(data.cFileName, "..") )
+                        {
+                              char NewPath[ _MAX_PATH];
+                              strcpy( NewPath, szPath);
+                              strcat( NewPath, "\\");
+                              strcat( NewPath, data.cFileName);
+                              i64CountFiles += GetFolderCountFiles( NewPath);
+                        }
+                  }
+                  else
+                  {
+                        i64CountFiles++;
+                  }
+                  BOOL bCode = FindNextFile( hFind, &data);
+                  if( !bCode && GetLastError() == ERROR_NO_MORE_FILES)
+                        break;
+            }
+            FindClose( hFind);
+      }
+      return i64CountFiles;
 }
