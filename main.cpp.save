@@ -94,17 +94,9 @@ int main()
                 txSleep(300);
                 ScreenshotIndex=GetFolderCountFiles("Screenshots\\");
             }
-            /*if(wather){
-
-                txTransparentBlt (txDC(), 800, 200, 101, 100, WatherMark, 0, 0);
-                wather=false;
-                }   */
+            
             draw_all_mebel(Tomb, nomer_tomba,wather, WatherMark);
-               /* if(wather){
-
-                txTransparentBlt (txDC(), 800, 200, 101, 100, WatherMark, 0, 0);
-                wather=false;
-                }    */
+               
             //Drag-n-drop from toolstrip to workspace
             for (int nomer_mebeli = 0; nomer_mebeli < count_knopok_mebeli; nomer_mebeli++)
             {

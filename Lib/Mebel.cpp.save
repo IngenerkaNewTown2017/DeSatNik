@@ -19,7 +19,7 @@ struct Mebel
 //Clear workspace
 void decor_destruction (Mebel* Tomb, int count_mebel);
 //Draw all workspace parts
-void draw_all_mebel(Mebel* Tomb, int count_mebel,bool wather, HDC WatherMark);
+void draw_all_mebel(Mebel* Tomb, int count_mebel,bool wather);
 
 void decor_destruction (Mebel* Tomb, int count_mebel)
 {
