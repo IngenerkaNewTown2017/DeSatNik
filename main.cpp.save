@@ -1,4 +1,3 @@
-
 #include "Lib\\savingInBMP.cpp"
 #include "Lib\\Mebel.cpp"
 #include "Lib\\MENU.cpp"
@@ -12,7 +11,7 @@
 using namespace std;
 int GetFolderCountFiles(const char* szPath);
 void saving (Mebel* Tomb, int count_knopok);
-
+bool wather= true;
 
 int main()
 {
@@ -50,7 +49,6 @@ int main()
     HDC WatherMark= txLoadImage ("Pics\\TempWather.bmp");
 
 
-    bool wather= true;
     bool isExit = false;
     bool startWS = false;
     bool returnToMenu = false;
@@ -93,24 +91,13 @@ int main()
                 ss = s;
                 const char* ScreenshotName = ("Screenshots\\picture" + ss + ".jpg").c_str();
 
-                //txTransparentBlt (txDC(), 0, 0, SizerX(WatherMark), Sizer(WatherMark), WatherMark, 0, 0);
-
                 ScreenCapture(0, 15, screenW, screenH - 310, ScreenshotName); // ETO VACHNO, NE TROGAI! -fpermissive
-                txSleep(1000);
+                txSleep(300);
                 ScreenshotIndex=GetFolderCountFiles("Screenshots\\");
-            wather=true;
             }
-            if(wather){
-
-                txTransparentBlt (txDC(), 800, 200, 101, 100, WatherMark, 0, 0);
-                wather=false;
-                }
-            draw_all_mebel(Tomb, nomer_tomba);
-                if(wather){
-
-                txTransparentBlt (txDC(), 800, 200, 101, 100, WatherMark, 0, 0);
-                wather=false;
-                }
+            
+            draw_all_mebel(Tomb, nomer_tomba,wather, WatherMark);
+               
             //Drag-n-drop from toolstrip to workspace
             for (int nomer_mebeli = 0; nomer_mebeli < count_knopok_mebeli; nomer_mebeli++)
             {
@@ -124,7 +111,7 @@ int main()
                         button_selection(screenW, screenH, &Tomb[nomer_tomba], knopki_mebeli[nomer_mebeli]);
                         Tomb[nomer_tomba].awidth = 200;
                         Tomb[nomer_tomba].aheight = 200;
-                        draw_all_mebel(Tomb, count_mebel);
+                        draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
 
                         checkalka(nomer_tomba, Tomb);
 
@@ -165,7 +152,7 @@ int main()
                             Bomzh.height = Tomb[i].height;
                             button_selection(screenW, screenH, &Tomb[i], Bomzh);
 
-                            draw_all_mebel(Tomb, count_mebel);
+                            draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
                             txSleep(10);
                         }
                     }
@@ -175,7 +162,7 @@ int main()
                         {
                             workspace_background();
                             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-                            draw_all_mebel(Tomb, count_mebel);
+                            draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
                             Tomb[i].awidth = Tomb[i].awidth * 1.05;
                             Tomb[i].aheight = Tomb[i].awidth * 1.05;
                             txSleep(100);
@@ -188,7 +175,7 @@ int main()
                         {
                             workspace_background();
                             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-                            draw_all_mebel(Tomb, count_mebel);
+                            draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
                             Tomb[i].awidth = Tomb[i].awidth  * 0.95;
                             Tomb[i].aheight = Tomb[i].awidth  * 0.95;
                             txSleep(100);

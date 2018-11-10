@@ -56,7 +56,7 @@ struct Mebel
 //Clear workspace
 void decor_destruction (Mebel* Tomb, int count_mebel);
 //Draw all workspace parts
-void draw_all_mebel(Mebel* Tomb, int count_mebel);
+void draw_all_mebel(Mebel* Tomb, int count_mebel,bool wather, HDC WatherMark);
 
 void decor_destruction (Mebel* Tomb, int count_mebel)
 {
@@ -66,13 +66,20 @@ void decor_destruction (Mebel* Tomb, int count_mebel)
     }
 }
 
-void draw_all_mebel(Mebel* Tomb, int count_mebel)
+void draw_all_mebel(Mebel* Tomb, int count_mebel,bool wather, HDC WatherMark)
 {
+          txSetColor(TX_BLACK, 5);
+          if(wather== true){
+
+                txTransparentBlt (txDC(), 800, 200, 101, 100, WatherMark, 0, 0);
+                //wather=false;
+                }
     for (int i=0; i<count_mebel; i++)
     {
         if (Tomb[i].risovat)
         {
             Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, Tomb[i].awidth, Tomb[i].aheight, Tomb[i].pctr, 0, 0, Tomb[i].width, Tomb[i].height, TX_WHITE);
+
         }
     }
 }
