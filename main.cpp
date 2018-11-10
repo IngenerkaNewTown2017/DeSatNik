@@ -119,11 +119,11 @@ int main()
                         risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
                         grid();
                         button_selection(screenW, screenH, &Tomb[nomer_tomba], knopki_mebeli[nomer_mebeli]);
-                        Tomb[nomer_tomba].awidth = 200;
-                        Tomb[nomer_tomba].aheight = 200;
-                        draw_all_mebel(Tomb, count_mebel);
+                        Tomb[nomer_tomba].awidth = SizerX(Tomb[nomer_tomba].pctr);
+                        Tomb[nomer_tomba].aheight = SizerY(Tomb[nomer_tomba].pctr);
 
-                        checkalka(nomer_tomba, Tomb);
+                        checkalka(nomer_tomba, Tomb, nomer_tomba);
+                        draw_all_mebel(Tomb, count_mebel);
 
                         txSleep(10);
                     }
@@ -151,16 +151,15 @@ int main()
                             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
                             grid();
 
-                            for (int e = 0; e < nomer_tomba; e++)
-                            {
-                                checkalka(e, Tomb);
-                            }
+                            checkalka(i, Tomb, nomer_tomba);
 
                             Button Bomzh = {};
                             Bomzh.picture = Tomb[i].pctr;
                             Bomzh.width = Tomb[i].width;
                             Bomzh.height = Tomb[i].height;
                             button_selection(screenW, screenH, &Tomb[i], Bomzh);
+                            //Tomb[i].awidth = SizerX(Tomb[i].pctr);
+                            //Tomb[i].aheight = SizerY(Tomb[i].pctr);
 
                             draw_all_mebel(Tomb, count_mebel);
                             txSleep(10);
@@ -172,9 +171,11 @@ int main()
                         {
                             workspace_background();
                             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-                            draw_all_mebel(Tomb, count_mebel);
+                            grid();
                             Tomb[i].awidth = Tomb[i].awidth * 1.05;
-                            Tomb[i].aheight = Tomb[i].awidth * 1.05;
+                            Tomb[i].aheight =Tomb[i].aheight * 1.05;
+                            checkalka(i, Tomb, nomer_tomba);
+                            draw_all_mebel(Tomb, count_mebel);
                             txSleep(100);
                         }
                     }
@@ -185,9 +186,13 @@ int main()
                         {
                             workspace_background();
                             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-                            draw_all_mebel(Tomb, count_mebel);
+                            grid();
                             Tomb[i].awidth = Tomb[i].awidth  * 0.95;
-                            Tomb[i].aheight = Tomb[i].awidth  * 0.95;
+                            Tomb[i].aheight = Tomb[i].aheight  * 0.95;
+
+                                checkalka(i, Tomb, nomer_tomba);
+
+                            draw_all_mebel(Tomb, count_mebel);
                             txSleep(100);
                         }
                     }
