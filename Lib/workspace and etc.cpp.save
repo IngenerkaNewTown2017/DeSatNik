@@ -134,29 +134,28 @@ int download_mebel(Mebel* knopki_mebeli)
                 string y = get.substr(0, pos3);
                 get = get.substr(pos3 + 1);
 
-                int pos4 = get.find(',');
-                string width = get.substr(0, pos4);
+                int pos6 = get.find(',');
+                string awidth = get.substr(0, pos6);
                 get = get.substr(pos4 + 1);
 
 
-
-                int pos5 = get.find(',');
-                string height = get.substr(0, pos5);
-                 get = get.substr(pos5 + 1);
-
+                
+                int pos7 = get.find(',');
+                string aheight = get.substr(0, pos7);
+                
                 int pos6 = get.find(',');
                 string awidth = get.substr(0, pos6);
                 get = get.substr(pos6 + 1);
 
 
-
+                
                 int pos7 = get.find(',');
                 string aheight = get.substr(0, pos7);
 
                 char* picAdress = new char[195];
                 strcpy(picAdress, adress.c_str());
 
-                knopki_mebeli[nomer] = {picAdress, true, atoi(x.c_str()), atoi(y.c_str()), txLoadImage(picAdress), atoi(width.c_str()), atoi(height.c_str()), atoi(awidth.c_str()), atoi(aheight.c_str())};
+                knopki_mebeli[nomer] = {picAdress, true, atoi(x.c_str()), atoi(y.c_str()), txLoadImage(picAdress), atoi(awidth.c_str()), atoi(aheight.c_str()), atoi(awidth.c_str()), atoi(aheight.c_str())};
 //PicSize
 
                 nomer++;
