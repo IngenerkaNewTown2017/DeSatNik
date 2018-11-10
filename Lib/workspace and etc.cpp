@@ -71,8 +71,8 @@ void button_selection(int screenW, int screenH, Mebel* Tomb, Button knopki_mebel
     Tomb->pctr = knopki_mebeli.picture;
     Tomb->MOUSE_X = txMouseX();
     Tomb->MOUSE_Y = txMouseY();
-    Tomb->width = knopki_mebeli.width;
-    Tomb->height = knopki_mebeli.height;
+    Tomb->width = SizerX(knopki_mebeli.picture);
+    Tomb->height = SizerY(knopki_mebeli.picture);
     Tomb->risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
     Tomb->adressMebeli = knopki_mebeli.adress;
 }

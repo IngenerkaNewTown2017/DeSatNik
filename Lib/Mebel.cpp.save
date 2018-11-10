@@ -1,0 +1,74 @@
+#pragma once
+
+#include "Button.cpp"
+#include "TXLib.h"
+
+struct Mebel
+{
+    const char* adressMebeli;
+    bool risovat;
+    int MOUSE_X;
+    int MOUSE_Y;
+    HDC pctr;
+    int width;
+    int height;
+    int awidth;
+    int aheight;
+};
+
+//Clear workspace
+void decor_destruction (Mebel* Tomb, int count_mebel);
+//Draw all workspace parts
+void draw_all_mebel(Mebel* Tomb, int count_mebel);
+
+void decor_destruction (Mebel* Tomb, int count_mebel)
+{
+    for (int i=0; i<count_mebel; i++)
+    {
+        Tomb[i] = {false, 0, 0};
+    }
+}
+
+void draw_all_mebel(Mebel* Tomb, int count_mebel)
+{
+    for (int i=0; i<count_mebel; i++)
+    {
+        if (Tomb[i].risovat)
+        {
+            Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, Tomb[i].awidth, Tomb[i].aheight, Tomb[i].pctr, 0, 0, Tomb[i].width, Tomb[i].height, TX_WHITE);
+        }
+    }
+}
+
+void checkalka( int nomer_kartinki, Mebel* Tomb, int vsego_kart)
+{
+    int screenW = GetSystemMetrics (SM_CXSCREEN);
+    int screenH = GetSystemMetrics (SM_CYSCREEN);
+
+    if (txMouseButtons() & 1)
+    {
+        //Tomb[nomer_kartinki].risovat = true;
+
+        for (int p = 0; p < vsego_kart; p++)
+        {
+            if ((Tomb[nomer_kartinki].MOUSE_Y < screenH-300 && (p != nomer_kartinki)) &&
+                (Tomb[nomer_kartinki].MOUSE_X <= Tomb[p].MOUSE_X and
+                                                                      Tomb[p].MOUSE_X <= Tomb[nomer_kartinki].MOUSE_X + Tomb[nomer_kartinki].awidth
+                or
+                Tomb[nomer_kartinki].MOUSE_X <= Tomb[p].MOUSE_X + Tomb[p].awidth and
+                                                                     Tomb[p].MOUSE_X + Tomb[p].awidth <= Tomb[nomer_kartinki].MOUSE_X + Tomb[nomer_kartinki].awidth)
+                 and
+                (Tomb[nomer_kartinki].MOUSE_Y <= Tomb[p].MOUSE_Y and
+                                                                      Tomb[p].MOUSE_Y <= Tomb[nomer_kartinki].MOUSE_Y + Tomb[nomer_kartinki].aheight
+                or
+                Tomb[nomer_kartinki].MOUSE_Y <= Tomb[p].MOUSE_Y + Tomb[p].aheight and
+                                                                     Tomb[p].MOUSE_Y + Tomb[p].aheight <= Tomb[nomer_kartinki].MOUSE_Y + Tomb[nomer_kartinki].aheight)
+
+
+                and Tomb[p].risovat )
+            {
+                Tomb[nomer_kartinki].risovat = false;
+            }
+        }
+    }
+}
