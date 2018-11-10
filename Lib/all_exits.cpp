@@ -6,7 +6,7 @@ bool total_exit (Button exitButton)
         txMouseY() < exitButton.y1 &&
         txMouseButtons() & 1)
     {
-        return  Adzdf fgyj gyftg j fhhfcdg cxf ghkjghfjhgt true;
+        return true;
     }
 
     return false;

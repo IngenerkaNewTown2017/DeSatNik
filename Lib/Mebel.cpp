@@ -68,12 +68,13 @@ void decor_destruction (Mebel* Tomb, int count_mebel)
 
 void draw_all_mebel(Mebel* Tomb, int count_mebel,bool wather, HDC WatherMark)
 {
-          txSetColor(TX_BLACK, 5);
-          if(wather== true){
+    txSetColor(TX_BLACK, 5);
+    if(wather== true)
+    {
+        txTransparentBlt (txDC(), 800, 200, 101, 100, WatherMark, 0, 0);
+        //wather=false;
+    }
 
-                txTransparentBlt (txDC(), 800, 200, 101, 100, WatherMark, 0, 0);
-                //wather=false;
-                }
     for (int i=0; i<count_mebel; i++)
     {
         if (Tomb[i].risovat)
@@ -91,20 +92,22 @@ void checkalka( int nomer_kartinki, Mebel* Tomb, int vsego_kart)
 
     if (txMouseButtons() & 1)
     {
-        //Tomb[nomer_kartinki].risovat = true;
+        if (Tomb[nomer_kartinki].MOUSE_Y + Tomb[nomer_kartinki].aheight > screenH-300)
+        {
+            Tomb[nomer_kartinki].risovat = false;
+        }
 
         for (int predydushii_nomer = 0; predydushii_nomer < vsego_kart; predydushii_nomer++)
         {
-                if ((Tomb[nomer_kartinki].MOUSE_Y + Tomb[predydushii_nomer].aheight < screenH-300
-                && (predydushii_nomer != nomer_kartinki)) &&
-                    oneDimensionalDistance(Tomb[nomer_kartinki].MOUSE_X + 1,    Tomb[nomer_kartinki].MOUSE_X    + Tomb[nomer_kartinki].awidth,
-                                           Tomb[predydushii_nomer].MOUSE_X + 1, Tomb[predydushii_nomer].MOUSE_X + Tomb[predydushii_nomer].awidth) == 0
-                    and
-                    Tomb[predydushii_nomer].risovat
-                    and
-                    oneDimensionalDistance(Tomb[nomer_kartinki].MOUSE_Y + 1,    Tomb[nomer_kartinki].MOUSE_Y    + Tomb[nomer_kartinki].aheight,
-                                           Tomb[predydushii_nomer].MOUSE_Y + 1, Tomb[predydushii_nomer].MOUSE_Y + Tomb[predydushii_nomer].aheight) == 0)
-                {
+            if (predydushii_nomer != nomer_kartinki &&
+                oneDimensionalDistance(Tomb[nomer_kartinki].MOUSE_X + 1,    Tomb[nomer_kartinki].MOUSE_X    + Tomb[nomer_kartinki].awidth,
+                                       Tomb[predydushii_nomer].MOUSE_X + 1, Tomb[predydushii_nomer].MOUSE_X + Tomb[predydushii_nomer].awidth) == 0
+                and
+                Tomb[predydushii_nomer].risovat
+                and
+                oneDimensionalDistance(Tomb[nomer_kartinki].MOUSE_Y + 1,    Tomb[nomer_kartinki].MOUSE_Y    + Tomb[nomer_kartinki].aheight,
+                                       Tomb[predydushii_nomer].MOUSE_Y + 1, Tomb[predydushii_nomer].MOUSE_Y + Tomb[predydushii_nomer].aheight) == 0)
+            {
                 Tomb[nomer_kartinki].risovat = false;
             }
         }
