@@ -1,3 +1,21 @@
+/*!
+\mainpage Эта программа написана командой молодых, (и не очень) талантливых программистов DeSatNik team. Особая благодарность за поддержку и веру в лучшее в отношении этого кода выражается Beavisabra
+\file
+\brief main всего кода
+
+Суть да дело программы
+
+\authors DeSatNik team
+\version 1.0.0
+\date 13.11.2018
+\bug Неисчеслимы, пока что
+\warning Осторожнее
+\name Функции основного файла
+
+*/
+
+
+
 #include "Lib\\savingInBMP.cpp"
 #include "Lib\\Mebel.cpp"
 #include "Lib\\MENU.cpp"
@@ -9,9 +27,28 @@
 #include <string>
 
 using namespace std;
+/*!
+\brief функция подсчёта скриншотов
+
+Считает скриншоты сделаные пользователем в программе
+
+
+\param[in] const char* szPath Путь к папке со скриншотами
+*/
 int GetFolderCountFiles(const char* szPath);
+
+/*!
+\brief функция сохранения
+
+Сохраняет планировку в файл saving.txt
+
+
+\param[in] Mebel* Tomb Массив сохраняемой мебели
+\param[in] int count_knopok предел
+*/
+
 void saving (Mebel* Tomb, int count_knopok);
-bool wather= true;
+bool wather= true; ///\brief Показ водяного знака
 
 int main()
 {
@@ -20,6 +57,10 @@ int main()
     char s[100];
     string ss;
     int ScreenshotIndex=GetFolderCountFiles("Screenshots\\");
+
+    char s2[100];
+    string ss2;
+    int SaveIndex=GetFolderCountFiles("Saves\\");
 
     int count_mebel = 100;
     Mebel Tomb[count_mebel];
@@ -41,17 +82,17 @@ int main()
     Button knopki_mebeli[200];
     int count_knopok_mebeli = read(knopki_mebeli);
     //coords of first button
-    coords_of_first_button(knopki_mebeli, count_knopok_mebeli);
+    coords_of_first_button(knopki_mebeli, count_knopok_mebeli); /// \brief Координаты первой кнопки
 
-    HDC WSpace = txLoadImage ("Pics\\Workspace.bmp");
-    HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp");
-    HDC escape= txLoadImage ("Pics\\menu_escape.bmp");
-    HDC WatherMark= txLoadImage ("Pics\\TempWather.bmp");
+    HDC WSpace = txLoadImage ("Pics\\Workspace.bmp"); /// \brief Картинка. Фон рабочей области редактора
+    HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp"); /// \brief Картинка. Фон меню
+    HDC escape= txLoadImage ("Pics\\menu_escape.bmp"); /// \brief Картинка. Меню паузы
+    HDC WatherMark= txLoadImage ("Pics\\TempWather.bmp"); /// \brief Водяной знак
 
 
-    bool isExit = false;
-    bool startWS = false;
-    bool returnToMenu = false;
+    bool isExit = false; /// \brief Выход из программы
+    bool startWS = false; /// \brief Начало работы
+    bool returnToMenu = false; /// \brief Возврат в меню
 
     while (!isExit)
     {
@@ -83,7 +124,10 @@ int main()
                nomer_tomba = download_mebel(Tomb);
             }
 
-
+if (GetAsyncKeyState('F'))
+            {
+//drDre(Mebel* knopki_mebeli)
+}
             //Screenshot
             if (GetAsyncKeyState('Q'))
             {
@@ -220,8 +264,21 @@ int main()
 
 void saving (Mebel* Tomb, int count_knopok)
 {
+char s2[100];
+string ss2;
+int SaveIndex=GetFolderCountFiles("Saves\\");
+
+itoa(SaveIndex,s2,10);
+                ss2 = s2;
+                const char* SaveName = ("Saves\\save" + ss2 + ".txt").c_str();
+
+
+                txSleep(300);
+
+
     ofstream fout_save;
-    fout_save.open("savings.txt");
+    ofstream ofs(SaveName);
+    fout_save.open(SaveName);
 
     for (int i=0; i<count_knopok; i++)
     {

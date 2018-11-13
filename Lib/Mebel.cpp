@@ -1,8 +1,33 @@
 #pragma once
 
+/*!
+\file
+\brief Мебель
+
+Файл содержащий весь код, связанный с мебелью
+
+\authors DeSatNik team
+\version 1.0.0
+\date 13.11.2018
+\bug Неисчеслимы, пока что
+\warning Осторожнее
+\name Функции связанные с мебелью
+
+*/
+
 #include "Button.cpp"
 #include "TXLib.h"
+/*!
+\brief функция проверки столкновения
 
+Функция проверяет взаимное расположение мебели
+
+
+\param[in] double minX1 Первая минимальная координата X
+\param[in] double maxX1 Первая максимальная координата X
+\param[in] double minX2 Вторая минимальная координата X
+\param[in] double maxX2 Вторая максимальная координата X
+*/
 double oneDimensionalDistance (double minX1, double maxX1, double minX2, double maxX2)
 {
     double distance = 0;
@@ -42,18 +67,27 @@ double oneDimensionalDistance (double minX1, double maxX1, double minX2, double 
 
 struct Mebel
 {
-    const char* adressMebeli;
-    bool risovat;
-    int MOUSE_X;
-    int MOUSE_Y;
-    HDC pctr;
-    int width;
-    int height;
-    int awidth;
-    int aheight;
+    const char* adressMebeli; ///\brief путь к картинке
+    bool risovat; ///\brief рисование
+    int MOUSE_X; ///\brief X координата мыши
+    int MOUSE_Y; ///\brief Y координата мыши
+    HDC pctr; ///\brief Картинка
+    int width; ///\brief Ширина сначала
+    int height; ///\brief Высота сначала
+    int awidth; ///\brief Ширина сначала
+    int aheight; ///\brief Высота на данный момент
 };
 
 //Clear workspace
+/*!
+\brief функция уничтжения
+
+Функция очищает рабочую область
+
+
+\param[in] Mebel* Tomb Убираемая мебель
+\param[in] int count_mebel придел колличества
+*/
 void decor_destruction (Mebel* Tomb, int count_mebel);
 //Draw all workspace parts
 void draw_all_mebel(Mebel* Tomb, int count_mebel,bool wather, HDC WatherMark);
@@ -65,7 +99,16 @@ void decor_destruction (Mebel* Tomb, int count_mebel)
         Tomb[i] = {false, 0, 0};
     }
 }
+/*!
+\brief функция рисования мебели
 
+Функция рисует всю мебель
+
+\param[in] Mebel* Tomb Рисуемая мебель
+\param[in] int count_mebel придел колличества
+\param[in] bool wather рисование водяного знака
+\param[in] HDC WatherMark Картинка для водяного знака
+*/
 void draw_all_mebel(Mebel* Tomb, int count_mebel,bool wather, HDC WatherMark)
 {
     txSetColor(TX_BLACK, 5);
@@ -84,7 +127,16 @@ void draw_all_mebel(Mebel* Tomb, int count_mebel,bool wather, HDC WatherMark)
         }
     }
 }
+/*!
+\brief функция проверки столкновения
 
+Функция проверяет взаимное расположение мебели
+
+
+\param[in] int nomer_kartinki Номер
+\param[in] Mebel* Tomb Мебель
+\param[in] int vsego_kart предел
+*/
 void checkalka( int nomer_kartinki, Mebel* Tomb, int vsego_kart)
 {
     int screenW = GetSystemMetrics (SM_CXSCREEN);

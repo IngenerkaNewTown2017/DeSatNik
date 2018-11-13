@@ -3,19 +3,19 @@
 
 struct Button
 {
-    const char* adress;
-    HDC picture;
-    int x;
-    int y;
-    int x1;
-    int y1;
-    int width;
-    int height;
+    const char* adress; ///\brief Адрес картинки
+    HDC picture; ///\brief Сама картинка
+    int x; ///\brief Координта х
+    int y; ///\brief Координта y
+    int x1; ///\brief Координта х1
+    int y1; ///\brief Координта y1
+    int width; ///\brief ширина
+    int height; ///\brief Высота
 };
 
-Button exitButton;
-Button saveButton;
-Button newplanButton;
-Button loadButton;
-Button continueButton;
-Button settingsButton;
+Button exitButton; ///\brief Кнопка выхода
+Button saveButton; ///\brief Кнопка сохранения
+Button newplanButton; ///\brief Кнопка создания
+Button loadButton; ///\brief Кнопка загрузки
+Button continueButton; ///\brief Кнопка продолжения
+Button settingsButton; ///\brief Кнопка настроек

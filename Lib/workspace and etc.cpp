@@ -1,16 +1,47 @@
 #pragma once
 
+/*!
+\file
+\brief Код рабочей области
+
+Файл в котором прописывается код связаный с рабочей областью редактора
+
+\authors DeSatNik team
+\version 1.0.0
+\date 13.11.2018
+\bug Неисчеслимы, пока что
+\warning Осторожнее
+\name Функции рабочей области
+
+*/
+
 #include "Button.cpp"
 #include <iostream>
 #include <fstream>
 
 using namespace std;
+/*!
+\brief Сетка
 
+Функция рисования сетки
+*/
 void grid();
+/*!
+\brief функция проверки клика
+
+Функция читает из файла
+
+
+\param[in] Button* knopki_mebeli читаемая кнопка
+*/
 int read(Button* knopki_mebeli);
 
 const int RAZMER_KNOPKI = 100;
+/*!
+\brief Фон рабочей области
 
+Функция рисования фона рабочей области
+*/
 void workspace_background()
 {
     int screenW = GetSystemMetrics (SM_CXSCREEN);
@@ -65,7 +96,15 @@ int read(Button* knopki_mebeli)
     fout.close();
     return nomer;
 }
+/*!
+\brief Функция выбора кнопки
 
+Функция отвечающая за реакцию кнопки
+\param[in] int screenW Ширина экрана
+\param[in] int screenH Высота экрана
+\param[in] Mebel* Tomb Рисуемая мебель
+\param[in] Button knopki_mebeli Кнопка
+*/
 void button_selection(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli)
 {
     Tomb->pctr = knopki_mebeli.picture;
@@ -76,7 +115,14 @@ void button_selection(int screenW, int screenH, Mebel* Tomb, Button knopki_mebel
     Tomb->risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
     Tomb->adressMebeli = knopki_mebeli.adress;
 }
+/*!
+\brief Функция выбора кнопки
 
+Функция отвечающая за координаты кнопок на панели
+
+\param[in] int count_knopok_mebeli Предел колличества кнопок
+\param[in] Button knopki_mebeli Кнопка
+*/
 void coords_of_first_button(Button* knopki_mebeli, int count_knopok_mebeli)
 {
     int screenW = GetSystemMetrics(SM_CXSCREEN);
@@ -103,12 +149,22 @@ void coords_of_first_button(Button* knopki_mebeli, int count_knopok_mebeli)
         }
     }
 }
+/*!
+\brief Загрузка
 
+Функция отвечающая за загрузку планировки из файла номер которого был введён
+
+\param[in] Mebel* knopki_mebeli мебель
+*/
 int download_mebel(Mebel* knopki_mebeli)
 {
+
+    string ss2 = txInputBox ("Nomer save?", "System", "0");
+    const char* SaveName = ("Saves\\save" + ss2 + ".txt").c_str();
+
     int nomer = 0;
     ifstream fout;
-    fout.open("savings.txt");
+    fout.open(SaveName);
 
     if (fout)
     {
@@ -175,7 +231,8 @@ void drDre(Mebel* knopki_mebeli)
 
     const char* adress = "";
     ifstream fout;
-    const char* imya_faila = txInputBox ("Г‚ГўГҐГ¤ГЁГІГҐ Г­Г Г§ГўГ Г­ГЁГҐ ГґГ Г©Г«Г (ГЏГ°ГЁГ¬ГҐГ°:Lenin)", "System", "");
+    const char* imya_faila = txInputBox ("Choose Save)", "System", "");
+
     adress = imya_faila;
     fout.open(imya_faila);
 
@@ -183,7 +240,7 @@ void drDre(Mebel* knopki_mebeli)
     {
         fout.close();
         char* imya_faila2 = new char[195];
-        strcpy(imya_faila2, "Files\\");
+        strcpy(imya_faila2, "Saves\\");
         strcat(imya_faila2, imya_faila);
         fout.open(imya_faila2);
         adress = imya_faila2;
@@ -192,7 +249,7 @@ void drDre(Mebel* knopki_mebeli)
     {
         fout.close();
         char* imya_faila3 = new char[195];
-        strcpy(imya_faila3, "Files\\");
+        strcpy(imya_faila3, "Save\\");
         strcat(imya_faila3, imya_faila);
         strcat(imya_faila3, ".txt");
         fout.open(imya_faila3);
