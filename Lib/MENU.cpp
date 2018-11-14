@@ -1,19 +1,101 @@
 #pragma once
 
+/*!
+\file
+\brief Файл Меню
+
+Здесь прописывается меню программы
+
+\authors DeSatNik team
+\version 1.0.0
+\date 13.11.2018
+\bug Неисчеслимы, пока что
+\warning Осторожнее
+\name То, что связано с меню
+
+*/
+
 #include "TXLib.h"
 #include "Button.cpp"
 
+/*!
+\brief функция проверки положения мыши
+
+Функция проверяет, что мышь наведена на объект
+
+
+\param[in] int MinX Минимальная левая граница объекта
+\param[in] int MaxX Максимальная правая граница объекта
+\param[in] int MinY Минимальная верхняя граница объекта
+\param[in] int MaxY Максимальная нижняя граница объекта
+*/
 bool checkFocus(int MinX, int MaxX, int MinY, int MaxY);
+/*!
+\brief функция проверки клика
+
+Функция проверяет, что совершён клик по объекту
+
+
+\param[in] int MinX Минимальная левая граница объекта
+\param[in] int MaxX Максимальная правая граница объекта
+\param[in] int MinY Минимальная верхняя граница объекта
+\param[in] int MaxY Максимальная нижняя граница объекта
+*/
 bool checkClick(int MinX, int MinY, int MaxX, int MaxY);
+/*!
+\brief функция рисования иконки
+
+Функция рисует иконку  для кнопки к мебели на панели
+
+
+\param[in] Button sofaButton Кнопка для которой рисуется иконка
+*/
 void ikons (Button sofaButton);
+/*!
+\brief Подсказки в меню
+
+Функция выводит подсказки для кнопок меню
+*/
 void checkMenuFocus();
+/*!
+\brief функция рисования меню
+
+Функция рисует меню по размерам экрана
+
+
+\param[in] int screenW Ширина экрана
+\param[in] int screenH Высота экрана
+\param[in] HDC fon_menu Картинака. Фон меню
+*/
 void drawMenu (int screenW, int screenH, HDC fon_menu);
+/*!
+\brief функция возврата в меню
+
+Функция позволяет вернуться назад в меню
+
+
+\param[in] bool returnToMenu Переменная которая регулирует возврат
+*/
 bool nazad (bool returnToMenu);
+/*!
+\brief функция начала работы
+
+Функция позволяет перейти к работе
+
+
+\param[in] bool startWork Переменная которая регулирует начало работы
+*/
 bool startWorkspace (bool startWork);
 int SizerX(HDC pic);
 int SizerY(HDC pic);
+/*!
+\brief функция определения размера картинки
+
+Функция возвращает ширину картинки
 
 
+\param[in] HDC pic Картинка
+*/
 int SizerX(HDC pic)
 {
     HBITMAP hbm=(HBITMAP)Win32::GetCurrentObject(pic, OBJ_BITMAP);
@@ -21,7 +103,14 @@ int SizerX(HDC pic)
     Win32::GetObject(hbm,sizeof(bm), (LPVOID)&bm);
     return bm.bmWidth;
 }
+/*!
+\brief функция определения размера картинки
 
+Функция возвращает высоту картинки
+
+
+\param[in] HDC pic Картинка
+*/
 int SizerY(HDC pic)
 {
     HBITMAP hbm=(HBITMAP)Win32::GetCurrentObject(pic, OBJ_BITMAP);
@@ -113,7 +202,7 @@ bool startWorkspace (bool startWork)
 
 bool nazad (bool returnToMenu)
 {
-	if (GetAsyncKeyState(VK_RETURN))
+	if (GetAsyncKeyState('M'))
 	{
 		returnToMenu = true;
 	}

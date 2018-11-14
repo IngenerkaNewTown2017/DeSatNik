@@ -1,13 +1,21 @@
+
+/*!
+\brief Структура для кнопок
+
+Собирает в себе данные необходимые для создания кнопки
+
+
+*/
 struct Button
 {
-    const char* adress;
-    HDC picture;
-    int x;
-    int y;
-    int x1;
-    int y1;
-    int width;
-    int height;
+    const char* adress; ///\brief Адрес картинки
+    HDC picture; ///\brief Сама картинка
+    int x; ///\brief Координта х
+    int y; ///\brief Координта y
+    int x1; ///\brief Координта х1
+    int y1; ///\brief Координта y1
+    int width; ///\brief ширина
+    int height; ///\brief Высота
 };
 
 Button exitButton;
