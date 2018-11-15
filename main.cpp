@@ -44,11 +44,11 @@ int GetFolderCountFiles(const char* szPath);
 
 
 \param[in] Mebel* Tomb Массив сохраняемой мебели
-\param[in] int count_knopok предел
+\param[in] int count_knopok предел мебели
 */
 
 void saving (Mebel* Tomb, int count_knopok);
-bool wather= true; ///\brief Показ водяного знака
+bool wather = true; ///\brief Показ водяного знака
 
 int main()
 {
@@ -68,19 +68,20 @@ int main()
 
     decor_destruction(Tomb, count_mebel);
 
-    int screenW = GetSystemMetrics (SM_CXSCREEN);
-    int screenH = GetSystemMetrics (SM_CYSCREEN);
-    txCreateWindow (screenW, screenH);
+    int screenX = GetSystemMetrics (SM_CXSCREEN);
+    int screenY = GetSystemMetrics (SM_CYSCREEN);
+    txCreateWindow (screenX, screenY);
 
-    settingsButton = {"", nullptr, 0, screenH * 75/100, 200, screenH * 80/100};
-    newplanButton = {"", nullptr, 0, screenH * 80/100, 200, screenH * 85/100};
-    loadButton = {"", nullptr, 0, screenH * 85/100, 200, screenH * 90/100};
-    saveButton = {"", nullptr, 0, screenH * 90/100, 200, screenH * 95/100};
-    exitButton = {"", nullptr, 0, screenH * 95/100, 200, screenH};
+    settingsButton = {"", nullptr, 0, screenY * 75/100, 200, screenY * 80/100};
+    newplanButton = {"", nullptr, 0, screenY * 80/100, 200, screenY * 85/100};
+    loadButton = {"", nullptr, 0, screenY * 85/100, 200, screenY * 90/100};
+    saveButton = {"", nullptr, 0, screenY * 90/100, 200, screenY * 95/100};
+    exitButton = {"", nullptr, 0, screenY * 95/100, 200, screenY};
 
 
     Button knopki_mebeli[200];
     int count_knopok_mebeli = read(knopki_mebeli);
+    KOLICH_RYADOV_WS = round((count_knopok_mebeli + 1)/4);
     //coords of first button
     coords_of_first_button(knopki_mebeli, count_knopok_mebeli); /// \brief Координаты первой кнопки
 
@@ -105,6 +106,7 @@ int main()
             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
             grid();
 
+
             returnToMenu = nazad (returnToMenu);
             if (returnToMenu)
             {
@@ -124,9 +126,9 @@ int main()
                nomer_tomba = download_mebel(Tomb);
             }
 
-if (GetAsyncKeyState('F'))
+            if (GetAsyncKeyState('F'))
             {
-//drDre(Mebel* knopki_mebeli)
+                //drDre(Mebel knopki_mebeli);
 }
             //Screenshot
             if (GetAsyncKeyState('Q'))
@@ -135,7 +137,7 @@ if (GetAsyncKeyState('F'))
                 ss = s;
                 const char* ScreenshotName = ("Screenshots\\picture" + ss + ".jpg").c_str();
 
-                ScreenCapture(0, 15, screenW, screenH - 310, ScreenshotName); // ETO VACHNO, NE TROGAI! -fpermissive
+                ScreenCapture(0, 15, screenX, screenY - 310, ScreenshotName); // ETO VACHNO, NE TROGAI! -fpermissive
                 txSleep(300);
                 ScreenshotIndex=GetFolderCountFiles("Screenshots\\");
             }
@@ -152,7 +154,7 @@ if (GetAsyncKeyState('F'))
                         workspace_background();
                         risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
                         grid();
-                        button_selection(screenW, screenH, &Tomb[nomer_tomba], knopki_mebeli[nomer_mebeli]);
+                        button_selection(screenX, screenY, &Tomb[nomer_tomba], knopki_mebeli[nomer_mebeli]);
                         Tomb[nomer_tomba].awidth = SizerX(Tomb[nomer_tomba].pctr);
                         Tomb[nomer_tomba].aheight = SizerY(Tomb[nomer_tomba].pctr);
                         draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
@@ -191,7 +193,7 @@ if (GetAsyncKeyState('F'))
                             Bomzh.adress = Tomb[i].adressMebeli;
                             Bomzh.width = Tomb[i].width;
                             Bomzh.height = Tomb[i].height;
-                            button_selection(screenW, screenH, &Tomb[i], Bomzh);
+                            button_selection(screenX, screenY, &Tomb[i], Bomzh);
 
                             draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
                             txSleep(10);
@@ -232,7 +234,7 @@ if (GetAsyncKeyState('F'))
         else
         {
             returnToMenu = false;
-            drawMenu (screenW, screenH, fon_menu);
+            drawMenu (screenX, screenY, fon_menu);
             checkMenuFocus();
             //menu_escape(escape);
             startWS = startWorkspace(startWS);
