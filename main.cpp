@@ -81,7 +81,8 @@ int main()
 
     Button knopki_mebeli[200];
     int count_knopok_mebeli = read(knopki_mebeli);
-    KOLICH_RYADOV_WS = round((count_knopok_mebeli + 1)/4);
+    //In C++ round (2.5) = 2
+    KOLICH_RYADOV_WS = round((count_knopok_mebeli + 2)/4);
     //coords of first button
     coords_of_first_button(knopki_mebeli, count_knopok_mebeli); /// \brief Координаты первой кнопки
 
@@ -129,7 +130,8 @@ int main()
             if (GetAsyncKeyState('F'))
             {
                 //drDre(Mebel knopki_mebeli);
-}
+            }
+
             //Screenshot
             if (GetAsyncKeyState('Q'))
             {
@@ -157,9 +159,9 @@ int main()
                         button_selection(screenX, screenY, &Tomb[nomer_tomba], knopki_mebeli[nomer_mebeli]);
                         Tomb[nomer_tomba].awidth = SizerX(Tomb[nomer_tomba].pctr);
                         Tomb[nomer_tomba].aheight = SizerY(Tomb[nomer_tomba].pctr);
-                        draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
 
-                        checkalka(nomer_tomba, Tomb, nomer_tomba);
+                        checkalka(nomer_tomba, Tomb, nomer_tomba);//It was higher and what a chaNGE!!!
+                        draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
 
                         txSleep(10);
                     }
@@ -186,7 +188,6 @@ int main()
                             workspace_background();
                             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
                             grid();
-                            checkalka(i, Tomb, nomer_tomba);
 
                             Button Bomzh = {};
                             Bomzh.picture = Tomb[i].pctr;
@@ -194,6 +195,7 @@ int main()
                             Bomzh.width = Tomb[i].width;
                             Bomzh.height = Tomb[i].height;
                             button_selection(screenX, screenY, &Tomb[i], Bomzh);
+                            checkalka(i, Tomb, nomer_tomba);//It was higher and what a chaNGE!!!
 
                             draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
                             txSleep(10);
@@ -266,20 +268,18 @@ int main()
 
 void saving (Mebel* Tomb, int count_knopok)
 {
-char s2[100];
-string ss2;
-int SaveIndex=GetFolderCountFiles("Saves\\");
+    char s2[100];
+    int SaveIndex=GetFolderCountFiles("Saves\\");
 
-itoa(SaveIndex,s2,10);
-                ss2 = s2;
-                const char* SaveName = ("Saves\\save" + ss2 + ".txt").c_str();
+    itoa(SaveIndex,s2,10);
+    string ss2 = s2;
+    const char* SaveName = ("Saves\\save" + ss2 + ".txt").c_str();
 
 
-                txSleep(300);
+    txSleep(300);
 
 
     ofstream fout_save;
-    ofstream ofs(SaveName);
     fout_save.open(SaveName);
 
     for (int i=0; i<count_knopok; i++)

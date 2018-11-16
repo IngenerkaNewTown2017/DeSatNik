@@ -26,6 +26,7 @@ using namespace std;
 Функция рисования сетки
 */
 void grid();
+
 /*!
 \brief функция проверки клика
 
@@ -37,6 +38,8 @@ void grid();
 int read(Button* knopki_mebeli);
 
 const int RAZMER_KNOPKI = 100;
+int KOLICH_RYADOV_WS = 0;
+
 /*!
 \brief Фон рабочей области
 
@@ -44,11 +47,11 @@ const int RAZMER_KNOPKI = 100;
 */
 void workspace_background()
 {
-    int screenW = GetSystemMetrics (SM_CXSCREEN);
-    int screenH = GetSystemMetrics (SM_CYSCREEN);
+    int screenX = GetSystemMetrics (SM_CXSCREEN);
+    int screenY = GetSystemMetrics (SM_CYSCREEN);
     txClear();
     txSetColor(TX_BLACK, 5);
-    txRectangle(50, 50, screenW - 50, screenH - 350);
+    txRectangle(50, 50, screenX - 50, screenY - 350);
     txSetColor(TX_WHITE);
 
     //Grid
@@ -57,24 +60,27 @@ void workspace_background()
 
 void grid()
 {
-    int screenW = GetSystemMetrics (SM_CXSCREEN);
-    int screenH = GetSystemMetrics (SM_CYSCREEN);
+    int screenX = GetSystemMetrics (SM_CXSCREEN);
+    int screenY = GetSystemMetrics (SM_CYSCREEN);
+
     txSetColor(TX_BLACK);
-    for (int y = screenH; y >= screenH - 300; y = y - RAZMER_KNOPKI)
+
+    for (int y = screenY; y >= screenY - KOLICH_RYADOV_WS * RAZMER_KNOPKI; y = y - RAZMER_KNOPKI)
     {
-        txLine   (0, y, RAZMER_KNOPKI * (screenW / RAZMER_KNOPKI), y);
+        txLine   ((screenX/2) - 2 * RAZMER_KNOPKI, y, (screenX/2) + 2 * RAZMER_KNOPKI, y);
     }
 
-    for (int x = 0; x <= screenW; x = x + RAZMER_KNOPKI)
+    for (int x = (screenX/2) - 2 * RAZMER_KNOPKI; x < (screenX/2) + 2 * RAZMER_KNOPKI; x = x + RAZMER_KNOPKI)
     {
-        txLine   (x, screenH - 300, x, screenH);
+        txLine   (x, screenY - KOLICH_RYADOV_WS * RAZMER_KNOPKI, x, screenY);
     }
 
-    txSetColor(TX_BLACK, 4);
-    for (int x = 0; x <= screenW; x = x + 5 * RAZMER_KNOPKI)
+    /*txSetColor(TX_BLACK, 4);
+
+    for (int x = 0; x <= screenX; x = x + 4 * RAZMER_KNOPKI)
     {
-        txLine   (x, screenH - 300, x, screenH);
-    }
+        txLine   (x, screenY - 300, x, screenY);
+    } */
 }
 
 int read(Button* knopki_mebeli)
@@ -100,19 +106,20 @@ int read(Button* knopki_mebeli)
 \brief Функция выбора кнопки
 
 Функция отвечающая за реакцию кнопки
-\param[in] int screenW Ширина экрана
-\param[in] int screenH Высота экрана
+\param[in] int screenX Ширина экрана
+\param[in] int screenY Высота экрана
 \param[in] Mebel* Tomb Рисуемая мебель
 \param[in] Button knopki_mebeli Кнопка
 */
-void button_selection(int screenW, int screenH, Mebel* Tomb, Button knopki_mebeli)
+
+void button_selection(int screenX, int screenY, Mebel* Tomb, Button knopki_mebeli)
 {
     Tomb->pctr = knopki_mebeli.picture;
     Tomb->MOUSE_X = txMouseX();
     Tomb->MOUSE_Y = txMouseY();
     Tomb->width = SizerX(knopki_mebeli.picture);
     Tomb->height = SizerY(knopki_mebeli.picture);
-    Tomb->risovat = checkFocus(50, 50, screenW - 50 - 200, screenH - 350 - 200);
+    Tomb->risovat = checkFocus(50, 50, screenX - 50 - 200, screenY - 350 - 200);
     Tomb->adressMebeli = knopki_mebeli.adress;
 }
 /*!
@@ -120,15 +127,16 @@ void button_selection(int screenW, int screenH, Mebel* Tomb, Button knopki_mebel
 
 Функция отвечающая за координаты кнопок на панели
 
-\param[in] int count_knopok_mebeli Предел колличества кнопок
+\param[in] int count_knopok_mebeli Предел количества кнопок
 \param[in] Button knopki_mebeli Кнопка
 */
+
 void coords_of_first_button(Button* knopki_mebeli, int count_knopok_mebeli)
 {
-    int screenW = GetSystemMetrics(SM_CXSCREEN);
-    int screenH = GetSystemMetrics(SM_CYSCREEN);
-    int CurrentX = 0;
-    int CurrentY = screenH - 3 * RAZMER_KNOPKI;
+    int screenX = GetSystemMetrics(SM_CXSCREEN);
+    int screenY = GetSystemMetrics(SM_CYSCREEN);
+    int CurrentX = (screenX/2) - 2 * RAZMER_KNOPKI;
+    int CurrentY = screenY - KOLICH_RYADOV_WS * RAZMER_KNOPKI;
 
     for (int i=0; i<count_knopok_mebeli; i++)
     {
@@ -142,13 +150,14 @@ void coords_of_first_button(Button* knopki_mebeli, int count_knopok_mebeli)
 
         //Generate coords for next button
         CurrentX = CurrentX + RAZMER_KNOPKI;
-        if (CurrentX > screenW - RAZMER_KNOPKI)
+        if (CurrentX >= (screenX/2) + 2 * RAZMER_KNOPKI)
         {
-            CurrentX =  RAZMER_KNOPKI;
+            CurrentX = (screenX/2) - 2 * RAZMER_KNOPKI;
             CurrentY = CurrentY + RAZMER_KNOPKI;
         }
     }
 }
+
 /*!
 \brief Загрузка
 

@@ -33,30 +33,32 @@ double oneDimensionalDistance (double minX1, double maxX1, double minX2, double 
     double distance = 0;
 
     if (minX1  < maxX1 && minX2  < maxX2 &&               //minX1   < maxX1 < minX2  < maxX2
-                maxX1  < minX2)
+                 maxX1  < minX2)
     {
-    distance = minX2 - maxX1;
+        distance = minX2 - maxX1;
     }
-      else if (minX1  < minX2 && maxX1  < maxX2 &&        //minX1   < minX2  < maxX1 < maxX2
-                minX2  < maxX1)
+    else if (minX1  < minX2 && maxX1  < maxX2 &&        //minX1   < minX2  < maxX1 < maxX2
+                      minX2  < maxX1)
     {
-    distance = 0;
+        distance = 0;
     }
     else if (minX1  < minX2 && maxX2  < maxX1 &&        //minX1   < minX2  < maxX2 < maxX1
-                minX2  < maxX2)
+                      minX2  < maxX2)
     {
         distance = 0;
     }
-        else if (minX2  < minX1 && maxX1  < maxX2 &&        //minX2   < minX1  < maxX1 < maxX2
-                minX1  < maxX1) {
+    else if (minX2  < minX1 && maxX1  < maxX2 &&        //minX2   < minX1  < maxX1 < maxX2
+                      minX1  < maxX1)
+    {
         distance = 0;
-    } else if (minX2  < minX1 && maxX2  < maxX1 &&        //minX2   < minX1  < maxX2 < maxX1
-                minX1  < maxX2)
+    }
+    else if (minX2  < minX1 && maxX2  < maxX1 &&        //minX2   < minX1  < maxX2 < maxX1
+                      minX1  < maxX2)
     {
         distance = 0;
     }
     else if (minX2  < maxX2 && minX1  < maxX1 &&        //minX2   < maxX2  < minX1  < maxX1
-                maxX2  < minX1)
+                      maxX2  < minX1)
     {
         distance = minX1 - maxX2;
     }
@@ -144,7 +146,8 @@ void checkalka( int nomer_kartinki, Mebel* Tomb, int vsego_kart)
 
     if (txMouseButtons() & 1)
     {
-        if (Tomb[nomer_kartinki].MOUSE_Y + Tomb[nomer_kartinki].aheight > screenH-300)
+        //FIXME KOLICH_RYADOV_WS!!! RAZMER_KNOPKI!!!
+        if (Tomb[nomer_kartinki].MOUSE_Y + Tomb[nomer_kartinki].aheight > screenH - 300)
         {
             Tomb[nomer_kartinki].risovat = false;
         }
@@ -160,6 +163,9 @@ void checkalka( int nomer_kartinki, Mebel* Tomb, int vsego_kart)
                 oneDimensionalDistance(Tomb[nomer_kartinki].MOUSE_Y + 1,    Tomb[nomer_kartinki].MOUSE_Y    + Tomb[nomer_kartinki].aheight,
                                        Tomb[predydushii_nomer].MOUSE_Y + 1, Tomb[predydushii_nomer].MOUSE_Y + Tomb[predydushii_nomer].aheight) == 0)
             {
+                char str[100];
+                sprintf(str, "%d %d %d %d", nomer_kartinki, predydushii_nomer, Tomb[nomer_kartinki].MOUSE_X, Tomb[predydushii_nomer].MOUSE_X);
+                txTextOut(100, screenH - 300 + nomer_kartinki * 20, str);
                 Tomb[nomer_kartinki].risovat = false;
             }
         }
