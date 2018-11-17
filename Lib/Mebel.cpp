@@ -1,5 +1,3 @@
-#pragma once
-
 /*!
 \file
 \brief Мебель
@@ -14,8 +12,10 @@
 \name Функции связанные с мебелью
 
 */
+#pragma once
 
 #include "Button.cpp"
+#include "config.cpp"
 #include "TXLib.h"
 /*!
 \brief функция проверки столкновения
@@ -114,19 +114,18 @@ void decor_destruction (Mebel* Tomb, int count_mebel)
 void draw_all_mebel(Mebel* Tomb, int count_mebel,bool wather, HDC WatherMark)
 {
     txSetColor(TX_BLACK, 5);
-    if(wather== true)
-    {
-        txTransparentBlt (txDC(), 800, 200, 101, 100, WatherMark, 0, 0);
-        //wather=false;
-    }
 
     for (int i=0; i<count_mebel; i++)
     {
         if (Tomb[i].risovat)
         {
             Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, Tomb[i].awidth, Tomb[i].aheight, Tomb[i].pctr, 0, 0, Tomb[i].width, Tomb[i].height, TX_WHITE);
-
         }
+    }
+
+    if (wather)
+    {
+        txTransparentBlt (txDC(), 800, 200, 101, 100, WatherMark, 0, 0);
     }
 }
 /*!
@@ -141,13 +140,10 @@ void draw_all_mebel(Mebel* Tomb, int count_mebel,bool wather, HDC WatherMark)
 */
 void checkalka( int nomer_kartinki, Mebel* Tomb, int vsego_kart)
 {
-    int screenW = GetSystemMetrics (SM_CXSCREEN);
-    int screenH = GetSystemMetrics (SM_CYSCREEN);
-
     if (txMouseButtons() & 1)
     {
         //FIXME KOLICH_RYADOV_WS!!! RAZMER_KNOPKI!!!
-        if (Tomb[nomer_kartinki].MOUSE_Y + Tomb[nomer_kartinki].aheight > screenH - 300)
+        if (Tomb[nomer_kartinki].MOUSE_Y + Tomb[nomer_kartinki].aheight > screenY - KOLICH_RYADOV_WS * RAZMER_KNOPKI)
         {
             Tomb[nomer_kartinki].risovat = false;
         }
@@ -165,7 +161,7 @@ void checkalka( int nomer_kartinki, Mebel* Tomb, int vsego_kart)
             {
                 char str[100];
                 sprintf(str, "%d %d %d %d", nomer_kartinki, predydushii_nomer, Tomb[nomer_kartinki].MOUSE_X, Tomb[predydushii_nomer].MOUSE_X);
-                txTextOut(100, screenH - 300 + nomer_kartinki * 20, str);
+                txTextOut(100, screenY - 300 + nomer_kartinki * 20, str);
                 Tomb[nomer_kartinki].risovat = false;
             }
         }

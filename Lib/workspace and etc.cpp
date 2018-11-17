@@ -1,5 +1,3 @@
-#pragma once
-
 /*!
 \file
 \brief Код рабочей области
@@ -14,7 +12,9 @@
 \name Функции рабочей области
 
 */
+#pragma once
 
+#include "config.cpp"
 #include "Button.cpp"
 #include <iostream>
 #include <fstream>
@@ -37,9 +37,6 @@ void grid();
 */
 int read(Button* knopki_mebeli);
 
-const int RAZMER_KNOPKI = 100;
-int KOLICH_RYADOV_WS = 0;
-
 /*!
 \brief Фон рабочей области
 
@@ -60,27 +57,20 @@ void workspace_background()
 
 void grid()
 {
-    int screenX = GetSystemMetrics (SM_CXSCREEN);
-    int screenY = GetSystemMetrics (SM_CYSCREEN);
-
     txSetColor(TX_BLACK);
 
     for (int y = screenY; y >= screenY - KOLICH_RYADOV_WS * RAZMER_KNOPKI; y = y - RAZMER_KNOPKI)
     {
-        txLine   ((screenX/2) - 2 * RAZMER_KNOPKI, y, (screenX/2) + 2 * RAZMER_KNOPKI, y);
+        txLine   ((screenX - KOLICH_STOLBCOV_WS * RAZMER_KNOPKI) / 2, y,
+                  (screenX + KOLICH_STOLBCOV_WS * RAZMER_KNOPKI) / 2, y);
     }
 
-    for (int x = (screenX/2) - 2 * RAZMER_KNOPKI; x < (screenX/2) + 2 * RAZMER_KNOPKI; x = x + RAZMER_KNOPKI)
+    for (int x  = (screenX - KOLICH_STOLBCOV_WS * RAZMER_KNOPKI) / 2;
+             x <= (screenX + KOLICH_STOLBCOV_WS * RAZMER_KNOPKI) / 2;
+             x += RAZMER_KNOPKI)
     {
         txLine   (x, screenY - KOLICH_RYADOV_WS * RAZMER_KNOPKI, x, screenY);
     }
-
-    /*txSetColor(TX_BLACK, 4);
-
-    for (int x = 0; x <= screenX; x = x + 4 * RAZMER_KNOPKI)
-    {
-        txLine   (x, screenY - 300, x, screenY);
-    } */
 }
 
 int read(Button* knopki_mebeli)
@@ -133,9 +123,7 @@ void button_selection(int screenX, int screenY, Mebel* Tomb, Button knopki_mebel
 
 void coords_of_first_button(Button* knopki_mebeli, int count_knopok_mebeli)
 {
-    int screenX = GetSystemMetrics(SM_CXSCREEN);
-    int screenY = GetSystemMetrics(SM_CYSCREEN);
-    int CurrentX = (screenX/2) - 2 * RAZMER_KNOPKI;
+    int CurrentX = (screenX - KOLICH_STOLBCOV_WS * RAZMER_KNOPKI) / 2;
     int CurrentY = screenY - KOLICH_RYADOV_WS * RAZMER_KNOPKI;
 
     for (int i=0; i<count_knopok_mebeli; i++)
@@ -150,9 +138,9 @@ void coords_of_first_button(Button* knopki_mebeli, int count_knopok_mebeli)
 
         //Generate coords for next button
         CurrentX = CurrentX + RAZMER_KNOPKI;
-        if (CurrentX >= (screenX/2) + 2 * RAZMER_KNOPKI)
+        if (CurrentX >= (screenX + KOLICH_STOLBCOV_WS * RAZMER_KNOPKI) / 2)
         {
-            CurrentX = (screenX/2) - 2 * RAZMER_KNOPKI;
+            CurrentX = (screenX - KOLICH_STOLBCOV_WS * RAZMER_KNOPKI) / 2;
             CurrentY = CurrentY + RAZMER_KNOPKI;
         }
     }
@@ -167,7 +155,6 @@ void coords_of_first_button(Button* knopki_mebeli, int count_knopok_mebeli)
 */
 int download_mebel(Mebel* knopki_mebeli)
 {
-
     string ss2 = txInputBox ("Nomer save?", "System", "0");
     const char* SaveName = ("Saves\\save" + ss2 + ".txt").c_str();
 
@@ -203,17 +190,13 @@ int download_mebel(Mebel* knopki_mebeli)
                 string width = get.substr(0, pos4);
                 get = get.substr(pos4 + 1);
 
-
-
                 int pos5 = get.find(',');
                 string height = get.substr(0, pos5);
-                 get = get.substr(pos5 + 1);
+                get = get.substr(pos5 + 1);
 
                 int pos6 = get.find(',');
                 string awidth = get.substr(0, pos6);
                 get = get.substr(pos6 + 1);
-
-
 
                 int pos7 = get.find(',');
                 string aheight = get.substr(0, pos7);
@@ -222,17 +205,14 @@ int download_mebel(Mebel* knopki_mebeli)
                 strcpy(picAdress, adress.c_str());
 
                 knopki_mebeli[nomer] = {picAdress, true, atoi(x.c_str()), atoi(y.c_str()), txLoadImage(picAdress), atoi(width.c_str()), atoi(height.c_str()), atoi(awidth.c_str()), atoi(aheight.c_str())};
-//PicSize
-
                 nomer++;
             }
         }
 
         fout.close();
-     }
+    }
 
-     return nomer;
-
+    return nomer;
 }
 
 void drDre(Mebel* knopki_mebeli)

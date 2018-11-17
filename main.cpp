@@ -14,8 +14,7 @@
 
 */
 
-
-
+#include "Lib\\config.cpp"
 #include "Lib\\savingInBMP.cpp"
 #include "Lib\\Mebel.cpp"
 #include "Lib\\MENU.cpp"
@@ -48,7 +47,6 @@ int GetFolderCountFiles(const char* szPath);
 */
 
 void saving (Mebel* Tomb, int count_knopok);
-bool wather = true; ///\brief Показ водяного знака
 
 int main()
 {
@@ -68,8 +66,8 @@ int main()
 
     decor_destruction(Tomb, count_mebel);
 
-    int screenX = GetSystemMetrics (SM_CXSCREEN);
-    int screenY = GetSystemMetrics (SM_CYSCREEN);
+    screenX = GetSystemMetrics (SM_CXSCREEN);
+    screenY = GetSystemMetrics (SM_CYSCREEN);
     txCreateWindow (screenX, screenY);
 
     settingsButton = {"", nullptr, 0, screenY * 75/100, 200, screenY * 80/100};
@@ -82,7 +80,7 @@ int main()
     Button knopki_mebeli[200];
     int count_knopok_mebeli = read(knopki_mebeli);
     //In C++ round (2.5) = 2
-    KOLICH_RYADOV_WS = round((count_knopok_mebeli + 2)/4);
+    KOLICH_RYADOV_WS = round((count_knopok_mebeli + 0.4999 * KOLICH_STOLBCOV_WS)/KOLICH_STOLBCOV_WS);
     //coords of first button
     coords_of_first_button(knopki_mebeli, count_knopok_mebeli); /// \brief Координаты первой кнопки
 
