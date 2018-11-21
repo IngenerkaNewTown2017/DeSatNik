@@ -75,7 +75,7 @@ int main()
     loadButton = {"", nullptr, 0, screenY * 85/100, 200, screenY * 90/100};
     saveButton = {"", nullptr, 0, screenY * 90/100, 200, screenY * 95/100};
     exitButton = {"", nullptr, 0, screenY * 95/100, 200, screenY};
-
+    docButton={"", nullptr, RAZMER_KNOPKI,screenY * 50/100, 200, screenY * 80/100};
 
     Button knopki_mebeli[200];
     int count_knopok_mebeli = read(knopki_mebeli);
@@ -236,6 +236,8 @@ int main()
             returnToMenu = false;
             drawMenu (screenX, screenY, fon_menu);
             checkMenuFocus();
+            doc (docButton);
+
             //menu_escape(escape);
             startWS = startWorkspace(startWS);
         }
