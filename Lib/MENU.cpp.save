@@ -20,8 +20,6 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <stdlib.h>
-
 
 /*!
 \brief функция проверки положения мыши
@@ -191,7 +189,7 @@ void drawMenu (int screenW, int screenH, HDC fon_menu)
 	txTextOut(saveButton.x, saveButton.y, "Сохранить");
 	txTextOut(loadButton.x, loadButton.y, "Загрузить");
     txTextOut (exitButton.x, exitButton.y, "Выйти");
-    txTextOut(settingsButton.x, settingsButton.y, "Настройки");
+    txTextOut(settingsButton.x, settingsButton.y, "xXx");
     txTextOut(docButton.x, docButton.y, "xXx");
 }
 
@@ -253,7 +251,7 @@ void doc (Button docButton)
         txMouseY() < docButton.y1 &&
         txMouseButtons() & 1)
     {
-    system("Documentation.chm");
+    System("Documentation.chm");
      }
 }
 

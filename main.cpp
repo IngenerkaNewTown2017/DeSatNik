@@ -1,16 +1,16 @@
 /*!
-\mainpage Ýòà ïðîãðàììà íàïèñàíà êîìàíäîé ìîëîäûõ, (è íå î÷åíü) òàëàíòëèâûõ ïðîãðàììèñòîâ DeSatNik team. Îñîáàÿ áëàãîäàðíîñòü çà ïîääåðæêó è âåðó â ëó÷øåå â îòíîøåíèè ýòîãî êîäà âûðàæàåòñÿ Beavisabra
+\mainpage ÃÃ²Ã  Ã¯Ã°Ã®Ã£Ã°Ã Ã¬Ã¬Ã  Ã­Ã Ã¯Ã¨Ã±Ã Ã­Ã  ÃªÃ®Ã¬Ã Ã­Ã¤Ã®Ã© Ã¬Ã®Ã«Ã®Ã¤Ã»Ãµ, (Ã¨ Ã­Ã¥ Ã®Ã·Ã¥Ã­Ã¼) Ã²Ã Ã«Ã Ã­Ã²Ã«Ã¨Ã¢Ã»Ãµ Ã¯Ã°Ã®Ã£Ã°Ã Ã¬Ã¬Ã¨Ã±Ã²Ã®Ã¢ DeSatNik team. ÃŽÃ±Ã®Ã¡Ã Ã¿ Ã¡Ã«Ã Ã£Ã®Ã¤Ã Ã°Ã­Ã®Ã±Ã²Ã¼ Ã§Ã  Ã¯Ã®Ã¤Ã¤Ã¥Ã°Ã¦ÃªÃ³ Ã¨ Ã¢Ã¥Ã°Ã³ Ã¢ Ã«Ã³Ã·Ã¸Ã¥Ã¥ Ã¢ Ã®Ã²Ã­Ã®Ã¸Ã¥Ã­Ã¨Ã¨ Ã½Ã²Ã®Ã£Ã® ÃªÃ®Ã¤Ã  Ã¢Ã»Ã°Ã Ã¦Ã Ã¥Ã²Ã±Ã¿ Beavisabra
 \file
-\brief main âñåãî êîäà
+\brief main Ã¢Ã±Ã¥Ã£Ã® ÃªÃ®Ã¤Ã 
 
-Ñóòü äà äåëî ïðîãðàììû
+Ã‘Ã³Ã²Ã¼ Ã¤Ã  Ã¤Ã¥Ã«Ã® Ã¯Ã°Ã®Ã£Ã°Ã Ã¬Ã¬Ã»
 
 \authors DeSatNik team
 \version 1.0.0
 \date 13.11.2018
-\bug Íåèñ÷åñëèìû, ïîêà ÷òî
-\warning Îñòîðîæíåå
-\name Ôóíêöèè îñíîâíîãî ôàéëà
+\bug ÃÃ¥Ã¨Ã±Ã·Ã¥Ã±Ã«Ã¨Ã¬Ã», Ã¯Ã®ÃªÃ  Ã·Ã²Ã®
+\warning ÃŽÃ±Ã²Ã®Ã°Ã®Ã¦Ã­Ã¥Ã¥
+\name Ã”Ã³Ã­ÃªÃ¶Ã¨Ã¨ Ã®Ã±Ã­Ã®Ã¢Ã­Ã®Ã£Ã® Ã´Ã Ã©Ã«Ã 
 
 */
 
@@ -27,23 +27,23 @@
 
 using namespace std;
 /*!
-\brief ôóíêöèÿ ïîäñ÷¸òà ñêðèíøîòîâ
+\brief Ã´Ã³Ã­ÃªÃ¶Ã¨Ã¿ Ã¯Ã®Ã¤Ã±Ã·Â¸Ã²Ã  Ã±ÃªÃ°Ã¨Ã­Ã¸Ã®Ã²Ã®Ã¢
 
-Ñ÷èòàåò ñêðèíøîòû ñäåëàíûå ïîëüçîâàòåëåì â ïðîãðàììå
+Ã‘Ã·Ã¨Ã²Ã Ã¥Ã² Ã±ÃªÃ°Ã¨Ã­Ã¸Ã®Ã²Ã» Ã±Ã¤Ã¥Ã«Ã Ã­Ã»Ã¥ Ã¯Ã®Ã«Ã¼Ã§Ã®Ã¢Ã Ã²Ã¥Ã«Ã¥Ã¬ Ã¢ Ã¯Ã°Ã®Ã£Ã°Ã Ã¬Ã¬Ã¥
 
 
-\param[in] const char* szPath Ïóòü ê ïàïêå ñî ñêðèíøîòàìè
+\param[in] const char* szPath ÃÃ³Ã²Ã¼ Ãª Ã¯Ã Ã¯ÃªÃ¥ Ã±Ã® Ã±ÃªÃ°Ã¨Ã­Ã¸Ã®Ã²Ã Ã¬Ã¨
 */
 int GetFolderCountFiles(const char* szPath);
 
 /*!
-\brief ôóíêöèÿ ñîõðàíåíèÿ
+\brief Ã´Ã³Ã­ÃªÃ¶Ã¨Ã¿ Ã±Ã®ÃµÃ°Ã Ã­Ã¥Ã­Ã¨Ã¿
 
-Ñîõðàíÿåò ïëàíèðîâêó â ôàéë saving.txt
+Ã‘Ã®ÃµÃ°Ã Ã­Ã¿Ã¥Ã² Ã¯Ã«Ã Ã­Ã¨Ã°Ã®Ã¢ÃªÃ³ Ã¢ Ã´Ã Ã©Ã« saving.txt
 
 
-\param[in] Mebel* Tomb Ìàññèâ ñîõðàíÿåìîé ìåáåëè
-\param[in] int count_knopok ïðåäåë ìåáåëè
+\param[in] Mebel* Tomb ÃŒÃ Ã±Ã±Ã¨Ã¢ Ã±Ã®ÃµÃ°Ã Ã­Ã¿Ã¥Ã¬Ã®Ã© Ã¬Ã¥Ã¡Ã¥Ã«Ã¨
+\param[in] int count_knopok Ã¯Ã°Ã¥Ã¤Ã¥Ã« Ã¬Ã¥Ã¡Ã¥Ã«Ã¨
 */
 
 void saving (Mebel* Tomb, int count_knopok);
@@ -54,7 +54,7 @@ int main()
 
 
 
-   if (     txMouseX() > screenX - 300 and    //çàãðóçèòü ïîëüçîâàòåëüñêèé óðîâåíü
+   if (     txMouseX() > screenX - 300 and    //Ã§Ã Ã£Ã°Ã³Ã§Ã¨Ã²Ã¼ Ã¯Ã®Ã«Ã¼Ã§Ã®Ã¢Ã Ã²Ã¥Ã«Ã¼Ã±ÃªÃ¨Ã© Ã³Ã°Ã®Ã¢Ã¥Ã­Ã¼
             txMouseY() > screenY - 300 and
             txMouseY() < screenX and
             txMouseX() < screenY and
@@ -87,27 +87,27 @@ int main()
     loadButton = {"", nullptr, 0, screenY * 85/100, 200, screenY * 90/100};
     saveButton = {"", nullptr, 0, screenY * 90/100, 200, screenY * 95/100};
     exitButton = {"", nullptr, 0, screenY * 95/100, 200, screenY};
+    docButton={"", nullptr, RAZMER_KNOPKI,screenY * 50/100, 200, screenY * 80/100};
+
     //choiceButton = {"",nullptr, 0, screenY * 70/100, 200, screenY * 75/100};
-
-
 
     Button knopki_mebeli[200];
     int count_knopok_mebeli = read(knopki_mebeli);
     //In C++ round (2.5) = 2
     KOLICH_RYADOV_WS = round((count_knopok_mebeli + 0.4999 * KOLICH_STOLBCOV_WS)/KOLICH_STOLBCOV_WS);
     //coords of first button
-    coords_of_first_button(knopki_mebeli, count_knopok_mebeli); /// \brief Êîîðäèíàòû ïåðâîé êíîïêè
+    coords_of_first_button(knopki_mebeli, count_knopok_mebeli); /// \brief ÃŠÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» Ã¯Ã¥Ã°Ã¢Ã®Ã© ÃªÃ­Ã®Ã¯ÃªÃ¨
 
-    HDC WSpace = txLoadImage ("Pics\\Workspace.bmp"); /// \brief Êàðòèíêà. Ôîí ðàáî÷åé îáëàñòè ðåäàêòîðà
-    HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp"); /// \brief Êàðòèíêà. Ôîí ìåíþ
-    HDC escape= txLoadImage ("Pics\\menu_escape.bmp"); /// \brief Êàðòèíêà. Ìåíþ ïàóçû
-    HDC WatherMark= txLoadImage ("Pics\\TempWather.bmp"); /// \brief Âîäÿíîé çíàê
+    HDC WSpace = txLoadImage ("Pics\\Workspace.bmp"); /// \brief ÃŠÃ Ã°Ã²Ã¨Ã­ÃªÃ . Ã”Ã®Ã­ Ã°Ã Ã¡Ã®Ã·Ã¥Ã© Ã®Ã¡Ã«Ã Ã±Ã²Ã¨ Ã°Ã¥Ã¤Ã ÃªÃ²Ã®Ã°Ã 
+    HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp"); /// \brief ÃŠÃ Ã°Ã²Ã¨Ã­ÃªÃ . Ã”Ã®Ã­ Ã¬Ã¥Ã­Ã¾
+    HDC escape= txLoadImage ("Pics\\menu_escape.bmp"); /// \brief ÃŠÃ Ã°Ã²Ã¨Ã­ÃªÃ . ÃŒÃ¥Ã­Ã¾ Ã¯Ã Ã³Ã§Ã»
+    HDC WatherMark= txLoadImage ("Pics\\TempWather.bmp"); /// \brief Ã‚Ã®Ã¤Ã¿Ã­Ã®Ã© Ã§Ã­Ã Ãª
     HDC user = txLoadImage ("Pics\\users level.bmp");
     HDC button = txLoadImage ("Pics\\button.bmp");
 
-    bool isExit = false; /// \brief Âûõîä èç ïðîãðàììû
-    bool startWS = false; /// \brief Íà÷àëî ðàáîòû
-    bool returnToMenu = false; /// \brief Âîçâðàò â ìåíþ
+    bool isExit = false; /// \brief Ã‚Ã»ÃµÃ®Ã¤ Ã¨Ã§ Ã¯Ã°Ã®Ã£Ã°Ã Ã¬Ã¬Ã»
+    bool startWS = false; /// \brief ÃÃ Ã·Ã Ã«Ã® Ã°Ã Ã¡Ã®Ã²Ã»
+    bool returnToMenu = false; /// \brief Ã‚Ã®Ã§Ã¢Ã°Ã Ã² Ã¢ Ã¬Ã¥Ã­Ã¾
 
     while (!isExit)
     {
@@ -252,6 +252,8 @@ int main()
             returnToMenu = false;
             drawMenu (screenX, screenY, fon_menu);
             checkMenuFocus();
+            doc (docButton);
+
             //menu_escape(escape);
             startWS = startWorkspace(startWS);
         }
@@ -355,7 +357,7 @@ int GetFolderCountFiles( const char* szPath)
 }
 
  /*void chooseVoid (HDC menuPic ,HDC choose, int red, int green, int blue, bool game_over, int* level, bool* nachalo_progi, HDC user, int x, int y, HDC about)
-{ //ôóíêöèÿ âûáîðà óðîâíåé
+{ //Ã´Ã³Ã­ÃªÃ¶Ã¨Ã¿ Ã¢Ã»Ã¡Ã®Ã°Ã  Ã³Ã°Ã®Ã¢Ã­Ã¥Ã©
 
 
 
@@ -364,7 +366,7 @@ int GetFolderCountFiles( const char* szPath)
     {
         txTransparentBlt (txDC(), 0, 0, 1440, 900, choose, 0, 0, TX_WHITE);
 
-        if (txMouseX() > 93 and          //çàãðóçèòü óðîâåíü ¹1
+        if (txMouseX() > 93 and          //Ã§Ã Ã£Ã°Ã³Ã§Ã¨Ã²Ã¼ Ã³Ã°Ã®Ã¢Ã¥Ã­Ã¼ Â¹1
             txMouseY() > 90 and
             txMouseY() < 330 and
             txMouseX() < 477 and
@@ -373,7 +375,7 @@ int GetFolderCountFiles( const char* szPath)
                     *level = 1;
                     *nachalo_progi = true;
 
-        } else if (txMouseX() >533 and    //çàãðóçèòü óðîâåíü ¹2
+        } else if (txMouseX() >533 and    //Ã§Ã Ã£Ã°Ã³Ã§Ã¨Ã²Ã¼ Ã³Ã°Ã®Ã¢Ã¥Ã­Ã¼ Â¹2
             txMouseY() > 90 and
             txMouseY() < 329 and
             txMouseX() < 917 and
@@ -383,7 +385,7 @@ int GetFolderCountFiles( const char* szPath)
                     *nachalo_progi = true;
 
         }
-        else if (txMouseX() > 970 and           //çàãðóçèòü óðîâåíü ¹3
+        else if (txMouseX() > 970 and           //Ã§Ã Ã£Ã°Ã³Ã§Ã¨Ã²Ã¼ Ã³Ã°Ã®Ã¢Ã¥Ã­Ã¼ Â¹3
             txMouseY() > 90 and
             txMouseY() < 332 and
             txMouseX() < 1359 and
@@ -394,7 +396,7 @@ int GetFolderCountFiles( const char* szPath)
 
         }
 
-         if (txMouseX() > screenX - and    //çàãðóçèòü ïîëüçîâàòåëüñêèé óðîâåíü
+         if (txMouseX() > screenX - and    //Ã§Ã Ã£Ã°Ã³Ã§Ã¨Ã²Ã¼ Ã¯Ã®Ã«Ã¼Ã§Ã®Ã¢Ã Ã²Ã¥Ã«Ã¼Ã±ÃªÃ¨Ã© Ã³Ã°Ã®Ã¢Ã¥Ã­Ã¼
             txMouseY() > 521 and
             txMouseY() < 761 and
             txMouseX() < 917 and
