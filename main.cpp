@@ -52,7 +52,19 @@ int main()
 {
     ShellExecute(NULL,NULL,"sound.exe",NULL ,NULL,SW_SHOWMINIMIZED);
 
-    char s[100];
+
+
+   if (     txMouseX() > screenX - 300 and    //загрузить пользовательский уровень
+            txMouseY() > screenY - 300 and
+            txMouseY() < screenX and
+            txMouseX() < screenY and
+            txMouseButtons() & 1)
+
+    {
+
+    }
+
+     char s[100];
     string ss;
     int ScreenshotIndex=GetFolderCountFiles("Screenshots\\");
 
@@ -75,6 +87,8 @@ int main()
     loadButton = {"", nullptr, 0, screenY * 85/100, 200, screenY * 90/100};
     saveButton = {"", nullptr, 0, screenY * 90/100, 200, screenY * 95/100};
     exitButton = {"", nullptr, 0, screenY * 95/100, 200, screenY};
+    //choiceButton = {"",nullptr, 0, screenY * 70/100, 200, screenY * 75/100};
+
 
 
     Button knopki_mebeli[200];
@@ -88,7 +102,8 @@ int main()
     HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp"); /// \brief Картинка. Фон меню
     HDC escape= txLoadImage ("Pics\\menu_escape.bmp"); /// \brief Картинка. Меню паузы
     HDC WatherMark= txLoadImage ("Pics\\TempWather.bmp"); /// \brief Водяной знак
-
+    HDC user = txLoadImage ("Pics\\users level.bmp");
+    HDC button = txLoadImage ("Pics\\button.bmp");
 
     bool isExit = false; /// \brief Выход из программы
     bool startWS = false; /// \brief Начало работы
@@ -103,6 +118,7 @@ int main()
         {
             workspace_background();
             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
+            txBitBlt (txDC(), screenX - 300, screenY - 300, 500, 500, button, 0, 0);
             grid();
 
 
@@ -337,3 +353,60 @@ int GetFolderCountFiles( const char* szPath)
       }
       return i64CountFiles;
 }
+
+ /*void chooseVoid (HDC menuPic ,HDC choose, int red, int green, int blue, bool game_over, int* level, bool* nachalo_progi, HDC user, int x, int y, HDC about)
+{ //функция выбора уровней
+
+
+
+   txSleep(1000);
+    while (*nachalo == false)
+    {
+        txTransparentBlt (txDC(), 0, 0, 1440, 900, choose, 0, 0, TX_WHITE);
+
+        if (txMouseX() > 93 and          //загрузить уровень №1
+            txMouseY() > 90 and
+            txMouseY() < 330 and
+            txMouseX() < 477 and
+            txMouseButtons() & 1)
+        {
+                    *level = 1;
+                    *nachalo_progi = true;
+
+        } else if (txMouseX() >533 and    //загрузить уровень №2
+            txMouseY() > 90 and
+            txMouseY() < 329 and
+            txMouseX() < 917 and
+            txMouseButtons() & 1)
+        {
+                    *level = 2;
+                    *nachalo_progi = true;
+
+        }
+        else if (txMouseX() > 970 and           //загрузить уровень №3
+            txMouseY() > 90 and
+            txMouseY() < 332 and
+            txMouseX() < 1359 and
+            txMouseButtons() & 1)
+        {
+                    *level = 3;
+                    *nachalo_progi = true;
+
+        }
+
+         if (txMouseX() > screenX - and    //загрузить пользовательский уровень
+            txMouseY() > 521 and
+            txMouseY() < 761 and
+            txMouseX() < 917 and
+            txMouseButtons() & 1)
+        {
+            *level = 0;
+            *nachalo_progi = true;
+
+
+        }
+
+        txSleep(10);
+    }
+}*/
+
