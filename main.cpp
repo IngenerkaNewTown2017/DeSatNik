@@ -137,9 +137,7 @@ int main()
             }
 
             if (GetAsyncKeyState('L'))
-            {
-               nomer_tomba = download_mebel(Tomb);
-            }
+
 
             if (GetAsyncKeyState('F'))
             {
@@ -157,7 +155,7 @@ int main()
                 txSleep(300);
                 ScreenshotIndex=GetFolderCountFiles("Screenshots\\");
             }
-
+                menu_escape(escape);
             draw_all_mebel(Tomb, nomer_tomba,wather, WatherMark);
 
             //Drag-n-drop from toolstrip to workspace

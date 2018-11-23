@@ -40,26 +40,26 @@ void menu_escape(HDC escape)
         while (!isreturn)
         {
 
-            txBitBlt (txDC(), screenH/2, screenW/2 - 300, SizerX(escape), SizerX(escape), escape, 0, 0);
-            txSleep(20);
+            txBitBlt (txDC(), screenH/2, screenW/2 - 300, 215, 291, escape, 0, 0);
+
             if ((txMouseButtons() & 1 &&
                 txMouseX() > screenW/2 - 300 +30 && txMouseX() < screenW/2 - 300 + 180
             &&  txMouseY() > screenH/2 +65  && txMouseY() < screenH/2+95) )
             {
                 isreturn = true;
-
+            
             } else if ((txMouseButtons() & 1 &&
                 txMouseX() > screenW/2 - 300 +30 && txMouseX() < screenW/2 - 300 + 180
             &&  txMouseY() > screenH/2 +105  && txMouseY() < screenH/2+135) )
             {
               GetAsyncKeyState('L');
-
+            
             } else if ((txMouseButtons() & 1 &&
                 txMouseX() > screenW/2 - 300 +30 && txMouseX() < screenW/2 - 300 + 180
             &&  txMouseY() > screenH/2 +145  && txMouseY() < screenH/2+175) )
             {
              GetAsyncKeyState('S');
-
+            
             } else if ((txMouseButtons() & 1 &&
                 txMouseX() > screenW/2 - 300 +30 && txMouseX() < screenW/2 - 300 + 180
             &&  txMouseY() > screenH/2 +225  && txMouseY() < screenH/2+255) )
