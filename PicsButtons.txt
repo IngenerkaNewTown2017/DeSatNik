@@ -6,5 +6,5 @@ Pics\\Puffeg.bmp
 Pics\\Kreslo.bmp
 Pics\\TV.bmp
 Pics\\Bath.bmp
-Pics\\Ковёр.bmp
-Pics\\Пол.bmp
+Floor\\Ковёр.bmp
+Floor\\Пол.bmp
