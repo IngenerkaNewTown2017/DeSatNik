@@ -55,7 +55,7 @@ int main()
     txCreateWindow (screenX, screenY);
     ShellExecute(NULL,NULL,"sound.exe",NULL ,NULL,SW_SHOWMINIMIZED);
 
-     char s[100];
+    char s[100];
     string ss;
     int ScreenshotIndex=GetFolderCountFiles("Screenshots\\");
 
@@ -67,12 +67,10 @@ int main()
     Mebel Tomb[count_mebel];
     int nomer_tomba = 0;
 
-
     HDC obst[4];
     obst[0] = txLoadImage("Pics\\users plan.bmp");
 
     decor_destruction(Tomb, count_mebel);
-
 
 
     settingsButton = {"", nullptr, 0, screenY * 75/100, 200, screenY * 80/100};
@@ -104,7 +102,7 @@ int main()
     bool returnToMenu = false; /// \brief Âîçâðàò â ìåíþ
     bool risovatKnopka = true;
 
-                int plan = -1;
+    int plan = -1;
     while (!isExit)
     {
         txBegin();
@@ -114,11 +112,11 @@ int main()
         {
             workspace_background();
             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
+            //txBitBlt (txDC(), screenX - 300, screenY - 300, 500, 500, button, 0, 0);
             grid();
 
 
             returnToMenu = nazad (returnToMenu);
-
             if (returnToMenu)
             {
                 decor_destruction(Tomb, nomer_tomba);
@@ -136,7 +134,11 @@ int main()
             {
                nomer_tomba = download_mebel(Tomb);
             }
-
+            if (GetAsyncKeyState('F'))
+            {
+                //drDre(Mebel knopki_mebeli);
+            }
+          
             if (GetAsyncKeyState('W'))
             {
                 plan = 0;
@@ -170,11 +172,15 @@ int main()
                 txSleep(300);
                 ScreenshotIndex=GetFolderCountFiles("Screenshots\\");
             }
+          
+            menu_escape(escape);
 
-        if (plan != -1)
-        {
-        Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
-          }
+          
+            if (plan != -1)
+            {
+                Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
+            }
+
             draw_all_mebel(Tomb, nomer_tomba,wather, WatherMark);
 
             //Drag-n-drop from toolstrip to workspace
@@ -424,8 +430,6 @@ int GetFolderCountFiles( const char* szPath)
             *plan = 0;
             *nachalo_progi = true;
           }
-
         txSleep(10);
     }
 }*/
-
