@@ -50,19 +50,10 @@ void saving (Mebel* Tomb, int count_knopok);
 
 int main()
 {
+    screenX = GetSystemMetrics (SM_CXSCREEN);
+    screenY = GetSystemMetrics (SM_CYSCREEN);
+    txCreateWindow (screenX, screenY);
     ShellExecute(NULL,NULL,"sound.exe",NULL ,NULL,SW_SHOWMINIMIZED);
-
-
-
-   if (     txMouseX() > screenX - 300 and    //çàãðóçèòü ïîëüçîâàòåëüñêèé óðîâåíü
-            txMouseY() > screenY - 300 and
-            txMouseY() < screenX and
-            txMouseX() < screenY and
-            txMouseButtons() & 1)
-
-    {
-
-    }
 
      char s[100];
     string ss;
@@ -76,11 +67,13 @@ int main()
     Mebel Tomb[count_mebel];
     int nomer_tomba = 0;
 
+
+    HDC obst[4];
+    obst[0] = txLoadImage("Pics\\users plan.bmp");
+
     decor_destruction(Tomb, count_mebel);
 
-    screenX = GetSystemMetrics (SM_CXSCREEN);
-    screenY = GetSystemMetrics (SM_CYSCREEN);
-    txCreateWindow (screenX, screenY);
+
 
     settingsButton = {"", nullptr, 0, screenY * 75/100, 200, screenY * 80/100};
     newplanButton = {"", nullptr, 0, screenY * 80/100, 200, screenY * 85/100};
@@ -102,13 +95,16 @@ int main()
     HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp"); /// \brief Êàðòèíêà. Ôîí ìåíþ
     HDC escape= txLoadImage ("Pics\\menu_escape.bmp"); /// \brief Êàðòèíêà. Ìåíþ ïàóçû
     HDC WatherMark= txLoadImage ("Pics\\TempWather.bmp"); /// \brief Âîäÿíîé çíàê
-    HDC user = txLoadImage ("Pics\\users level.bmp");
-    HDC button = txLoadImage ("Pics\\button.bmp");
+    //HDC user = txLoadImage ("Pics\\users level.bmp");
+    //HDC button = txLoadImage ("Pics\\button.bmp");
+    HDC choose_menu = txLoadImage ("Pics\\choose_menu.bmp");
 
     bool isExit = false; /// \brief Âûõîä èç ïðîãðàììû
     bool startWS = false; /// \brief Íà÷àëî ðàáîòû
     bool returnToMenu = false; /// \brief Âîçâðàò â ìåíþ
+    bool risovatKnopka = true;
 
+                int plan = -1;
     while (!isExit)
     {
         txBegin();
@@ -118,11 +114,11 @@ int main()
         {
             workspace_background();
             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-            txBitBlt (txDC(), screenX - 300, screenY - 300, 500, 500, button, 0, 0);
             grid();
 
 
             returnToMenu = nazad (returnToMenu);
+
             if (returnToMenu)
             {
                 decor_destruction(Tomb, nomer_tomba);
@@ -141,9 +137,26 @@ int main()
                nomer_tomba = download_mebel(Tomb);
             }
 
-            if (GetAsyncKeyState('F'))
+            if (GetAsyncKeyState('W'))
             {
-                //drDre(Mebel knopki_mebeli);
+                plan = 0;
+                bool nachalo = false;
+                while (!nachalo )
+                {
+                    txBitBlt    (txDC(), 0, 0, screenX, screenY, choose_menu, 0, 0);
+
+                    if (txMouseX() > screenX - 900 and
+                        txMouseY() > screenY - 700 and
+                        txMouseY() < screenY - 400 and
+                        txMouseX() <   screenX - 600 and
+                        txMouseButtons() & 1)
+                    {
+                                plan = 0;
+                                nachalo = true;
+                      }
+
+                      txSleep(10);
+                }
             }
 
             //Screenshot
@@ -158,6 +171,10 @@ int main()
                 ScreenshotIndex=GetFolderCountFiles("Screenshots\\");
             }
 
+        if (plan != -1)
+        {
+        Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
+          }
             draw_all_mebel(Tomb, nomer_tomba,wather, WatherMark);
 
             //Drag-n-drop from toolstrip to workspace
@@ -356,57 +373,57 @@ int GetFolderCountFiles( const char* szPath)
       return i64CountFiles;
 }
 
- /*void chooseVoid (HDC menuPic ,HDC choose, int red, int green, int blue, bool game_over, int* level, bool* nachalo_progi, HDC user, int x, int y, HDC about)
-{ //ôóíêöèÿ âûáîðà óðîâíåé
+ /*void chooseVoid (HDC menuPic ,HDC choose_menu, bool game_over, int* plan, bool* nachalo_progi)
+{
 
-
+      if
 
    txSleep(1000);
-    while (*nachalo == false)
+    while (*nachalo_progi == false)
     {
-        txTransparentBlt (txDC(), 0, 0, 1440, 900, choose, 0, 0, TX_WHITE);
+        txTransparentBlt (txDC(), 0, 0, screenX, screenY, choose_menu, 0, 0, TX_WHITE);
 
-        if (txMouseX() > 93 and          //çàãðóçèòü óðîâåíü ¹1
-            txMouseY() > 90 and
-            txMouseY() < 330 and
-            txMouseX() < 477 and
+        if (txMouseX() > screenX - 700 and
+            txMouseY() > screenY - 800 and
+            txMouseY() < screenY - 300 and
+            txMouseX() <   screenX - 200 and
             txMouseButtons() & 1)
         {
-                    *level = 1;
+                    *plan = 1;
+                    *nachalo_progi = true;
+          }
+
+        else if (txMouseX() > and
+            txMouseY() >  and
+            txMouseY() <  and
+            txMouseX() <  and
+            txMouseButtons() & 1)
+        {
+                    *plan = 2;
                     *nachalo_progi = true;
 
-        } else if (txMouseX() >533 and    //çàãðóçèòü óðîâåíü ¹2
-            txMouseY() > 90 and
-            txMouseY() < 329 and
-            txMouseX() < 917 and
+          }
+
+        else if (txMouseX() >  and
+            txMouseY() >  and
+            txMouseY() <  and
+            txMouseX() <  and
             txMouseButtons() & 1)
         {
-                    *level = 2;
+                    *plan = 3;
                     *nachalo_progi = true;
 
-        }
-        else if (txMouseX() > 970 and           //çàãðóçèòü óðîâåíü ¹3
-            txMouseY() > 90 and
-            txMouseY() < 332 and
-            txMouseX() < 1359 and
+          }
+
+         if (txMouseX()>and
+            txMouseY() >  and
+            txMouseY() <  and
+            txMouseX() <  and
             txMouseButtons() & 1)
         {
-                    *level = 3;
-                    *nachalo_progi = true;
-
-        }
-
-         if (txMouseX() > screenX - and    //çàãðóçèòü ïîëüçîâàòåëüñêèé óðîâåíü
-            txMouseY() > 521 and
-            txMouseY() < 761 and
-            txMouseX() < 917 and
-            txMouseButtons() & 1)
-        {
-            *level = 0;
+            *plan = 0;
             *nachalo_progi = true;
-
-
-        }
+          }
 
         txSleep(10);
     }
