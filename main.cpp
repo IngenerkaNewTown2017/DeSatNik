@@ -1,16 +1,16 @@
 /*!
-\mainpage ГќГІГ  ГЇГ°Г®ГЈГ°Г Г¬Г¬Г  Г­Г ГЇГЁГ±Г Г­Г  ГЄГ®Г¬Г Г­Г¤Г®Г© Г¬Г®Г«Г®Г¤Г»Гµ, (ГЁ Г­ГҐ Г®Г·ГҐГ­Гј) ГІГ Г«Г Г­ГІГ«ГЁГўГ»Гµ ГЇГ°Г®ГЈГ°Г Г¬Г¬ГЁГ±ГІГ®Гў DeSatNik team. ГЋГ±Г®ГЎГ Гї ГЎГ«Г ГЈГ®Г¤Г Г°Г­Г®Г±ГІГј Г§Г  ГЇГ®Г¤Г¤ГҐГ°Г¦ГЄГі ГЁ ГўГҐГ°Гі Гў Г«ГіГ·ГёГҐГҐ Гў Г®ГІГ­Г®ГёГҐГ­ГЁГЁ ГЅГІГ®ГЈГ® ГЄГ®Г¤Г  ГўГ»Г°Г Г¦Г ГҐГІГ±Гї Beavisabra
+\mainpage Эта программа написана командой молодых, (и не очень) талантливых программистов DeSatNik team. Особая благодарность за поддержку и веру в лучшее в отношении этого кода выражается Beavisabra
 \file
-\brief main ГўГ±ГҐГЈГ® ГЄГ®Г¤Г 
+\brief main всего кода
 
-Г‘ГіГІГј Г¤Г  Г¤ГҐГ«Г® ГЇГ°Г®ГЈГ°Г Г¬Г¬Г»
+Суть да дело программы
 
 \authors DeSatNik team
 \version 1.0.0
 \date 13.11.2018
-\bug ГЌГҐГЁГ±Г·ГҐГ±Г«ГЁГ¬Г», ГЇГ®ГЄГ  Г·ГІГ®
-\warning ГЋГ±ГІГ®Г°Г®Г¦Г­ГҐГҐ
-\name Г”ГіГ­ГЄГ¶ГЁГЁ Г®Г±Г­Г®ГўГ­Г®ГЈГ® ГґГ Г©Г«Г 
+\bug Неисчеслимы, пока что
+\warning Осторожнее
+\name Функции основного файла
 
 */
 
@@ -26,27 +26,6 @@
 #include <string>
 
 using namespace std;
-/*!
-\brief ГґГіГ­ГЄГ¶ГЁГї ГЇГ®Г¤Г±Г·ВёГІГ  Г±ГЄГ°ГЁГ­ГёГ®ГІГ®Гў
-
-Г‘Г·ГЁГІГ ГҐГІ Г±ГЄГ°ГЁГ­ГёГ®ГІГ» Г±Г¤ГҐГ«Г Г­Г»ГҐ ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«ГҐГ¬ Гў ГЇГ°Г®ГЈГ°Г Г¬Г¬ГҐ
-
-
-\param[in] const char* szPath ГЏГіГІГј ГЄ ГЇГ ГЇГЄГҐ Г±Г® Г±ГЄГ°ГЁГ­ГёГ®ГІГ Г¬ГЁ
-*/
-int GetFolderCountFiles(const char* szPath);
-
-/*!
-\brief ГґГіГ­ГЄГ¶ГЁГї Г±Г®ГµГ°Г Г­ГҐГ­ГЁГї
-
-Г‘Г®ГµГ°Г Г­ГїГҐГІ ГЇГ«Г Г­ГЁГ°Г®ГўГЄГі Гў ГґГ Г©Г« saving.txt
-
-
-\param[in] Mebel* Tomb ГЊГ Г±Г±ГЁГў Г±Г®ГµГ°Г Г­ГїГҐГ¬Г®Г© Г¬ГҐГЎГҐГ«ГЁ
-\param[in] int count_knopok ГЇГ°ГҐГ¤ГҐГ« Г¬ГҐГЎГҐГ«ГЁ
-*/
-
-void saving (Mebel* Tomb, int count_knopok);
 
 int main()
 {
@@ -87,19 +66,19 @@ int main()
     //In C++ round (2.5) = 2
     KOLICH_RYADOV_WS = round((count_knopok_mebeli + 0.4999 * KOLICH_STOLBCOV_WS)/KOLICH_STOLBCOV_WS);
     //coords of first button
-    coords_of_first_button(knopki_mebeli, count_knopok_mebeli); /// \brief ГЉГ®Г®Г°Г¤ГЁГ­Г ГІГ» ГЇГҐГ°ГўГ®Г© ГЄГ­Г®ГЇГЄГЁ
+    coords_of_first_button(knopki_mebeli, count_knopok_mebeli); /// \brief Координаты первой кнопки
 
-    HDC WSpace = txLoadImage ("Pics\\Workspace.bmp"); /// \brief ГЉГ Г°ГІГЁГ­ГЄГ . Г”Г®Г­ Г°Г ГЎГ®Г·ГҐГ© Г®ГЎГ«Г Г±ГІГЁ Г°ГҐГ¤Г ГЄГІГ®Г°Г 
-    HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp"); /// \brief ГЉГ Г°ГІГЁГ­ГЄГ . Г”Г®Г­ Г¬ГҐГ­Гѕ
-    HDC escape= txLoadImage ("Pics\\menu_escape.bmp"); /// \brief ГЉГ Г°ГІГЁГ­ГЄГ . ГЊГҐГ­Гѕ ГЇГ ГіГ§Г»
-    HDC WatherMark= txLoadImage ("Pics\\TempWather.bmp"); /// \brief Г‚Г®Г¤ГїГ­Г®Г© Г§Г­Г ГЄ
+    HDC WSpace = txLoadImage ("Pics\\Workspace.bmp"); /// \brief Картинка. Фон рабочей области редактора
+    HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp"); /// \brief Картинка. Фон меню
+    HDC escape= txLoadImage ("Pics\\menu_escape.bmp"); /// \brief Картинка. Меню паузы
+    HDC WatherMark= txLoadImage ("Pics\\TempWather.bmp"); /// \brief Водяной знак
     //HDC user = txLoadImage ("Pics\\users level.bmp");
     //HDC button = txLoadImage ("Pics\\button.bmp");
     HDC choose_menu = txLoadImage ("Pics\\choose_menu.bmp");
 
-    bool isExit = false; /// \brief Г‚Г»ГµГ®Г¤ ГЁГ§ ГЇГ°Г®ГЈГ°Г Г¬Г¬Г»
-    bool startWS = false; /// \brief ГЌГ Г·Г Г«Г® Г°Г ГЎГ®ГІГ»
-    bool returnToMenu = false; /// \brief Г‚Г®Г§ГўГ°Г ГІ Гў Г¬ГҐГ­Гѕ
+    bool isExit = false; /// \brief Выход из программы
+    bool startWS = false; /// \brief Начало работы
+    bool returnToMenu = false; /// \brief Возврат в меню
     bool risovatKnopka = true;
 
     int plan = -1;
@@ -138,7 +117,7 @@ int main()
             {
                 //drDre(Mebel knopki_mebeli);
             }
-          
+
             if (GetAsyncKeyState('W'))
             {
                 plan = 0;
@@ -150,14 +129,14 @@ int main()
                     if (txMouseX() > screenX - 900 and
                         txMouseY() > screenY - 700 and
                         txMouseY() < screenY - 400 and
-                        txMouseX() <   screenX - 600 and
+                        txMouseX() < screenX - 600 and
                         txMouseButtons() & 1)
                     {
-                                plan = 0;
-                                nachalo = true;
-                      }
+                        plan = 0;
+                        nachalo = true;
+                    }
 
-                      txSleep(10);
+                    txSleep(10);
                 }
             }
 
@@ -172,10 +151,10 @@ int main()
                 txSleep(300);
                 ScreenshotIndex=GetFolderCountFiles("Screenshots\\");
             }
-          
-            menu_escape(escape);
 
-          
+            menu_escape(escape, &nomer_tomba, Tomb);
+
+
             if (plan != -1)
             {
                 Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
@@ -302,81 +281,6 @@ int main()
     txDeleteDC(WSpace);
 
     return 0;
-}
-
-
-void saving (Mebel* Tomb, int count_knopok)
-{
-    char s2[100];
-    int SaveIndex=GetFolderCountFiles("Saves\\");
-
-    itoa(SaveIndex,s2,10);
-    string ss2 = s2;
-    const char* SaveName = ("Saves\\save" + ss2 + ".txt").c_str();
-
-
-    txSleep(300);
-
-
-    ofstream fout_save;
-    fout_save.open(SaveName);
-
-    for (int i=0; i<count_knopok; i++)
-    {
-        if (Tomb[i].risovat)
-        {
-             fout_save <<   Tomb[i].risovat << "," <<
-                            Tomb[i].adressMebeli << "," <<
-                            Tomb[i].MOUSE_X << "," <<
-                            Tomb[i].MOUSE_Y <<","<<
-                            Tomb[i].width << "," <<
-                            Tomb[i].height <<","<<
-                            Tomb[i].awidth << "," <<
-                            Tomb[i].aheight<<  endl;
-        }
-    }
-
-    fout_save.close();
-}
-
-int GetFolderCountFiles( const char* szPath)
-{
-      if( !szPath || !*szPath) return 0;
-      __int64      i64CountFiles = 0;
-      char Path[ _MAX_PATH];
-      WIN32_FIND_DATA      data;
-
-      strcpy( Path, szPath);
-      if( Path[ strlen( Path) - 1] != '\\')
-            strcat( Path, "\\");
-      strcat( Path,"*.*");
-      HANDLE hFind = FindFirstFile( Path, &data);
-      if( hFind != INVALID_HANDLE_VALUE)
-      {
-            while(1)
-            {
-                  if( data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-                  {
-                        if( strcmp(data.cFileName, ".") && strcmp(data.cFileName, "..") )
-                        {
-                              char NewPath[ _MAX_PATH];
-                              strcpy( NewPath, szPath);
-                              strcat( NewPath, "\\");
-                              strcat( NewPath, data.cFileName);
-                              i64CountFiles += GetFolderCountFiles( NewPath);
-                        }
-                  }
-                  else
-                  {
-                        i64CountFiles++;
-                  }
-                  BOOL bCode = FindNextFile( hFind, &data);
-                  if( !bCode && GetLastError() == ERROR_NO_MORE_FILES)
-                        break;
-            }
-            FindClose( hFind);
-      }
-      return i64CountFiles;
 }
 
  /*void chooseVoid (HDC menuPic ,HDC choose_menu, bool game_over, int* plan, bool* nachalo_progi)

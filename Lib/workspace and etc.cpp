@@ -16,6 +16,7 @@
 
 #include "config.cpp"
 #include "Button.cpp"
+#include "MENU.cpp"
 #include <iostream>
 #include <fstream>
 
@@ -26,6 +27,27 @@ using namespace std;
 Функция рисования сетки
 */
 void grid();
+/*!
+\brief функция подсчёта скриншотов
+
+Считает скриншоты сделаные пользователем в программе
+
+
+\param[in] const char* szPath Путь к папке со скриншотами
+*/
+int GetFolderCountFiles(const char* szPath);
+
+/*!
+\brief функция сохранения
+
+Сохраняет планировку в файл saving.txt
+
+
+\param[in] Mebel* Tomb Массив сохраняемой мебели
+\param[in] int count_knopok предел
+*/
+void saving (Mebel* Tomb, int count_knopok);
+
 
 /*!
 \brief функция проверки клика
@@ -36,6 +58,8 @@ void grid();
 \param[in] Button* knopki_mebeli читаемая кнопка
 */
 int read(Button* knopki_mebeli);
+
+void menu_escape(HDC escape, int* nomer_tomba, Mebel* Tomb);
 
 /*!
 \brief Фон рабочей области
@@ -214,6 +238,127 @@ int download_mebel(Mebel* knopki_mebeli)
 
     return nomer;
 }
+
+int GetFolderCountFiles( const char* szPath)
+{
+      if( !szPath || !*szPath) return 0;
+      __int64      i64CountFiles = 0;
+      char Path[ _MAX_PATH];
+      WIN32_FIND_DATA      data;
+
+      strcpy( Path, szPath);
+      if( Path[ strlen( Path) - 1] != '\\')
+            strcat( Path, "\\");
+      strcat( Path,"*.*");
+      HANDLE hFind = FindFirstFile( Path, &data);
+      if( hFind != INVALID_HANDLE_VALUE)
+      {
+            while(1)
+            {
+                  if( data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+                  {
+                        if( strcmp(data.cFileName, ".") && strcmp(data.cFileName, "..") )
+                        {
+                              char NewPath[ _MAX_PATH];
+                              strcpy( NewPath, szPath);
+                              strcat( NewPath, "\\");
+                              strcat( NewPath, data.cFileName);
+                              i64CountFiles += GetFolderCountFiles( NewPath);
+                        }
+                  }
+                  else
+                  {
+                        i64CountFiles++;
+                  }
+                  BOOL bCode = FindNextFile( hFind, &data);
+                  if( !bCode && GetLastError() == ERROR_NO_MORE_FILES)
+                        break;
+            }
+            FindClose( hFind);
+      }
+      return i64CountFiles;
+}
+
+
+
+void saving (Mebel* Tomb, int count_knopok)
+{
+    char s2[100];
+    int SaveIndex=GetFolderCountFiles("Saves\\");
+
+    itoa(SaveIndex,s2,10);
+    string ss2 = s2;
+    const char* SaveName = ("Saves\\save" + ss2 + ".txt").c_str();
+
+
+    txSleep(300);
+
+
+    ofstream fout_save;
+    fout_save.open(SaveName);
+
+    for (int i=0; i<count_knopok; i++)
+    {
+        if (Tomb[i].risovat)
+        {
+             fout_save <<   Tomb[i].risovat << "," <<
+                            Tomb[i].adressMebeli << "," <<
+                            Tomb[i].MOUSE_X << "," <<
+                            Tomb[i].MOUSE_Y <<","<<
+                            Tomb[i].width << "," <<
+                            Tomb[i].height <<","<<
+                            Tomb[i].awidth << "," <<
+                            Tomb[i].aheight<<  endl;
+        }
+    }
+
+    fout_save.close();
+}
+
+void menu_escape(HDC escape, int* nomer_tomba, Mebel* Tomb)
+{
+    int screenW = GetSystemMetrics (SM_CXSCREEN);
+    int screenH = GetSystemMetrics (SM_CYSCREEN);
+
+    bool isreturn = false;
+    if (GetAsyncKeyState('P'))
+    {
+        txSleep(1000);
+
+        while (!isreturn)
+        {
+            txBitBlt (txDC(), screenH/2, screenW/2 - 300, SizerX(escape), SizerY(escape), escape, 0, 0);
+
+            txRectangle(        screenW/2 - 300 +  30, screenH/2 + 105,
+                                screenW/2 - 300 + 180, screenH/2 + 135);
+            txSleep(20);
+            if (     checkClick(screenW/2 - 300 +  30, screenH/2 +  65,
+                                screenW/2 - 300 + 180, screenH/2 +  95))
+            {
+                isreturn = true;
+            }
+            else if (checkClick(screenW/2 - 300 +  30, screenH/2 + 105,
+                                screenW/2 - 300 + 180, screenH/2 + 135))
+            {
+                *nomer_tomba = download_mebel(Tomb);
+                isreturn = true;
+            }
+            else if (checkClick(screenW/2 - 300 +  30, screenH/2 + 145,
+                                screenW/2 - 300 + 180, screenH/2 + 175))
+            {
+                saving (Tomb, *nomer_tomba);
+                isreturn = true;
+            }
+            else if (checkClick(screenW/2 - 300 +  30, screenH/2 + 225,
+                                screenW/2 - 300 + 180, screenH/2 + 255))
+            {
+                GetAsyncKeyState(VK_ESCAPE);
+                isreturn = true;
+            }
+        }
+    }
+}
+
 
 void drDre(Mebel* knopki_mebeli)
 {
