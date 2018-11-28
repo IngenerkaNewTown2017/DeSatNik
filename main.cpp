@@ -29,8 +29,8 @@ using namespace std;
 
 int main()
 {
-    screenX = GetSystemMetrics (SM_CXSCREEN);
-    screenY = GetSystemMetrics (SM_CYSCREEN);
+     screenX = GetSystemMetrics (SM_CXSCREEN);
+     screenY = GetSystemMetrics (SM_CYSCREEN);
     txCreateWindow (screenX, screenY);
     ShellExecute(NULL,NULL,"sound.exe",NULL ,NULL,SW_SHOWMINIMIZED);
 
@@ -89,11 +89,18 @@ int main()
 		//Redactor
         if (startWS)
         {
-            workspace_background();
+            if (plan != -1)
+            {
+                Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
+                grid();
+            }
+            else
+            {
+                workspace_background();
+            }
             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
             //txBitBlt (txDC(), screenX - 300, screenY - 300, 500, 500, button, 0, 0);
             grid();
-
 
             returnToMenu = nazad (returnToMenu);
             if (returnToMenu)
@@ -113,10 +120,6 @@ int main()
             {
                nomer_tomba = download_mebel(Tomb);
             }
-            if (GetAsyncKeyState('F'))
-            {
-                //drDre(Mebel knopki_mebeli);
-            }
 
             if (GetAsyncKeyState('W'))
             {
@@ -124,12 +127,11 @@ int main()
                 bool nachalo = false;
                 while (!nachalo )
                 {
-                    txBitBlt    (txDC(), 0, 0, screenX, screenY, choose_menu, 0, 0);
-
-                    if (txMouseX() > screenX - 900 and
-                        txMouseY() > screenY - 700 and
-                        txMouseY() < screenY - 400 and
-                        txMouseX() < screenX - 600 and
+                    Win32::TransparentBlt(txDC(), 0, 0, screenX, screenY, choose_menu, 0, 0, 900, 600, TX_RED);
+                    if (txMouseX() > screenX - 670 and
+                        txMouseY() > screenY - 495 and
+                        txMouseY() < screenY - 110 and
+                        txMouseX() < screenX - 215 and
                         txMouseButtons() & 1)
                     {
                         plan = 0;
@@ -152,13 +154,6 @@ int main()
                 ScreenshotIndex=GetFolderCountFiles("Screenshots\\");
             }
 
-            menu_escape(escape, &nomer_tomba, Tomb);
-
-
-            if (plan != -1)
-            {
-                Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
-            }
 
             draw_all_mebel(Tomb, nomer_tomba,wather, WatherMark);
 
@@ -169,7 +164,15 @@ int main()
                 {
                     while(txMouseButtons() & 1)
                     {
-                        workspace_background();
+                        if (plan != -1)
+                        {
+                            Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
+                           grid();
+                        }
+                        else
+                        {
+                            workspace_background();
+                        }
                         risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
                         grid();
                         button_selection(screenX, screenY, &Tomb[nomer_tomba], knopki_mebeli[nomer_mebeli]);
@@ -178,6 +181,7 @@ int main()
 
                         checkalka(nomer_tomba, Tomb, nomer_tomba);//It was higher and what a chaNGE!!!
                         draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
+
 
                         txSleep(10);
                     }
@@ -215,9 +219,14 @@ int main()
 
                             draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
                             txSleep(10);
+
+                            if (plan != -1)
+            {
+                Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
+            }
                         }
                     }
-                    else if (GetAsyncKeyState(VK_LEFT))
+                        else if (GetAsyncKeyState(VK_LEFT))
                     {
                         while(GetAsyncKeyState(VK_LEFT))
                         {
@@ -228,6 +237,11 @@ int main()
                             Tomb[i].awidth = Tomb[i].awidth * 1.05;
                             Tomb[i].aheight = Tomb[i].awidth * 1.05;
                             txSleep(100);
+
+                            if (plan != -1)
+                            {
+                                Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
+                            }
                         }
                     }
 
@@ -242,6 +256,11 @@ int main()
                             Tomb[i].awidth = Tomb[i].awidth  * 0.95;
                             Tomb[i].aheight = Tomb[i].awidth  * 0.95;
                             txSleep(100);
+
+                             if (plan != -1)
+            {
+                Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
+            }
                         }
                     }
                 }
@@ -254,7 +273,7 @@ int main()
             returnToMenu = false;
             drawMenu (screenX, screenY, fon_menu);
             checkMenuFocus();
-            doc (docButton);
+            doc(docButton);
 
             //menu_escape(escape);
             startWS = startWorkspace(startWS);
@@ -271,14 +290,17 @@ int main()
     }
 
 
-    //Delete all pics in for
-    for (int i=0; i<count_knopok_mebeli; i++)
-    {
-        txDeleteDC(knopki_mebeli[i].picture);
-    }
+                            //Delete all pics in for
+                            for (int i=0; i<count_knopok_mebeli; i++)
+                            {
+                                txDeleteDC(knopki_mebeli[i].picture);
+                            }
     txDeleteDC(fon_menu);
     txDeleteDC(escape);
     txDeleteDC(WSpace);
+
+    return screenX;
+    return screenY;
 
     return 0;
 }
