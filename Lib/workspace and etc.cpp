@@ -70,8 +70,9 @@ void workspace_background()
 {
     int screenX = GetSystemMetrics (SM_CXSCREEN);
     int screenY = GetSystemMetrics (SM_CYSCREEN);
+    txSetFillColor(TX_BLACK);
     txClear();
-    txSetColor(TX_BLACK, 5);
+    txSetFillColor(TX_WHITE);
     txRectangle(50, 50, screenX - 50, screenY - 350);
     txSetColor(TX_WHITE);
 

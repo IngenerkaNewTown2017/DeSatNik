@@ -192,7 +192,7 @@ void drawMenu (int screenW, int screenH, HDC fon_menu)
 	txTextOut(loadButton.x, loadButton.y, "Загрузить");
     txTextOut (exitButton.x, exitButton.y, "Выйти");
     txTextOut(settingsButton.x, settingsButton.y, "Настройки");
-    txTextOut(docButton.x, docButton.y, "xXx");
+    txTextOut(docButton.x, docButton.y, "Документэйшн");
 }
 
 bool startWorkspace (bool startWork)

@@ -143,7 +143,10 @@ void checkalka( int nomer_kartinki, Mebel* Tomb, int vsego_kart)
     if (txMouseButtons() & 1)
     {
         //FIXME KOLICH_RYADOV_WS!!! RAZMER_KNOPKI!!!
-        if (Tomb[nomer_kartinki].MOUSE_Y + Tomb[nomer_kartinki].aheight > screenY - KOLICH_RYADOV_WS * RAZMER_KNOPKI)
+        //if (Tomb[nomer_kartinki].MOUSE_Y + Tomb[nomer_kartinki].aheight > screenY - KOLICH_RYADOV_WS * RAZMER_KNOPKI)
+
+
+        if (txGetPixel(txMouseX(),txMouseY()) == TX_BLACK)
         {
             Tomb[nomer_kartinki].risovat = false;
         }
