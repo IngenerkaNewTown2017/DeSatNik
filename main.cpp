@@ -29,8 +29,8 @@ using namespace std;
 
 int main()
 {
-     screenX = GetSystemMetrics (SM_CXSCREEN);
-     screenY = GetSystemMetrics (SM_CYSCREEN);
+    screenX = GetSystemMetrics (SM_CXSCREEN);
+    screenY = GetSystemMetrics (SM_CYSCREEN);
     txCreateWindow (screenX, screenY);
     ShellExecute(NULL,NULL,"sound.exe",NULL ,NULL,SW_SHOWMINIMIZED);
 
@@ -100,7 +100,6 @@ int main()
             }
             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
             //txBitBlt (txDC(), screenX - 300, screenY - 300, 500, 500, button, 0, 0);
-            grid();
 
             returnToMenu = nazad (returnToMenu);
             if (returnToMenu)
@@ -125,7 +124,7 @@ int main()
             {
                 plan = 0;
                 bool nachalo = false;
-                while (!nachalo )
+                while (!nachalo)
                 {
                     Win32::TransparentBlt(txDC(), 0, 0, screenX, screenY, choose_menu, 0, 0, 900, 600, TX_RED);
                     if (txMouseX() > screenX - 670 and
@@ -167,14 +166,13 @@ int main()
                         if (plan != -1)
                         {
                             Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
-                           grid();
+                            grid();
                         }
                         else
                         {
                             workspace_background();
                         }
                         risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-                        grid();
                         button_selection(screenX, screenY, &Tomb[nomer_tomba], knopki_mebeli[nomer_mebeli]);
                         Tomb[nomer_tomba].awidth = SizerX(Tomb[nomer_tomba].pctr);
                         Tomb[nomer_tomba].aheight = SizerY(Tomb[nomer_tomba].pctr);
@@ -205,9 +203,16 @@ int main()
                     {
                         while(txMouseButtons() & 1)
                         {
-                            workspace_background();
+                            if (plan != -1)
+                            {
+                                Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
+                                grid();
+                            }
+                            else
+                            {
+                                workspace_background();
+                            }
                             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-                            grid();
 
                             Button Bomzh = {};
                             Bomzh.picture = Tomb[i].pctr;
@@ -219,29 +224,28 @@ int main()
 
                             draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
                             txSleep(10);
-
-                            if (plan != -1)
-            {
-                Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
-            }
                         }
                     }
-                        else if (GetAsyncKeyState(VK_LEFT))
+
+                    else if (GetAsyncKeyState(VK_LEFT))
                     {
                         while(GetAsyncKeyState(VK_LEFT))
                         {
-                            workspace_background();
+                            if (plan != -1)
+                            {
+                                Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
+                                grid();
+                            }
+                            else
+                            {
+                                workspace_background();
+                            }
                             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
                             checkalka(i, Tomb, nomer_tomba);
                             draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
                             Tomb[i].awidth = Tomb[i].awidth * 1.05;
                             Tomb[i].aheight = Tomb[i].awidth * 1.05;
                             txSleep(100);
-
-                            if (plan != -1)
-                            {
-                                Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
-                            }
                         }
                     }
 
@@ -249,18 +253,21 @@ int main()
                     {
                         while(GetAsyncKeyState(VK_RIGHT))
                         {
-                            workspace_background();
+                            if (plan != -1)
+                            {
+                                Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
+                                grid();
+                            }
+                            else
+                            {
+                                workspace_background();
+                            }
                             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
                             checkalka(i, Tomb, nomer_tomba);
                             draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
                             Tomb[i].awidth = Tomb[i].awidth  * 0.95;
                             Tomb[i].aheight = Tomb[i].awidth  * 0.95;
                             txSleep(100);
-
-                             if (plan != -1)
-            {
-                Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
-            }
                         }
                     }
                 }
