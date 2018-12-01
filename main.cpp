@@ -153,7 +153,7 @@ int main()
                 ScreenshotIndex=GetFolderCountFiles("Screenshots\\");
             }
 
-
+            menu_escape(escape, &nomer_tomba, Tomb, &isExit);
             draw_all_mebel(Tomb, nomer_tomba,wather, WatherMark);
 
             //Drag-n-drop from toolstrip to workspace
