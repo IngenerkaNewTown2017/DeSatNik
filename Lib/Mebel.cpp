@@ -78,6 +78,7 @@ struct Mebel
     int height; ///\brief Высота сначала
     int awidth; ///\brief Ширина сначала
     int aheight; ///\brief Высота на данный момент
+    bool EtoPol;
 };
 
 //Clear workspace
@@ -158,6 +159,8 @@ void checkalka( int nomer_kartinki, Mebel* Tomb, int vsego_kart)
                                        Tomb[predydushii_nomer].MOUSE_X + 1, Tomb[predydushii_nomer].MOUSE_X + Tomb[predydushii_nomer].awidth) == 0
                 and
                 Tomb[predydushii_nomer].risovat
+                and
+                Tomb[predydushii_nomer].EtoPol == false
                 and
                 oneDimensionalDistance(Tomb[nomer_kartinki].MOUSE_Y + 1,    Tomb[nomer_kartinki].MOUSE_Y    + Tomb[nomer_kartinki].aheight,
                                        Tomb[predydushii_nomer].MOUSE_Y + 1, Tomb[predydushii_nomer].MOUSE_Y + Tomb[predydushii_nomer].aheight) == 0)
