@@ -47,7 +47,7 @@ int main()
     int nomer_tomba = 0;
 
     HDC obst[4];
-    obst[0] = txLoadImage("Pics\\users plan.bmp");
+    obst[0] = txLoadImage("Plans\\users plan.bmp");
 
     decor_destruction(Tomb, count_mebel);
 
@@ -74,7 +74,7 @@ int main()
     HDC WatherMark= txLoadImage ("Pics\\TempWather.bmp"); /// \brief Водяной знак
     //HDC user = txLoadImage ("Pics\\users level.bmp");
     //HDC button = txLoadImage ("Pics\\button.bmp");
-    HDC choose_menu = txLoadImage ("Pics\\choose_menu.bmp");
+    HDC choose_menu = txLoadImage ("Plans\\choose_menu.bmp");
 
     bool isExit = false; /// \brief Выход из программы
     bool startWS = false; /// \brief Начало работы
@@ -126,7 +126,9 @@ int main()
                 bool nachalo = false;
                 while (!nachalo)
                 {
+
                     Win32::TransparentBlt(txDC(), 0, 0, screenX, screenY, choose_menu, 0, 0, 900, 600, TX_RED);
+                    txRectangle(screenX - 670,  screenY - 495, screenX - 215, screenY - 110);
                     if (txMouseX() > screenX - 670 and
                         txMouseY() > screenY - 495 and
                         txMouseY() < screenY - 110 and
