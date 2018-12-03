@@ -72,8 +72,6 @@ int main()
     HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp"); /// \brief Картинка. Фон меню
     HDC escape= txLoadImage ("Pics\\menu_escape.bmp"); /// \brief Картинка. Меню паузы
     HDC WatherMark= txLoadImage ("Pics\\TempWather.bmp"); /// \brief Водяной знак
-    //HDC user = txLoadImage ("Pics\\users level.bmp");
-    //HDC button = txLoadImage ("Pics\\button.bmp");
     HDC choose_menu = txLoadImage ("Plans\\choose_menu.bmp");
 
     bool isExit = false; /// \brief Выход из программы
@@ -126,7 +124,6 @@ int main()
                 bool nachalo = false;
                 while (!nachalo)
                 {
-
                     Win32::TransparentBlt(txDC(), 0, 0, screenX, screenY, choose_menu, 0, 0, 900, 600, TX_RED);
                     txRectangle(screenX - 670,  screenY - 495, screenX - 215, screenY - 110);
                     if (txMouseX() > screenX - 670 and
@@ -299,72 +296,14 @@ int main()
     }
 
 
-                            //Delete all pics in for
-                            for (int i=0; i<count_knopok_mebeli; i++)
-                            {
-                                txDeleteDC(knopki_mebeli[i].picture);
-                            }
+    //Delete all pics in for
+    for (int i=0; i<count_knopok_mebeli; i++)
+    {
+        txDeleteDC(knopki_mebeli[i].picture);
+    }
     txDeleteDC(fon_menu);
     txDeleteDC(escape);
     txDeleteDC(WSpace);
 
-    return screenX;
-    return screenY;
-
     return 0;
 }
-
- /*void chooseVoid (HDC menuPic ,HDC choose_menu, bool game_over, int* plan, bool* nachalo_progi)
-{
-
-      if
-
-   txSleep(1000);
-    while (*nachalo_progi == false)
-    {
-        txTransparentBlt (txDC(), 0, 0, screenX, screenY, choose_menu, 0, 0, TX_WHITE);
-
-        if (txMouseX() > screenX - 700 and
-            txMouseY() > screenY - 800 and
-            txMouseY() < screenY - 300 and
-            txMouseX() <   screenX - 200 and
-            txMouseButtons() & 1)
-        {
-                    *plan = 1;
-                    *nachalo_progi = true;
-          }
-
-        else if (txMouseX() > and
-            txMouseY() >  and
-            txMouseY() <  and
-            txMouseX() <  and
-            txMouseButtons() & 1)
-        {
-                    *plan = 2;
-                    *nachalo_progi = true;
-
-          }
-
-        else if (txMouseX() >  and
-            txMouseY() >  and
-            txMouseY() <  and
-            txMouseX() <  and
-            txMouseButtons() & 1)
-        {
-                    *plan = 3;
-                    *nachalo_progi = true;
-
-          }
-
-         if (txMouseX()>and
-            txMouseY() >  and
-            txMouseY() <  and
-            txMouseX() <  and
-            txMouseButtons() & 1)
-        {
-            *plan = 0;
-            *nachalo_progi = true;
-          }
-        txSleep(10);
-    }
-}*/
