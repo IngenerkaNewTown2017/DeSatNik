@@ -59,7 +59,7 @@ void saving (Mebel* Tomb, int count_knopok);
 */
 int read(Button* knopki_mebeli);
 
-void menu_escape(HDC escape, int* nomer_tomba, Mebel* Tomb);
+void menu_escape(HDC escape, int* nomer_tomba, Mebel* Tomb, bool* isExit);
 
 /*!
 \brief Фон рабочей области
@@ -327,7 +327,7 @@ void saving (Mebel* Tomb, int count_knopok)
     fout_save.close();
 }
 
-void menu_escape(HDC escape, int* nomer_tomba, Mebel* Tomb)
+void menu_escape(HDC escape, int* nomer_tomba, Mebel* Tomb, bool* isExit)
 {
     int screenW = GetSystemMetrics (SM_CXSCREEN);
     int screenH = GetSystemMetrics (SM_CYSCREEN);
@@ -339,72 +339,42 @@ void menu_escape(HDC escape, int* nomer_tomba, Mebel* Tomb)
 
         while (!isreturn)
         {
-            txBitBlt (txDC(), screenH/2, screenW/2 - 300, SizerX(escape), SizerY(escape), escape, 0, 0);
+
+            int x0 = screenW/2 - 300;
+            int y0 = screenH/2;
+            Button exitButton{"",nullptr,x0 +  30,y0 + 225,x0 + 180,y0 + 255};
+            txBitBlt (txDC(), x0, y0, SizerX(escape), SizerY(escape), escape, 0, 0);
 
             txRectangle(        screenW/2 - 300 +  30, screenH/2 + 105,
                                 screenW/2 - 300 + 180, screenH/2 + 135);
             txSleep(20);
-            if (     checkClick(screenW/2 - 300 +  30, screenH/2 +  65,
-                                screenW/2 - 300 + 180, screenH/2 +  95))
+            if (     checkClick(x0 +  30, y0 +  65,
+                                x0 + 180, y0 +  95))
             {
                 isreturn = true;
             }
-            else if (checkClick(screenW/2 - 300 +  30, screenH/2 + 105,
-                                screenW/2 - 300 + 180, screenH/2 + 135))
+            else if (checkClick(x0 +  30, y0+105,
+                               x0 + 180, y0 + 135))
             {
                 *nomer_tomba = download_mebel(Tomb);
                 isreturn = true;
             }
-            else if (checkClick(screenW/2 - 300 +  30, screenH/2 + 145,
-                                screenW/2 - 300 + 180, screenH/2 + 175))
+            else if (checkClick(x0 +  30, y0 + 145,
+                                x0 + 180, y0 + 175))
             {
                 saving (Tomb, *nomer_tomba);
                 isreturn = true;
             }
-            else if (checkClick(screenW/2 - 300 +  30, screenH/2 + 225,
-                                screenW/2 - 300 + 180, screenH/2 + 255))
+            else if (checkClick(x0 +  30, y0 + 225, x0 + 180, y0 + 255))
             {
-                GetAsyncKeyState(VK_ESCAPE);
+                txDisableAutoPause();
+                *isExit = true;
                 isreturn = true;
             }
+            txRectangle(        x0 +  30, y0 + 225,x0 + 180, y0 + 255);
         }
     }
 }
 
 
-void drDre(Mebel* knopki_mebeli)
-{
 
-    const char* adress = "";
-    ifstream fout;
-    const char* imya_faila = txInputBox ("Choose Save)", "System", "");
-
-    adress = imya_faila;
-    fout.open(imya_faila);
-
-    if (!fout)
-    {
-        fout.close();
-        char* imya_faila2 = new char[195];
-        strcpy(imya_faila2, "Saves\\");
-        strcat(imya_faila2, imya_faila);
-        fout.open(imya_faila2);
-        adress = imya_faila2;
-    }
-    if (!fout)
-    {
-        fout.close();
-        char* imya_faila3 = new char[195];
-        strcpy(imya_faila3, "Save\\");
-        strcat(imya_faila3, imya_faila);
-        strcat(imya_faila3, ".txt");
-        fout.open(imya_faila3);
-        adress = imya_faila3;
-    }
-
-
-
-
-
-
- }
