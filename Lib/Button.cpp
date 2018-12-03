@@ -11,6 +11,7 @@ struct Button
     int y1; ///\brief Координта y1
     int width; ///\brief ширина
     int height; ///\brief Высота
+    bool EtoPol;
 };
 
 Button exitButton; ///\brief Кнопка выхода
