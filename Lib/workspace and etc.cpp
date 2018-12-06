@@ -193,10 +193,6 @@ int download_mebel(Mebel* knopki_mebeli)
     int nomer = 0;
     ifstream fout;
     fout.open(SaveName);
-       //if (strcmp("dfd", "dsfsdf") == 0)
-
-
-
 
     if (fout)
     {
@@ -339,14 +335,12 @@ void menu_escape(HDC escape, int* nomer_tomba, Mebel* Tomb, bool* isExit)
 
         while (!isreturn)
         {
-
             int x0 = screenW/2 - 300;
             int y0 = screenH/2;
+
             Button exitButton{"",nullptr,x0 +  30,y0 + 225,x0 + 180,y0 + 255};
             txBitBlt (txDC(), x0, y0, SizerX(escape), SizerY(escape), escape, 0, 0);
 
-            txRectangle(        screenW/2 - 300 +  30, screenH/2 + 105,
-                                screenW/2 - 300 + 180, screenH/2 + 135);
             txSleep(20);
             if (     checkClick(x0 +  30, y0 +  65,
                                 x0 + 180, y0 +  95))
@@ -371,7 +365,6 @@ void menu_escape(HDC escape, int* nomer_tomba, Mebel* Tomb, bool* isExit)
                 *isExit = true;
                 isreturn = true;
             }
-            txRectangle(        x0 +  30, y0 + 225,x0 + 180, y0 + 255);
         }
     }
 }

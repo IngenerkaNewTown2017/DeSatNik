@@ -9,3 +9,9 @@ int screenY = 0; ///\brief Высота экрана
 const int RAZMER_KNOPKI = 100;///\brief Размер кнопки на панели инструментов
 const int KOLICH_STOLBCOV_WS = 6;///\brief Количество столбцов на панели инструментов
 int KOLICH_RYADOV_WS = 0;///\brief Количество рядов на панели инструментов
+
+const char KEY_SAVE = 'S';
+const char KEY_DOWNLOAD = 'L';
+const char KEY_CHOOSE = 'W';
+const char KEY_SCREENSHOT = 'Q';
+

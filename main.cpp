@@ -108,17 +108,17 @@ int main()
             //menu_escape (escape);
 
             //Save to text
-            if (GetAsyncKeyState(key_save))
+            if (GetAsyncKeyState(KEY_SAVE))
             {
                 saving (Tomb, nomer_tomba);
             }
 
-            if (GetAsyncKeyState(key_dowload))
+            if (GetAsyncKeyState(KEY_DOWNLOAD))
             {
                nomer_tomba = download_mebel(Tomb);
             }
 
-            if (GetAsyncKeyState(key_choose))
+            if (GetAsyncKeyState(KEY_CHOOSE))
             {
                 bool nachalo = false;
                 while (!nachalo)
@@ -149,7 +149,7 @@ int main()
             }
 
             //Screenshot
-            if (GetAsyncKeyState(key_screenshot))
+            if (GetAsyncKeyState(KEY_SCREENSHOT))
             {
                 itoa(ScreenshotIndex,s,10);
                 ss = s;
@@ -231,10 +231,10 @@ int main()
                             checkalka(i, Tomb, nomer_tomba);//It was higher and what a chaNGE!!!
 
                             draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
-                             txSetColor(TX_RED);
-                    char str[100];
-                    sprintf(str, "%d %d %d", count_mebel, nomer_tomba, count_knopok_mebeli);
-                    txTextOut(100, screenY - 300 + i * 20, str);
+                            /*txSetColor(TX_RED);
+                            char str[100];
+                            sprintf(str, "%d %d %d", count_mebel, nomer_tomba, count_knopok_mebeli);
+                            txTextOut(100, screenY - 300 + i * 20, str); */
                             txSleep(10);
                         }
                     }

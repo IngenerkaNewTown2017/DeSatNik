@@ -118,7 +118,15 @@ void draw_all_mebel(Mebel* Tomb, int count_mebel,bool wather, HDC WatherMark)
 
     for (int i=0; i<count_mebel; i++)
     {
-        if (Tomb[i].risovat)
+        if (Tomb[i].risovat && Tomb[i].EtoPol)
+        {
+            Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, Tomb[i].awidth, Tomb[i].aheight, Tomb[i].pctr, 0, 0, Tomb[i].width, Tomb[i].height, TX_WHITE);
+        }
+    }
+
+    for (int i=0; i<count_mebel; i++)
+    {
+        if (Tomb[i].risovat && !Tomb[i].EtoPol)
         {
             Win32::TransparentBlt (txDC(), Tomb[i].MOUSE_X, Tomb[i].MOUSE_Y, Tomb[i].awidth, Tomb[i].aheight, Tomb[i].pctr, 0, 0, Tomb[i].width, Tomb[i].height, TX_WHITE);
         }
@@ -143,13 +151,18 @@ void checkalka( int nomer_kartinki, Mebel* Tomb, int vsego_kart)
 {
     if (txMouseButtons() & 1)
     {
-        //FIXME KOLICH_RYADOV_WS!!! RAZMER_KNOPKI!!!
-        //if (Tomb[nomer_kartinki].MOUSE_Y + Tomb[nomer_kartinki].aheight > screenY - KOLICH_RYADOV_WS * RAZMER_KNOPKI)
-
         bool risovat = true;
+
+        //Workspace
+        if (Tomb[nomer_kartinki].MOUSE_Y + Tomb[nomer_kartinki].aheight > screenY - KOLICH_RYADOV_WS * RAZMER_KNOPKI)
+        {
+            risovat = false;
+        }
+
+        //Black color
         for (int x = Tomb[nomer_kartinki].MOUSE_X; x < Tomb[nomer_kartinki].MOUSE_X + Tomb[nomer_kartinki].awidth; x += 5)
         {
-            for (int y = Tomb[nomer_kartinki].MOUSE_Y; y < Tomb[nomer_kartinki].MOUSE_Y + Tomb[nomer_kartinki].awidth; y += 5)
+            for (int y = Tomb[nomer_kartinki].MOUSE_Y; y < Tomb[nomer_kartinki].MOUSE_Y + Tomb[nomer_kartinki].aheight; y += 5)
             {
                 if (txGetPixel(x, y) == TX_BLACK)
                 {
@@ -160,10 +173,7 @@ void checkalka( int nomer_kartinki, Mebel* Tomb, int vsego_kart)
 
         Tomb[nomer_kartinki].risovat = risovat;
 
-
-
-
-
+        //Crossing with other pic
         for (int predydushii_nomer = 0; predydushii_nomer < vsego_kart; predydushii_nomer++)
         {
             if (predydushii_nomer != nomer_kartinki &&
@@ -174,12 +184,14 @@ void checkalka( int nomer_kartinki, Mebel* Tomb, int vsego_kart)
                 and
                 Tomb[predydushii_nomer].EtoPol == false
                 and
+                Tomb[nomer_kartinki].EtoPol == false
+                and
                 oneDimensionalDistance(Tomb[nomer_kartinki].MOUSE_Y + 1,    Tomb[nomer_kartinki].MOUSE_Y    + Tomb[nomer_kartinki].aheight,
                                        Tomb[predydushii_nomer].MOUSE_Y + 1, Tomb[predydushii_nomer].MOUSE_Y + Tomb[predydushii_nomer].aheight) == 0)
             {
-                char str[100];
+                /*char str[100];
                 sprintf(str, "%d %d %d %d", nomer_kartinki, predydushii_nomer, Tomb[nomer_kartinki].MOUSE_X, Tomb[predydushii_nomer].MOUSE_X);
-                txTextOut(100, screenY - 300 + nomer_kartinki * 20, str);
+                txTextOut(100, screenY - 300 + nomer_kartinki * 20, str);*/
                 Tomb[nomer_kartinki].risovat = false;
             }
         }
