@@ -3,10 +3,10 @@
 \file
 \brief main всего кода
 
-Суть да дело программы
+Суть программы
 
 \authors DeSatNik team
-\version 1.0.0
+\version 1.0.0 beta
 \date 13.11.2018
 \bug Неисчеслимы, пока что
 \warning Осторожнее
@@ -48,7 +48,7 @@ int main()
 
     HDC obst[4];
     obst[0] = txLoadImage("Plans\\users plan.bmp");
-
+    obst[1] = txLoadImage("Plans\\1plan.bmp");
     decor_destruction(Tomb, count_mebel);
 
 
@@ -87,7 +87,7 @@ int main()
 		//Redactor
         if (startWS)
         {
-            if (plan != -1)
+            if (plan >= 0)
             {
                 Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
                 grid();
@@ -108,31 +108,39 @@ int main()
             //menu_escape (escape);
 
             //Save to text
-            if (GetAsyncKeyState('S'))
+            if (GetAsyncKeyState(key_save))
             {
                 saving (Tomb, nomer_tomba);
             }
 
-            if (GetAsyncKeyState('L'))
+            if (GetAsyncKeyState(key_dowload))
             {
                nomer_tomba = download_mebel(Tomb);
             }
 
-            if (GetAsyncKeyState('W'))
+            if (GetAsyncKeyState(key_choose))
             {
-                plan = 0;
                 bool nachalo = false;
                 while (!nachalo)
                 {
                     Win32::TransparentBlt(txDC(), 0, 0, screenX, screenY, choose_menu, 0, 0, 900, 600, TX_RED);
+
+                    txSetFillColor(TX_TRANSPARENT);
+                    Win32::TransparentBlt (txDC(), screenX - 670, screenY - 495, 455, 385, obst[0], 0, 0, 1280, 720, TX_WHITE);
+                    Win32::TransparentBlt (txDC(), screenX - 670,  screenY - 895, 455, 385, obst[1], 0, 0, 1280, 720, TX_WHITE);
                     txRectangle(screenX - 670,  screenY - 495, screenX - 215, screenY - 110);
-                    if (txMouseX() > screenX - 670 and
-                        txMouseY() > screenY - 495 and
-                        txMouseY() < screenY - 110 and
-                        txMouseX() < screenX - 215 and
-                        txMouseButtons() & 1)
+
+                    txRectangle(screenX - 670,  screenY - 895, screenX - 215, screenY - 510);
+
+                    if (checkClick(screenX -  670, screenY - 495, screenX - 215  , screenY - 110))
                     {
                         plan = 0;
+                        nachalo = true;
+                    }
+
+                    if (checkClick(screenX -  670, screenY - 895, screenX - 215  , screenY - 510))
+                    {
+                        plan = 1;
                         nachalo = true;
                     }
 
@@ -141,7 +149,7 @@ int main()
             }
 
             //Screenshot
-            if (GetAsyncKeyState('Q'))
+            if (GetAsyncKeyState(key_screenshot))
             {
                 itoa(ScreenshotIndex,s,10);
                 ss = s;
@@ -162,7 +170,7 @@ int main()
                 {
                     while(txMouseButtons() & 1)
                     {
-                        if (plan != -1)
+                        if (plan >= 0)
                         {
                             Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
                             grid();
@@ -202,7 +210,7 @@ int main()
                     {
                         while(txMouseButtons() & 1)
                         {
-                            if (plan != -1)
+                            if (plan >= 0)
                             {
                                 Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
                                 grid();
@@ -235,7 +243,7 @@ int main()
                     {
                         while(GetAsyncKeyState(VK_LEFT))
                         {
-                            if (plan != -1)
+                            if (plan >= 0)
                             {
                                 Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
                                 grid();
@@ -257,7 +265,7 @@ int main()
                     {
                         while(GetAsyncKeyState(VK_RIGHT))
                         {
-                            if (plan != -1)
+                            if (plan >= 0)
                             {
                                 Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
                                 grid();
@@ -286,7 +294,6 @@ int main()
             checkMenuFocus();
             doc(docButton);
 
-            //menu_escape(escape);
             startWS = startWorkspace(startWS);
         }
 
