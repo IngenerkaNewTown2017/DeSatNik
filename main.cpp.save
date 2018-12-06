@@ -213,6 +213,10 @@ int main()
                             }
                             risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
 
+
+                    char str[100];
+                    sprintf(str, "%d %d %d", count_mebel, x, y);
+                    txTextOut(100, screenY - 300 + nomer_kartinki * 20, str); 
                             Button Bomzh = {};
                             Bomzh.EtoPol = Tomb[i].EtoPol;
                             Bomzh.picture = Tomb[i].pctr;
@@ -223,10 +227,6 @@ int main()
                             checkalka(i, Tomb, nomer_tomba);//It was higher and what a chaNGE!!!
 
                             draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
-                             txSetColor(TX_RED);
-                    char str[100];
-                    sprintf(str, "%d %d %d", count_mebel, nomer_tomba, count_knopok_mebeli);
-                    txTextOut(100, screenY - 300 + i * 20, str);
                             txSleep(10);
                         }
                     }
