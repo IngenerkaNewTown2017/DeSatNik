@@ -32,7 +32,6 @@ using namespace std;
 
 int main()
 {
-
     ShellExecute(NULL,NULL,"Lib\\sound.exe",NULL ,NULL,SW_SHOWMINIMIZED);
     screenX = GetSystemMetrics (SM_CXSCREEN);
     screenY = GetSystemMetrics (SM_CYSCREEN);
