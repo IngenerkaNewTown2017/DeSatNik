@@ -325,6 +325,7 @@ void saving (Mebel* Tomb, int count_knopok)
 
 void menu_escape(HDC escape, int* nomer_tomba, Mebel* Tomb, bool* isExit)
 {
+    bool debug = true;
     int screenW = GetSystemMetrics (SM_CXSCREEN);
     int screenH = GetSystemMetrics (SM_CYSCREEN);
 

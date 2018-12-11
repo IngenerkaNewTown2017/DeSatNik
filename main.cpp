@@ -37,6 +37,7 @@ int main()
     screenY = GetSystemMetrics (SM_CYSCREEN);
     txCreateWindow (screenX, screenY);
 
+bool debug =true;
     char s[100];
     string ss;
     int ScreenshotIndex=GetFolderCountFiles("Screenshots\\");
