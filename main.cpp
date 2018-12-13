@@ -26,6 +26,7 @@
 #include <string>
 
 
+void MishaNazoviEeKakNibud (int count_knopok_mebeli, HDC* obst, Button* knopki_mebeli, int i, Mebel* Tomb, int count_mebel, int nomer_tomba, HDC WatherMark, int plan);
 //Â ÕÎÄÅ ÐÀÇÀÐÀÁÎÒÊÈ ÏÐÎÃÐÀÌÌÛ ÌÛ ÎÒÊÐÛÂÀËÈ È ÇÀÊÐÛÂÀËÈ ÏÎËÎÂÛÅ ÂÎÏÐÎÑÛ. (ñìûñë íå ïîøëûé, ÿ ïðî ïîë íà êîòîðûé òåáÿ ïîëîæàò åñëè òû áóäåøü îñêàðáëÿòü àíèìý))))
 
 using namespace std;
@@ -127,20 +128,19 @@ int main()
                 while (!nachalo)
                 {
                     Win32::TransparentBlt(txDC(), 0, 0, screenX, screenY, choose_menu, 0, 0, 900, 600, TX_RED);
-
                     txSetFillColor(TX_TRANSPARENT);
+					
+					//Ýòî íàìåê íà ìàññèâ
                     Win32::TransparentBlt (txDC(), screenX - 670, screenY - 495, 455, 385, obst[0], 0, 0, 1280, 720, TX_WHITE);
-                    Win32::TransparentBlt (txDC(), screenX - 670,  screenY - 895, 455, 385, obst[1], 0, 0, 1280, 720, TX_WHITE);
                     txRectangle(screenX - 670,  screenY - 495, screenX - 215, screenY - 110);
-
-                    txRectangle(screenX - 670,  screenY - 895, screenX - 215, screenY - 510);
-
                     if (checkClick(screenX -  670, screenY - 495, screenX - 215  , screenY - 110))
                     {
                         plan = 0;
                         nachalo = true;
                     }
 
+                    Win32::TransparentBlt (txDC(), screenX - 670,  screenY - 895, 455, 385, obst[1], 0, 0, 1280, 720, TX_WHITE);
+                    txRectangle(screenX - 670,  screenY - 895, screenX - 215, screenY - 510);
                     if (checkClick(screenX -  670, screenY - 895, screenX - 215  , screenY - 510))
                     {
                         plan = 1;
@@ -246,20 +246,7 @@ int main()
                     {
                         while(GetAsyncKeyState(VK_LEFT))
                         {
-                            //Ñäåëàòü ôóíêöèåé
-                            if (plan >= 0)
-                            {
-                                Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
-                                grid();
-                            }
-                            else
-                            {
-                                workspace_background();
-                            }
-                            risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-                            checkalka(i, Tomb, nomer_tomba);
-                            draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
-
+                            MishaNazoviEeKakNibud (count_knopok_mebeli, obst, knopki_mebeli, i,Tomb,  count_mebel,nomer_tomba,WatherMark, plan);
 
                             Tomb[i].MOUSE_X = Tomb[i].MOUSE_X - 1;
                             if (!Tomb[i].risovat)
@@ -271,22 +258,59 @@ int main()
                         }
                     }
 
+                    else if (GetAsyncKeyState(VK_RIGHT))
+                    {
+                        while(GetAsyncKeyState(VK_RIGHT))
+                        {
+                            MishaNazoviEeKakNibud (count_knopok_mebeli, obst, knopki_mebeli, i,Tomb,  count_mebel,nomer_tomba,WatherMark, plan);
+
+                            Tomb[i].MOUSE_X = Tomb[i].MOUSE_X + 1;
+                            if (!Tomb[i].risovat)
+                            {
+                                Tomb[i].MOUSE_X = Tomb[i].MOUSE_X - 1;
+                            }
+
+                            txSleep(20);
+                        }
+                    }
+                    else if (GetAsyncKeyState(VK_DOWN))
+                    {
+                        while(GetAsyncKeyState(VK_DOWN))
+                        {
+                            MishaNazoviEeKakNibud (count_knopok_mebeli, obst, knopki_mebeli, i,Tomb,  count_mebel,nomer_tomba,WatherMark, plan);
+
+                            Tomb[i].MOUSE_Y = Tomb[i].MOUSE_Y + 1;
+                            if (!Tomb[i].risovat)
+                            {
+                                Tomb[i].MOUSE_Y = Tomb[i].MOUSE_Y - 1;
+                            }
+
+                            txSleep(20);
+                        }
+                    }
+
+                    else if (GetAsyncKeyState(VK_UP))
+                    {
+                        while(GetAsyncKeyState(VK_UP))
+                        {
+                            MishaNazoviEeKakNibud (count_knopok_mebeli, obst, knopki_mebeli, i,Tomb,  count_mebel,nomer_tomba,WatherMark, plan);
+
+                            Tomb[i].MOUSE_Y = Tomb[i].MOUSE_Y - 1;
+                            if (!Tomb[i].risovat)
+                            {
+                                Tomb[i].MOUSE_Y = Tomb[i].MOUSE_Y + 1;
+                            }
+
+                            txSleep(20);
+                        }
+                    }
+
                     else if (GetAsyncKeyState(VK_OEM_PLUS) || GetAsyncKeyState(VK_ADD))
                     {
                         while(GetAsyncKeyState(VK_OEM_PLUS) || GetAsyncKeyState(VK_ADD))
                         {
-                            if (plan >= 0)
-                            {
-                                Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
-                                grid();
-                            }
-                            else
-                            {
-                                workspace_background();
-                            }
-                            risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-                            checkalka(i, Tomb, nomer_tomba);
-                            draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
+                            MishaNazoviEeKakNibud (count_knopok_mebeli, obst, knopki_mebeli, i,Tomb,  count_mebel,nomer_tomba,WatherMark, plan);
+							
                             Tomb[i].awidth = Tomb[i].awidth * 1.05;
                             Tomb[i].aheight = Tomb[i].aheight * 1.05;
                             txSleep(100);
@@ -297,18 +321,8 @@ int main()
                     {
                         while(GetAsyncKeyState(VK_OEM_MINUS) || GetAsyncKeyState(VK_SUBTRACT))
                         {
-                            if (plan >= 0)
-                            {
-                                Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
-                                grid();
-                            }
-                            else
-                            {
-                                workspace_background();
-                            }
-                            risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
-                            checkalka(i, Tomb, nomer_tomba);
-                            draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
+                            MishaNazoviEeKakNibud (count_knopok_mebeli, obst, knopki_mebeli, i,Tomb,  count_mebel,nomer_tomba,WatherMark, plan);
+							
                             Tomb[i].awidth = Tomb[i].awidth  * 0.95;
                             Tomb[i].aheight = Tomb[i].aheight  * 0.95;
                             txSleep(100);
@@ -350,4 +364,20 @@ int main()
     txDeleteDC(WSpace);
 
     return 0;
+}
+
+void MishaNazoviEeKakNibud (int count_knopok_mebeli, HDC* obst, Button* knopki_mebeli, int i, Mebel* Tomb, int count_mebel, int nomer_tomba, HDC WatherMark, int plan)  
+{
+	if (plan >= 0)
+	{
+		Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
+		grid();
+	}
+	else
+	{
+		workspace_background();
+	}
+	risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
+	checkalka(i, Tomb, nomer_tomba);
+	draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
 }
