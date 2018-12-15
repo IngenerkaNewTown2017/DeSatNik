@@ -8,3 +8,7 @@ Pics\\TV.bmp
 Pics\\Bath.bmp
 FloorPics\\Ковёр.bmp
 FloorPics\\Пол.bmp
+Pics\\кровать.bmp
+Pics\\плита.bmp
+Pics\\раковина2.bmp
+Pics\\Раковина.bmp
