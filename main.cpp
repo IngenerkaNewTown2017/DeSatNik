@@ -1,15 +1,13 @@
 /*!
-\mainpage Эта программа написана командой молодых, (и не очень) талантливых программистов DeSatNik team. Особая благодарность за поддержку и веру в лучшее в отношении этого кода выражается Beavisabra
+\mainpage Эта программа написана командой молодых, талантливых программистов DeSatNik team. Особая благодарность за поддержку и веру в лучшее в отношении этого кода выражается Beavisabra. Для загрузки планировки нажмите клавишу, указанную в конфиге как KEY_DOWNLOAD (по умолчанию - L) и укажите номер сохранения. Для сохранения используйте KEY_SAVE (по умолчанию S). Для выбора планировки используйте KEY_CHOOSE (по умолчанию W). Для скриншота KEY_SCREENSHOT (по умолчанию Q). Пауза открывается клавишей P. Войти в режим программиста можно нажав на U. Предустановленные планировки можно заменить в папке Plans. Приятного использования.
 \file
-\brief main всего кода
+\brief  main всего кода
 
 Суть программы
 
 \authors DeSatNik team
 \version 1.0.0 beta
-\date 13.11.2018
-\bug Неисчеслимы, пока что
-\warning Осторожнее
+\date 15.12.2018
 \name Функции основного файла
 
 */
@@ -25,17 +23,43 @@
 #include <iostream>
 #include <string>
 #include "dirent.h"
+/*!
+\brief Структура планировок
 
+Структура для заготовленных планировок
+*/
 struct Plans
  {
-     int x;
-     int y;
-     const char* adress;
-     HDC pic;
+     int x; /// \brief координата Х привью
+     int y; /// \brief координата Y привью
+     const char* adress; /// \brief путь к картинке привью
+     HDC pic; /// \brief картинка привью
  };
 
+/*!
+\brief функция которую Михаил как-то назовёт
+
+Новое рисование всего
+
+
+\param[in] int count_knopok_mebeli
+\param[in] Plans* obst
+\param[in] Button* knopki_mebeli
+\param[in] int i
+\param[in] Mebel* Tomb
+\param[in] int count_mebel
+\param[in] int nomer_tomba
+\param[in] HDC WatherMark
+\param[in] int plan
+*/
 void MishaNazoviEeKakNibud (int count_knopok_mebeli, Plans* obst, Button* knopki_mebeli, int i, Mebel* Tomb, int count_mebel, int nomer_tomba, HDC WatherMark, int plan);
 
+/*!
+\brief Заполнение массива планировок
+
+
+\param[in] Plans* Plan
+*/
 void Grow(Plans* Plan);
 
 using namespace std;
@@ -46,6 +70,15 @@ int main()
     screenX = GetSystemMetrics (SM_CXSCREEN);
     screenY = GetSystemMetrics (SM_CYSCREEN);
     txCreateWindow (screenX, screenY);
+
+    if(GetAsyncKeyState('U')&& debug){
+    debug=false;
+    Sleep(100);
+    } else if (GetAsyncKeyState('U')&& !debug){
+    debug=true;
+    Sleep(100);
+    }
+
 
     char s[100];
     string ss;
@@ -65,14 +98,12 @@ int main()
     decor_destruction(Tomb, count_mebel);
 
 
-    settingsButton = {"", nullptr, 0, -screenY * 75/100, 200, -screenY * 80/100};
-    loadButton = {"", nullptr, 0, -screenY * 85/100, 200, -screenY * 90/100};
-    saveButton = {"", nullptr, 0, -screenY * 90/100, 200, -screenY * 95/100};
-
-
+    settingsButton = {"", nullptr, 0, screenY * 75/100, 200, screenY * 80/100};
     newplanButton = {"", nullptr, 0, screenY * 80/100, 200, screenY * 85/100};
-    exitButton =    {"", nullptr, 0, screenY * 90/100, 200, screenY * 95/100};
-    docButton=      {"", nullptr, 0, screenY * 85/100, 200, screenY * 90/100};
+    loadButton = {"", nullptr, 0, screenY * 85/100, 200, screenY * 90/100};
+    saveButton = {"", nullptr, 0, screenY * 90/100, 200, screenY * 95/100};
+    exitButton = {"", nullptr, 0, screenY * 95/100, 200, screenY};
+    docButton={"", nullptr, RAZMER_KNOPKI,screenY * 50/100, 200, screenY * 80/100};
 
     //choiceButton = {"",nullptr, 0, screenY * 70/100, 200, screenY * 75/100};
 
@@ -87,7 +118,7 @@ int main()
     HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp"); /// \brief Картинка. Фон меню
     HDC escape= txLoadImage ("Pics\\menu_escape.bmp"); /// \brief Картинка. Меню паузы
     HDC WatherMark= txLoadImage ("Pics\\TempWather.bmp"); /// \brief Водяной знак
-    HDC choose_menu = txLoadImage ("Plans\\choose_menu.bmp");
+    HDC choose_menu = txLoadImage ("Pics\\choose_menu.bmp");
 
     bool isExit = false; /// \brief Выход из программы
     bool startWS = false; /// \brief Начало работы
@@ -143,7 +174,7 @@ int main()
                     Win32::TransparentBlt(txDC(), 0, 0, screenX, screenY, choose_menu, 0, 0, 900, 600, TX_RED);
                     txSetFillColor(TX_TRANSPARENT);
 
-					//ГќГІГ® Г­Г Г¬ГҐГЄ Г­Г  Г¬Г Г±Г±ГЁГў
+					//Это намек на массив
                     for (int n = 0; n<PlansIndex; n++)
                     {
                         //txBitBlt (txDC(),obst[n].x, obst[n].y, 455, 385, obst[n].pic, 0, 0);
@@ -373,12 +404,6 @@ int main()
     txDeleteDC(escape);
     txDeleteDC(WSpace);
 
-    txDeleteDC(WatherMark);
-    txDeleteDC(choose_menu);
-    for (int i=0; i<4; i++)
-    {
-        txDeleteDC(obst[i].pic);
-    }
     return 0;
 }
 
@@ -393,8 +418,6 @@ void MishaNazoviEeKakNibud (int count_knopok_mebeli, Plans* obst, Button* knopki
 	{
 		workspace_background();
 	}
-
-
 	risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
 	checkalka(i, Tomb, nomer_tomba);
 	draw_all_mebel(Tomb, count_mebel,wather, WatherMark);

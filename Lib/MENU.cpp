@@ -8,9 +8,7 @@
 
 \authors DeSatNik team
 \version 1.0.0
-\date 13.11.2018
-\bug Неисчеслимы, пока что
-\warning Осторожнее
+\date 15.12.2018
 \name То, что связано с меню
 
 */
@@ -167,9 +165,9 @@ void checkMenuFocus()
         txTextOut(txMouseX(), txMouseY() - 20, "Сохраним что имеем?" );
     }
 
-    else if (checkFocus(docButton.x, docButton.y, docButton.x1, docButton.y1))
+    else if (checkFocus(loadButton.x, loadButton.y, loadButton.x1, loadButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Документация" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Загрузить что ль?" );
     }
 
     else if (checkFocus(exitButton.x, exitButton.y, exitButton.x1, exitButton.y1))
@@ -188,10 +186,10 @@ void drawMenu (int screenW, int screenH, HDC fon_menu)
     txSelectFont("Harlow Solid Italic", 40);
     txSetColor(TX_WHITE);
     txTextOut(newplanButton.x, newplanButton.y, "Новая планировка");
-	//txTextOut(saveButton.x, saveButton.y, "Сохранить");
-	//txTextOut(loadButton.x, loadButton.y, "Загрузить");
+	txTextOut(saveButton.x, saveButton.y, "Сохранить");
+	txTextOut(loadButton.x, loadButton.y, "Загрузить");
     txTextOut (exitButton.x, exitButton.y, "Выйти");
-    //txTextOut(settingsButton.x, settingsButton.y, "Настройки");
+    txTextOut(settingsButton.x, settingsButton.y, "Настройки");
     txTextOut(docButton.x, docButton.y, "Документэйшн");
 }
 

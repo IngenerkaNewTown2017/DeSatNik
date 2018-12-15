@@ -6,9 +6,7 @@
 
 \authors DeSatNik team
 \version 1.0.0
-\date 13.11.2018
-\bug Неисчеслимы, пока что
-\warning Осторожнее
+\date 15.12.2018
 \name Функции рабочей области
 
 */

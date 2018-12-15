@@ -14,4 +14,5 @@ const char KEY_SAVE = 'S';
 const char KEY_DOWNLOAD = 'L';
 const char KEY_CHOOSE = 'W';
 const char KEY_SCREENSHOT = 'Q';
+bool debug=false;
 
