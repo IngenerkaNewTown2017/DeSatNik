@@ -335,7 +335,7 @@ int main()
         }
 
         //MainMenu
-        else
+        else 
         {
             returnToMenu = false;
             drawMenu (screenX, screenY, fon_menu);
@@ -385,8 +385,6 @@ void MishaNazoviEeKakNibud (int count_knopok_mebeli, HDC* obst, Button* knopki_m
 	{
 		workspace_background();
 	}
-
-
 	risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
 	checkalka(i, Tomb, nomer_tomba);
 	draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
