@@ -27,7 +27,7 @@
 
 
 void MishaNazoviEeKakNibud (int count_knopok_mebeli, HDC* obst, Button* knopki_mebeli, int i, Mebel* Tomb, int count_mebel, int nomer_tomba, HDC WatherMark, int plan);
-//В ХОДЕ РАЗАРАБОТКИ ПРОГРАММЫ МЫ ОТКРЫВАЛИ И ЗАКРЫВАЛИ ПОЛОВЫЕ ВОПРОСЫ. (смысл не пошлый, я про пол на который тебя положат если ты будешь оскарблять анимэ))))
+
 
 using namespace std;
 
@@ -56,12 +56,14 @@ int main()
     decor_destruction(Tomb, count_mebel);
 
 
-    settingsButton = {"", nullptr, 0, screenY * 75/100, 200, screenY * 80/100};
+    settingsButton = {"", nullptr, 0, -screenY * 75/100, 200, -screenY * 80/100};
+    loadButton = {"", nullptr, 0, -screenY * 85/100, 200, -screenY * 90/100};
+    saveButton = {"", nullptr, 0, -screenY * 90/100, 200, -screenY * 95/100};
+
+
     newplanButton = {"", nullptr, 0, screenY * 80/100, 200, screenY * 85/100};
-    loadButton = {"", nullptr, 0, screenY * 85/100, 200, screenY * 90/100};
-    saveButton = {"", nullptr, 0, screenY * 90/100, 200, screenY * 95/100};
-    exitButton = {"", nullptr, 0, screenY * 95/100, 200, screenY};
-    docButton={"", nullptr, RAZMER_KNOPKI,screenY * 50/100, 200, screenY * 80/100};
+    exitButton =    {"", nullptr, 0, screenY * 90/100, 200, screenY * 95/100};
+    docButton=      {"", nullptr, 0, screenY * 85/100, 200, screenY * 90/100};
 
     //choiceButton = {"",nullptr, 0, screenY * 70/100, 200, screenY * 75/100};
 
@@ -129,7 +131,7 @@ int main()
                 {
                     Win32::TransparentBlt(txDC(), 0, 0, screenX, screenY, choose_menu, 0, 0, 900, 600, TX_RED);
                     txSetFillColor(TX_TRANSPARENT);
-					
+
 					//Это намек на массив
                     Win32::TransparentBlt (txDC(), screenX - 670, screenY - 495, 455, 385, obst[0], 0, 0, 1280, 720, TX_WHITE);
                     txRectangle(screenX - 670,  screenY - 495, screenX - 215, screenY - 110);
@@ -310,7 +312,7 @@ int main()
                         while(GetAsyncKeyState(VK_OEM_PLUS) || GetAsyncKeyState(VK_ADD))
                         {
                             MishaNazoviEeKakNibud (count_knopok_mebeli, obst, knopki_mebeli, i,Tomb,  count_mebel,nomer_tomba,WatherMark, plan);
-							
+
                             Tomb[i].awidth = Tomb[i].awidth * 1.05;
                             Tomb[i].aheight = Tomb[i].aheight * 1.05;
                             txSleep(100);
@@ -322,7 +324,7 @@ int main()
                         while(GetAsyncKeyState(VK_OEM_MINUS) || GetAsyncKeyState(VK_SUBTRACT))
                         {
                             MishaNazoviEeKakNibud (count_knopok_mebeli, obst, knopki_mebeli, i,Tomb,  count_mebel,nomer_tomba,WatherMark, plan);
-							
+
                             Tomb[i].awidth = Tomb[i].awidth  * 0.95;
                             Tomb[i].aheight = Tomb[i].aheight  * 0.95;
                             txSleep(100);
@@ -363,10 +365,16 @@ int main()
     txDeleteDC(escape);
     txDeleteDC(WSpace);
 
+    txDeleteDC(WatherMark);
+    txDeleteDC(choose_menu);
+    for (int i=0; i<4; i++)
+    {
+        txDeleteDC(obst[i]);
+    }
     return 0;
 }
 
-void MishaNazoviEeKakNibud (int count_knopok_mebeli, HDC* obst, Button* knopki_mebeli, int i, Mebel* Tomb, int count_mebel, int nomer_tomba, HDC WatherMark, int plan)  
+void MishaNazoviEeKakNibud (int count_knopok_mebeli, HDC* obst, Button* knopki_mebeli, int i, Mebel* Tomb, int count_mebel, int nomer_tomba, HDC WatherMark, int plan)
 {
 	if (plan >= 0)
 	{
@@ -377,6 +385,8 @@ void MishaNazoviEeKakNibud (int count_knopok_mebeli, HDC* obst, Button* knopki_m
 	{
 		workspace_background();
 	}
+
+
 	risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
 	checkalka(i, Tomb, nomer_tomba);
 	draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
