@@ -1,16 +1,16 @@
 /*!
-\mainpage Эта программа написана командой молодых, (и не очень) талантливых программистов DeSatNik team. Особая благодарность за поддержку и веру в лучшее в отношении этого кода выражается Beavisabra
+\mainpage ГќГІГ  ГЇГ°Г®ГЈГ°Г Г¬Г¬Г  Г­Г ГЇГЁГ±Г Г­Г  ГЄГ®Г¬Г Г­Г¤Г®Г© Г¬Г®Г«Г®Г¤Г»Гµ, (ГЁ Г­ГҐ Г®Г·ГҐГ­Гј) ГІГ Г«Г Г­ГІГ«ГЁГўГ»Гµ ГЇГ°Г®ГЈГ°Г Г¬Г¬ГЁГ±ГІГ®Гў DeSatNik team. ГЋГ±Г®ГЎГ Гї ГЎГ«Г ГЈГ®Г¤Г Г°Г­Г®Г±ГІГј Г§Г  ГЇГ®Г¤Г¤ГҐГ°Г¦ГЄГі ГЁ ГўГҐГ°Гі Гў Г«ГіГ·ГёГҐГҐ Гў Г®ГІГ­Г®ГёГҐГ­ГЁГЁ ГЅГІГ®ГЈГ® ГЄГ®Г¤Г  ГўГ»Г°Г Г¦Г ГҐГІГ±Гї Beavisabra
 \file
-\brief main всего кода
+\brief main ГўГ±ГҐГЈГ® ГЄГ®Г¤Г 
 
-Суть программы
+Г‘ГіГІГј ГЇГ°Г®ГЈГ°Г Г¬Г¬Г»
 
 \authors DeSatNik team
 \version 1.0.0 beta
 \date 13.11.2018
-\bug Неисчеслимы, пока что
-\warning Осторожнее
-\name Функции основного файла
+\bug ГЌГҐГЁГ±Г·ГҐГ±Г«ГЁГ¬Г», ГЇГ®ГЄГ  Г·ГІГ®
+\warning ГЋГ±ГІГ®Г°Г®Г¦Г­ГҐГҐ
+\name Г”ГіГ­ГЄГ¶ГЁГЁ Г®Г±Г­Г®ГўГ­Г®ГЈГ® ГґГ Г©Г«Г 
 
 */
 
@@ -65,12 +65,14 @@ int main()
     decor_destruction(Tomb, count_mebel);
 
 
-    settingsButton = {"", nullptr, 0, screenY * 75/100, 200, screenY * 80/100};
+    settingsButton = {"", nullptr, 0, -screenY * 75/100, 200, -screenY * 80/100};
+    loadButton = {"", nullptr, 0, -screenY * 85/100, 200, -screenY * 90/100};
+    saveButton = {"", nullptr, 0, -screenY * 90/100, 200, -screenY * 95/100};
+
+
     newplanButton = {"", nullptr, 0, screenY * 80/100, 200, screenY * 85/100};
-    loadButton = {"", nullptr, 0, screenY * 85/100, 200, screenY * 90/100};
-    saveButton = {"", nullptr, 0, screenY * 90/100, 200, screenY * 95/100};
-    exitButton = {"", nullptr, 0, screenY * 95/100, 200, screenY};
-    docButton={"", nullptr, RAZMER_KNOPKI,screenY * 50/100, 200, screenY * 80/100};
+    exitButton =    {"", nullptr, 0, screenY * 90/100, 200, screenY * 95/100};
+    docButton=      {"", nullptr, 0, screenY * 85/100, 200, screenY * 90/100};
 
     //choiceButton = {"",nullptr, 0, screenY * 70/100, 200, screenY * 75/100};
 
@@ -79,17 +81,17 @@ int main()
     //In C++ round (2.5) = 2
     KOLICH_RYADOV_WS = round((count_knopok_mebeli + 0.4999 * KOLICH_STOLBCOV_WS)/KOLICH_STOLBCOV_WS);
     //coords of first button
-    coords_of_first_button(knopki_mebeli, count_knopok_mebeli); /// \brief Координаты первой кнопки
+    coords_of_first_button(knopki_mebeli, count_knopok_mebeli); /// \brief ГЉГ®Г®Г°Г¤ГЁГ­Г ГІГ» ГЇГҐГ°ГўГ®Г© ГЄГ­Г®ГЇГЄГЁ
 
-    HDC WSpace = txLoadImage ("Pics\\Workspace.bmp"); /// \brief Картинка. Фон рабочей области редактора
-    HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp"); /// \brief Картинка. Фон меню
-    HDC escape= txLoadImage ("Pics\\menu_escape.bmp"); /// \brief Картинка. Меню паузы
-    HDC WatherMark= txLoadImage ("Pics\\TempWather.bmp"); /// \brief Водяной знак
+    HDC WSpace = txLoadImage ("Pics\\Workspace.bmp"); /// \brief ГЉГ Г°ГІГЁГ­ГЄГ . Г”Г®Г­ Г°Г ГЎГ®Г·ГҐГ© Г®ГЎГ«Г Г±ГІГЁ Г°ГҐГ¤Г ГЄГІГ®Г°Г 
+    HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp"); /// \brief ГЉГ Г°ГІГЁГ­ГЄГ . Г”Г®Г­ Г¬ГҐГ­Гѕ
+    HDC escape= txLoadImage ("Pics\\menu_escape.bmp"); /// \brief ГЉГ Г°ГІГЁГ­ГЄГ . ГЊГҐГ­Гѕ ГЇГ ГіГ§Г»
+    HDC WatherMark= txLoadImage ("Pics\\TempWather.bmp"); /// \brief Г‚Г®Г¤ГїГ­Г®Г© Г§Г­Г ГЄ
     HDC choose_menu = txLoadImage ("Pics\\choose_menu.bmp");
 
-    bool isExit = false; /// \brief Выход из программы
-    bool startWS = false; /// \brief Начало работы
-    bool returnToMenu = false; /// \brief Возврат в меню
+    bool isExit = false; /// \brief Г‚Г»ГµГ®Г¤ ГЁГ§ ГЇГ°Г®ГЈГ°Г Г¬Г¬Г»
+    bool startWS = false; /// \brief ГЌГ Г·Г Г«Г® Г°Г ГЎГ®ГІГ»
+    bool returnToMenu = false; /// \brief Г‚Г®Г§ГўГ°Г ГІ Гў Г¬ГҐГ­Гѕ
     bool risovatKnopka = true;
 
     Grow(obst);
@@ -141,7 +143,7 @@ int main()
                     Win32::TransparentBlt(txDC(), 0, 0, screenX, screenY, choose_menu, 0, 0, 900, 600, TX_RED);
                     txSetFillColor(TX_TRANSPARENT);
 
-					//Это намек на массив
+					//ГќГІГ® Г­Г Г¬ГҐГЄ Г­Г  Г¬Г Г±Г±ГЁГў
                     for (int n = 0; n<PlansIndex; n++)
                     {
                         //txBitBlt (txDC(),obst[n].x, obst[n].y, 455, 385, obst[n].pic, 0, 0);
@@ -371,6 +373,12 @@ int main()
     txDeleteDC(escape);
     txDeleteDC(WSpace);
 
+    txDeleteDC(WatherMark);
+    txDeleteDC(choose_menu);
+    for (int i=0; i<4; i++)
+    {
+        txDeleteDC(obst[i]);
+    }
     return 0;
 }
 
@@ -385,6 +393,8 @@ void MishaNazoviEeKakNibud (int count_knopok_mebeli, Plans* obst, Button* knopki
 	{
 		workspace_background();
 	}
+
+
 	risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
 	checkalka(i, Tomb, nomer_tomba);
 	draw_all_mebel(Tomb, count_mebel,wather, WatherMark);

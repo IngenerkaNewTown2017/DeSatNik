@@ -15,11 +15,14 @@
 #include "TXLib.h"
 #include <mmsystem.h>
 
-int mainofsound()
-    {
-    txCreateWindow (800, 600);
-      PlaySound (TEXT ("supermario.wav"), NULL, SND_SYNC);
-
+int main()
+{
+    txCreateWindow (600, 315);
+    txDisableAutoPause();
+    HDC fon = txLoadImage ("фон музыки.bmp");
+    txBitBlt (txDC(), 0, 0, 600, 315, fon, 0, 0);
+    txDeleteDC (fon);
+    PlaySound (TEXT ("supermario.wav"), NULL, SND_SYNC);
 
     return 0;
-    }
+}
