@@ -167,9 +167,9 @@ void checkMenuFocus()
         txTextOut(txMouseX(), txMouseY() - 20, "Сохраним что имеем?" );
     }
 
-    else if (checkFocus(loadButton.x, loadButton.y, loadButton.x1, loadButton.y1))
+    else if (checkFocus(docButton.x, docButton.y, docButton.x1, docButton.y1))
     {
-        txTextOut(txMouseX(), txMouseY() - 20, "Загрузить что ль?" );
+        txTextOut(txMouseX(), txMouseY() - 20, "Документация" );
     }
 
     else if (checkFocus(exitButton.x, exitButton.y, exitButton.x1, exitButton.y1))
@@ -188,10 +188,10 @@ void drawMenu (int screenW, int screenH, HDC fon_menu)
     txSelectFont("Harlow Solid Italic", 40);
     txSetColor(TX_WHITE);
     txTextOut(newplanButton.x, newplanButton.y, "Новая планировка");
-	txTextOut(saveButton.x, saveButton.y, "Сохранить");
-	txTextOut(loadButton.x, loadButton.y, "Загрузить");
+	//txTextOut(saveButton.x, saveButton.y, "Сохранить");
+	//txTextOut(loadButton.x, loadButton.y, "Загрузить");
     txTextOut (exitButton.x, exitButton.y, "Выйти");
-    txTextOut(settingsButton.x, settingsButton.y, "Настройки");
+    //txTextOut(settingsButton.x, settingsButton.y, "Настройки");
     txTextOut(docButton.x, docButton.y, "Документэйшн");
 }
 
