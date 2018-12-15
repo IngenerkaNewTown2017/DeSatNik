@@ -134,7 +134,7 @@ void draw_all_mebel(Mebel* Tomb, int count_mebel,bool wather, HDC WatherMark)
 
     if (wather)
     {
-        txTransparentBlt (txDC(), 800, 200, 101, 100, WatherMark, 0, 0);
+        txTransparentBlt (txDC(), 800, 200, 101, 100, WatherMark, 0, 0, TX_WHITE);
     }
 }
 /*!

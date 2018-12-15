@@ -1,16 +1,16 @@
 /*!
-\mainpage Эта программа написана командой молодых, (и не очень) талантливых программистов DeSatNik team. Особая благодарность за поддержку и веру в лучшее в отношении этого кода выражается Beavisabra
+\mainpage ГќГІГ  ГЇГ°Г®ГЈГ°Г Г¬Г¬Г  Г­Г ГЇГЁГ±Г Г­Г  ГЄГ®Г¬Г Г­Г¤Г®Г© Г¬Г®Г«Г®Г¤Г»Гµ, (ГЁ Г­ГҐ Г®Г·ГҐГ­Гј) ГІГ Г«Г Г­ГІГ«ГЁГўГ»Гµ ГЇГ°Г®ГЈГ°Г Г¬Г¬ГЁГ±ГІГ®Гў DeSatNik team. ГЋГ±Г®ГЎГ Гї ГЎГ«Г ГЈГ®Г¤Г Г°Г­Г®Г±ГІГј Г§Г  ГЇГ®Г¤Г¤ГҐГ°Г¦ГЄГі ГЁ ГўГҐГ°Гі Гў Г«ГіГ·ГёГҐГҐ Гў Г®ГІГ­Г®ГёГҐГ­ГЁГЁ ГЅГІГ®ГЈГ® ГЄГ®Г¤Г  ГўГ»Г°Г Г¦Г ГҐГІГ±Гї Beavisabra
 \file
-\brief main всего кода
+\brief main ГўГ±ГҐГЈГ® ГЄГ®Г¤Г 
 
-Суть программы
+Г‘ГіГІГј ГЇГ°Г®ГЈГ°Г Г¬Г¬Г»
 
 \authors DeSatNik team
 \version 1.0.0 beta
 \date 13.11.2018
-\bug Неисчеслимы, пока что
-\warning Осторожнее
-\name Функции основного файла
+\bug ГЌГҐГЁГ±Г·ГҐГ±Г«ГЁГ¬Г», ГЇГ®ГЄГ  Г·ГІГ®
+\warning ГЋГ±ГІГ®Г°Г®Г¦Г­ГҐГҐ
+\name Г”ГіГ­ГЄГ¶ГЁГЁ Г®Г±Г­Г®ГўГ­Г®ГЈГ® ГґГ Г©Г«Г 
 
 */
 
@@ -24,10 +24,19 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include "dirent.h"
 
+struct Plans
+ {
+     int x;
+     int y;
+     const char* adress;
+     HDC pic;
+ };
 
-void MishaNazoviEeKakNibud (int count_knopok_mebeli, HDC* obst, Button* knopki_mebeli, int i, Mebel* Tomb, int count_mebel, int nomer_tomba, HDC WatherMark, int plan);
+void MishaNazoviEeKakNibud (int count_knopok_mebeli, Plans* obst, Button* knopki_mebeli, int i, Mebel* Tomb, int count_mebel, int nomer_tomba, HDC WatherMark, int plan);
 
+void Grow(Plans* Plan);
 
 using namespace std;
 
@@ -44,15 +53,15 @@ int main()
 
     char s2[100];
     string ss2;
-    int SaveIndex=GetFolderCountFiles("Saves\\");
+    int SaveIndex= GetFolderCountFiles("Saves\\");
+    int PlansIndex = GetFolderCountFiles("Plans\\");
 
     int count_mebel = 100;
     Mebel Tomb[count_mebel];
     int nomer_tomba = 0;
 
-    HDC obst[4];
-    obst[0] = txLoadImage("Plans\\users plan.bmp");
-    obst[1] = txLoadImage("Plans\\1plan.bmp");
+    Plans obst[PlansIndex];
+
     decor_destruction(Tomb, count_mebel);
 
 
@@ -72,18 +81,20 @@ int main()
     //In C++ round (2.5) = 2
     KOLICH_RYADOV_WS = round((count_knopok_mebeli + 0.4999 * KOLICH_STOLBCOV_WS)/KOLICH_STOLBCOV_WS);
     //coords of first button
-    coords_of_first_button(knopki_mebeli, count_knopok_mebeli); /// \brief Координаты первой кнопки
+    coords_of_first_button(knopki_mebeli, count_knopok_mebeli); /// \brief ГЉГ®Г®Г°Г¤ГЁГ­Г ГІГ» ГЇГҐГ°ГўГ®Г© ГЄГ­Г®ГЇГЄГЁ
 
-    HDC WSpace = txLoadImage ("Pics\\Workspace.bmp"); /// \brief Картинка. Фон рабочей области редактора
-    HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp"); /// \brief Картинка. Фон меню
-    HDC escape= txLoadImage ("Pics\\menu_escape.bmp"); /// \brief Картинка. Меню паузы
-    HDC WatherMark= txLoadImage ("Pics\\TempWather.bmp"); /// \brief Водяной знак
-    HDC choose_menu = txLoadImage ("Plans\\choose_menu.bmp");
+    HDC WSpace = txLoadImage ("Pics\\Workspace.bmp"); /// \brief ГЉГ Г°ГІГЁГ­ГЄГ . Г”Г®Г­ Г°Г ГЎГ®Г·ГҐГ© Г®ГЎГ«Г Г±ГІГЁ Г°ГҐГ¤Г ГЄГІГ®Г°Г 
+    HDC fon_menu = txLoadImage ("Pics\\ClearFonMenu.bmp"); /// \brief ГЉГ Г°ГІГЁГ­ГЄГ . Г”Г®Г­ Г¬ГҐГ­Гѕ
+    HDC escape= txLoadImage ("Pics\\menu_escape.bmp"); /// \brief ГЉГ Г°ГІГЁГ­ГЄГ . ГЊГҐГ­Гѕ ГЇГ ГіГ§Г»
+    HDC WatherMark= txLoadImage ("Pics\\TempWather.bmp"); /// \brief Г‚Г®Г¤ГїГ­Г®Г© Г§Г­Г ГЄ
+    HDC choose_menu = txLoadImage ("Pics\\choose_menu.bmp");
 
-    bool isExit = false; /// \brief Выход из программы
-    bool startWS = false; /// \brief Начало работы
-    bool returnToMenu = false; /// \brief Возврат в меню
+    bool isExit = false; /// \brief Г‚Г»ГµГ®Г¤ ГЁГ§ ГЇГ°Г®ГЈГ°Г Г¬Г¬Г»
+    bool startWS = false; /// \brief ГЌГ Г·Г Г«Г® Г°Г ГЎГ®ГІГ»
+    bool returnToMenu = false; /// \brief Г‚Г®Г§ГўГ°Г ГІ Гў Г¬ГҐГ­Гѕ
     bool risovatKnopka = true;
+
+    Grow(obst);
 
     int plan = -1;
     while (!isExit)
@@ -95,7 +106,7 @@ int main()
         {
             if (plan >= 0)
             {
-                Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
+                Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan].pic, 0, 0, 1280, 720, TX_RED);
                 grid();
             }
             else
@@ -132,23 +143,20 @@ int main()
                     Win32::TransparentBlt(txDC(), 0, 0, screenX, screenY, choose_menu, 0, 0, 900, 600, TX_RED);
                     txSetFillColor(TX_TRANSPARENT);
 
-					//Это намек на массив
-                    Win32::TransparentBlt (txDC(), screenX - 670, screenY - 495, 455, 385, obst[0], 0, 0, 1280, 720, TX_WHITE);
-                    txRectangle(screenX - 670,  screenY - 495, screenX - 215, screenY - 110);
-                    if (checkClick(screenX -  670, screenY - 495, screenX - 215  , screenY - 110))
+					//ГќГІГ® Г­Г Г¬ГҐГЄ Г­Г  Г¬Г Г±Г±ГЁГў
+                    for (int n = 0; n<PlansIndex; n++)
                     {
-                        plan = 0;
-                        nachalo = true;
-                    }
+                        //txBitBlt (txDC(),obst[n].x, obst[n].y, 455, 385, obst[n].pic, 0, 0);
 
-                    Win32::TransparentBlt (txDC(), screenX - 670,  screenY - 895, 455, 385, obst[1], 0, 0, 1280, 720, TX_WHITE);
-                    txRectangle(screenX - 670,  screenY - 895, screenX - 215, screenY - 510);
-                    if (checkClick(screenX -  670, screenY - 895, screenX - 215  , screenY - 510))
-                    {
-                        plan = 1;
-                        nachalo = true;
-                    }
+                        Win32::TransparentBlt (txDC(),obst[n].x, obst[n].y, 455, 385, obst[n].pic, 0, 0, 1280, 720, TX_WHITE);
+                        txRectangle(obst[n].x,  obst[n].y, obst[n].x + 455,  obst[n].y + 385);
+                        if (checkClick(obst[n].x,  obst[n].y, obst[n].x + 455,  obst[n].y + 385))
+                        {
+                            plan = n;
+                            nachalo = true;
+                        }
 
+                   }
                     txSleep(10);
                 }
             }
@@ -177,7 +185,7 @@ int main()
                     {
                         if (plan >= 0)
                         {
-                            Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
+                            Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan].pic, 0, 0, 1280, 720, TX_RED);
                             grid();
                         }
                         else
@@ -217,7 +225,7 @@ int main()
                         {
                             if (plan >= 0)
                             {
-                                Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
+                                Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan].pic, 0, 0, 1280, 720, TX_RED);
                                 grid();
                             }
                             else
@@ -374,11 +382,11 @@ int main()
     return 0;
 }
 
-void MishaNazoviEeKakNibud (int count_knopok_mebeli, HDC* obst, Button* knopki_mebeli, int i, Mebel* Tomb, int count_mebel, int nomer_tomba, HDC WatherMark, int plan)
+void MishaNazoviEeKakNibud (int count_knopok_mebeli, Plans* obst, Button* knopki_mebeli, int i, Mebel* Tomb, int count_mebel, int nomer_tomba, HDC WatherMark, int plan)
 {
 	if (plan >= 0)
 	{
-		Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan], 0, 0, 1280, 720, TX_RED);
+		Win32::TransparentBlt (txDC(), 0, 0, screenX, screenY, obst[plan].pic, 0, 0, 1280, 720, TX_RED);
 		grid();
 	}
 	else
@@ -390,4 +398,47 @@ void MishaNazoviEeKakNibud (int count_knopok_mebeli, HDC* obst, Button* knopki_m
 	risovanieMenuWS(count_knopok_mebeli, knopki_mebeli);
 	checkalka(i, Tomb, nomer_tomba);
 	draw_all_mebel(Tomb, count_mebel,wather, WatherMark);
+}
+
+void Grow(Plans* Plan)
+{
+    DIR *mydir;
+    struct dirent *filename;
+    int NPlan = 0;
+
+    if ((mydir = opendir ("Plans\\")) != NULL)
+    {
+        while ((filename = readdir (mydir)) != NULL)
+        {
+            if ((strcmp(".", filename->d_name) !=0) and (strcmp("..", filename->d_name) != 0))
+            {
+                char* adress = new char[200];
+                strcpy(adress, "Plans\\");
+                strcat(adress, filename->d_name);
+                Plan[NPlan].adress = adress;
+                Plan[NPlan].pic = txLoadImage(Plan[NPlan].adress);
+
+                if (NPlan % 2 == 0)
+                {
+                    Plan[NPlan].x = screenX - 670;
+                }
+                else
+                {
+                    Plan[NPlan].x = screenX - 1270;
+                }
+
+                if (NPlan < 2)
+                {
+                    Plan[NPlan].y = screenY - 510;
+                }
+                else
+                {
+                    Plan[NPlan].y = screenY - 910;
+                }
+
+                NPlan++;
+            }
+        }
+        closedir (mydir);
+    }
 }
